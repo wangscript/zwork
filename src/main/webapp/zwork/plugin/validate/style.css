@@ -1,0 +1,13 @@
+/************jQuery.Validate插件样式开始********************/
+div.error {
+	background: url(img/error.gif) no-repeat left center;
+	color: Red;
+	width: 20px;float: left;margin-left: 10px;height: 18px;line-height: 18px;overflow:visible;
+	text-indent: 20px;
+}
+
+input.error {
+	
+}
+input.required{background: url("img/required.gif") right center no-repeat;}
+/************jQuery.Validate插件样式结束********************/
