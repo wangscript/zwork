@@ -141,7 +141,6 @@
 					var obj = this.list[i];
 					if(_type == undefined || _type == "pid"){
 						if(obj.pid == _uid){
-							alert("remove");
 							this.list[i] == undefined;
 							delete this.list[i];
 						}
