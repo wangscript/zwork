@@ -16,6 +16,10 @@
 	 */
 	$ui.memory = {
 
+		/**
+		 * 树形结构
+		 * 	将系统中的每一个元素以tree的形式搭建在一起
+		 */	
 		tree : {
 			// 层级型关系根节点
 			root : {
@@ -80,6 +84,9 @@
 				this.find(pid).children.remove(_uid);
 			}
 		},
+		/**
+		 * 
+		 * */
 		relate : {
 			list : new Array()
 		}
