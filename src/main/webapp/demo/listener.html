@@ -2,8 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>内存机制 - zwork - UI框架</title>
-	
+	<title>监听机制 - zwork - UI框架</title>
 	<style type="text/css">
 	body{font-size: 12px;}
 	</style>
@@ -22,47 +21,21 @@
 	<!-- zwork 必须文件 -->
 	
 	<!-- zwork 框架文件 -->
-	<script type="text/javascript" src="../zwork/js/zwork.memory.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.listener.js"></script>
 	<!-- zwork 框架文件 -->
 	
 	<script type="text/javascript">
 	$(function(){
-		$ui.init({
-			debug:false//启用调试
+		$ui.listener.add("div_window",function(obj){
+			alert(obj);
 		});
-		
-		//树形结构内存
-		var obj = function(){
-			this.uid = $ui.util.guid();
-			this.pid;
-			this.children;
-		};
-		
-		var obj1 = new obj();
-		var uid1 = obj1.uid;
-		var obj2 = new obj();
-		var uid2 = obj2.uid = "002";
-		
-		$ui.memory.tree.add("root",obj1);
-		$ui.memory.tree.add(uid1,obj2);
-		alert($ui.memory.tree.find(uid1).uid);
-		
-		//内存对象关系
-		$ui.memory.relate.add("001","002");
-		$ui.memory.relate.add("001","003");
-		$ui.memory.relate.add("001","004");
-		$ui.memory.relate.add("003","001");
-		
-		$ui.memory.relate.remove("001");
-		var list = $ui.memory.relate.find("001");
-		for(i in list){
-			alert(list[i].sid);
-		}
-		
+		$ui.listener.state("div_window","disable");
+		//$ui.listener.state("div_window","able");
+		$ui.listener("body");
 	})
 	</script>
 </head>
 <body>
-<a href="../index.html">返回首页</a>
+
 </body>
 </html>
