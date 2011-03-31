@@ -150,7 +150,7 @@
 				$ui.debug("未定义处理函数");
 			for ( var p in this.container) {
 				var ov = this.container[p];
-				fun(ov);
+				fun(ov,p);
 			}
 		} catch (e) {
 			$ui.debug( e );

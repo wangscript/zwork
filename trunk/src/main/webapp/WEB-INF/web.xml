@@ -3,6 +3,16 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+	<servlet>
+		<servlet-name>ListServlet</servlet-name>
+		<display-name>ListServlet</display-name>
+		<description></description>
+		<servlet-class>org.zwork.servlet.ListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListServlet</servlet-name>
+		<url-pattern>/list.zwork</url-pattern>
+	</servlet-mapping>
   <welcome-file-list>
   	<welcome-file>index.html</welcome-file>
   </welcome-file-list>

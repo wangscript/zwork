@@ -17,7 +17,7 @@ $(function(){
 </script>
 </head>
 <body>
-
+<form action="../../../list.zwork" method="post" name="form">
 <!-- 书写这样的一块区域，区域的class为listselect。name是form中的字段名 -->
 <div class="listselect" name="listselect" style="width:500px;height: 350px;">
 	<!-- list里面是你的数据列表，以key value的形式组成item项。-->
@@ -32,7 +32,8 @@ $(function(){
 		<div class="item" value="1">山东省</div>
 	</div>
 </div>
-
+<input type="submit" value="提交"/>
+</form>
 <div>
 <br/>
 1、按住ctrl可以多选，但是暂不支持多选以后拖动多个。<br/>

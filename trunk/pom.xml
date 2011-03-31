@@ -14,6 +14,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- 添加Servlet2.4 规格说明作为依赖  -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>2.0</version>
+		<scope>provided</scope>
+	</dependency>
   </dependencies>
   <build>
     <finalName>zwork</finalName>
