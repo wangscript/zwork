@@ -38,21 +38,21 @@
 			};
 			//设置用户自定义config
 			$.extend(config,_config);
+			//处理config
+			$ui.config.init(config);
 			
 			if(config.listen != undefined)
 				$ui(config.listen);
 			
-			
-			
-			//处理config
-			$ui.config.init(config);
-			$ui.debug("zwork.init() 初始化zwork config对象完毕");
-			
-			$ui.debug("zwork.init() 结束");
 			$ui.debug("当前版本 " + $ui.version);
 			
 		};
 		
+		/**
+		 * 查找组件
+		 * 参数：jQuery对象（对象）或内存uid（字符串）
+		 * 返回：组件对象（对象）
+		 * */
 		$ui.find = function(_obj){
 			if(_obj!=undefined){
 				if(typeof _obj == "string"){

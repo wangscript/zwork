@@ -3,7 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>window</title>
-	
+	<style type="text/css">
+	body{background: url("../image/wallpaper.jpg");}
+	</style>
 	<!-- jQuery lib -->
 	<script type="text/javascript" src="../zwork/js/lib/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="../zwork/js/lib/jquery.ui-1.8.9.min.js"></script>
@@ -68,6 +70,38 @@
 	</script>
 </head>
 <body>
-	<div type="window" show="true"></div>
+	<a href="../index.html">返回首页</a>
+	<div>
+		<p>
+			<b>可设置属性：</b><br/>
+			<ul>
+				<li>id - 编号</li>
+				<li>title - 标题</li>
+				<li>container - 所在容器，可以收用jQuery查询到的对象，可以接受一个标号id。</li>
+				<li>containerStyle - 所在容器样式</li>
+				<li>src - 页面地址</li>
+				<li>content - 静态页面内容</li>
+				<li>top - 相对于容器顶部的距离</li>
+				<li>left - 相对于容器左部的距离</li>
+				<li>width - 窗口宽度</li>
+				<li>height - 窗口高度</li>
+				<li>minHeight - 最小高度</li>
+				<li>minWidth - 最小宽度</li>
+				<li>maxWidth - 最大宽度</li>
+				<li>maxHeight - 最大高度</li>
+				<li>mask - 是否启用模态窗口</li>
+				<li>iframe - 是否启用iframe</li>
+			</ul>
+		</p>
+	</div>
+	
+	<div type="window" show="true" src="data_demo.html" title="被加载的页面" top="200" left="400" resizable="false" scroll="false"></div>
+	<div type="window" show="true" title="启用iframe的窗口" src="data_demo.html" iframe="true" minable="false" scroll="false"></div>
+	<div type="window" show="true" mask="true" title="模态窗口 - 内容是静态书写的" top="100" left="300" maxHeight="500" resizable="false" content="<b>我是书写的内容</b><br/>窗口最大高度：500">
+		<p>窗口的最大高度：500<br>
+		虽然在标签中有content属性，但是，如果在type=window的区域中有html内容，那么用此区域中的内容。<br>
+		当然如果不想显示此区域的内容，在div的开始标签和结束标签之间不能有换行符。
+		</p>
+	</div>
 </body>
 </html>

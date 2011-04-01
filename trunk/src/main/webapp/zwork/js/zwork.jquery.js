@@ -50,7 +50,6 @@
 		 * 返回	jQuery对象（对象）
 		 * */
 		resizEvent : function(_event){
-			
 			var current = $(this);
 			
 			if(_event == undefined){

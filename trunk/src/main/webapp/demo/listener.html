@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="../zwork/js/zwork.config.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.html.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.hashmap.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.jquery.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.extend.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.view.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.debug.js"></script>
@@ -27,12 +28,14 @@
 	
 	<script type="text/javascript">
 	$(function(){
-		$ui.listener.add("div_window",function(obj){
-			alert(obj);
+		//添加监听的方法接受俩个参数，第一个参数是监听的名称，第二个参数是父级内存对象，默认是root。
+		$ui.listener.add("test",function(_container,_parent){
+			alert(_container.html());	//很现实是body的html
+			alert(_parent.uid);
 		});
-		$ui.listener.state("div_window","disable");
-		//$ui.listener.state("div_window","able");
-		$ui.listener("body");
+		//$ui.listener.state("test","disable");	//禁用指定名称的监听
+		//$ui.listener.state("test","able");	//启用指定名称的监听
+		$ui.listener($("body"));
 	})
 	</script>
 </head>
