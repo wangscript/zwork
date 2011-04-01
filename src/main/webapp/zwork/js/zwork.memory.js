@@ -56,13 +56,18 @@
 				var result = undefined;
 				var children = function(_children) {
 					var map = _children;
+					var has = false;
 					map.call(function(obj) {
 						if (obj.uid == _uid) {
 							result = obj;
-						} else {
-							children(obj.children);
+							has = true;
 						}
 					});
+					if(!has){
+						map.call(function(obj){
+							children(obj.children);
+						});
+					}
 				};
 
 				if ($ui.memory.tree.root.obj.uid == _uid) {

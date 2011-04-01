@@ -13,11 +13,12 @@
 		
 		/**
 		 * copy一个zwork，然后把被拷贝对象的属性给当前copy对象
-		 * 参数：无
+		 * 参数	容器（对象）
+		 * 		父级对象（对象）	默认值	memory的root。
 		 * 返回：无
 		 */
-		var zwork = function(){
-			
+		var zwork = function(_container,_parent){
+			$ui.listener(_container,_parent);
 		};
 		
 		//注册给window，提供俩个调用变量。
@@ -32,11 +33,16 @@
 			
 			//定义默认的config样例
 			var config = {
-				debug : false
+				debug : false,
+				listen : undefined
 			};
-			
 			//设置用户自定义config
 			$.extend(config,_config);
+			
+			if(config.listen != undefined)
+				$ui(config.listen);
+			
+			
 			
 			//处理config
 			$ui.config.init(config);
@@ -45,6 +51,19 @@
 			$ui.debug("zwork.init() 结束");
 			$ui.debug("当前版本 " + $ui.version);
 			
+		};
+		
+		$ui.find = function(_obj){
+			if(_obj!=undefined){
+				if(typeof _obj == "string"){
+					return $ui.memory.tree.find(_obj);
+				}else{
+					var uid = _obj.data("uid");
+					return $ui.memory.tree.find(uid);
+				}
+			}else{
+				return undefined;
+			}
 		};
 
 		//版本
