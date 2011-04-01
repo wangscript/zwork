@@ -7,11 +7,15 @@
 	<!-- jQuery lib -->
 	<script type="text/javascript" src="../zwork/js/lib/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="../zwork/js/lib/jquery.ui-1.8.9.min.js"></script>
+	
+	<link href="../zwork/css/jquery/jquery.ui.resizable.css" rel="stylesheet" type="text/css">
 	<!-- jQuery lib -->
 	
 	<!-- zwork 必须文件 -->
 	<script type="text/javascript" src="../zwork/js/zwork.core.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.config.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.html.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.jquery.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.hashmap.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.extend.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.view.js"></script>
@@ -19,20 +23,51 @@
 	<script type="text/javascript" src="../zwork/js/zwork.util.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.memory.js"></script>
 	<script type="text/javascript" src="../zwork/js/zwork.listener.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.jquery.js"></script>
 	<!-- zwork 必须文件 -->
 	
 	<!-- zwork 框架文件 -->
 	<script type="text/javascript" src="../zwork/js/zwork.window.js"></script>
+	
+	<link href="../zwork/skin/dwz/zwork.core.css" rel="stylesheet" type="text/css">
+	<link href="../zwork/skin/dwz/zwork.window.css" rel="stylesheet" type="text/css">
 	<!-- zwork 框架文件 -->
 	
 	<script type="text/javascript">
 	$(function(){
-		var win = $ui.window();
-		//alert(win.test());
+		/**
+		var win = $ui.window({type:"demo"});
+		alert(win.type());
+		alert(win.uid);
+		$ui.memory.tree.find(win.uid).height(400);
+		alert(win.height());
+		var win1 = $ui.window({
+			src:"data_demo.html"
+		});
+		win1.show();
+		var win2 = $ui.window({
+			src:"http://www.baidu.com",
+			iframe:true
+		});
+		win2.show();
+		
+		var win3 = $ui.window({
+			title:"模态窗口",
+			content:"静态内容",
+			mask:true
+		});
+		win3.show();
+		*/
+		
+		$ui.init({
+			listen : $("body")
+		});
+		
+		$("body").height($(window).height());
 	});
 	</script>
 </head>
 <body>
-
+	<div type="window" show="true"></div>
 </body>
 </html>

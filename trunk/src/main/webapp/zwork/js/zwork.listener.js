@@ -15,7 +15,11 @@
 		 * 监听器拷贝
 		 * 参数	被处理对象
 		 * */
-		var listener = function(_obj){
+		var listener = function(_container,_parent){
+			if(_parent == undefined){
+				_parent == $ui.memory.tree.root;
+			}
+			
 			listener.map.call(function(fn,key){
 				if(listener.disabled.length > 0){
 					var has = false;
@@ -25,10 +29,10 @@
 						}
 					}
 					if(!has){
-						fn(_obj);
+						fn(_container,_parent);
 					}
 				}else{
-					fn(_obj);
+					fn(_container,_parent);
 				}
 				
 			});
@@ -75,6 +79,24 @@
 		listener.disabled = new Array();
 		//监听器列表
 		listener.map = new $ui.hashmap();
+		
+		//添加默认监听
+		listener.add("div_type_window",function(_c,_p){
+
+			var list = _c.flc("window");
+			for(i in list){
+				var window = list[i];
+				var config = {};
+				config.container = window.parent();
+				config.height = window.attr("height") || 400;
+				config.width = window.attr("width") || 500;
+				var zobj = $ui.window(config);
+				if(window.attr("show") || window.attr("show") == "true"){
+					zobj.show();
+				}
+			}
+			
+		});
 		
 		//注册给zwork
 		$ui.listener = listener;
