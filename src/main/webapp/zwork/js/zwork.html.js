@@ -10,7 +10,9 @@
 	 * html对象
 	 * */
 	var html = {
-		window : "<div class='zwork-window' zobj>" // win对象的html结构
+		
+		//窗口对象的html结构
+		window : "<div class='zwork-window' zobj>" 
 				+ "<div class='top'>" + "	<div class='border'>"
 				+ "		<div class='left'></div>" + "		<div class='center'></div>"
 				+ "		<div class='right'></div>" + "	</div>"
@@ -28,7 +30,11 @@
 				+ "		<div class='left'></div>" + "		<div class='center'></div>"
 				+ "		<div class='right'></div>" + "	</div>"
 				+ "	<div class='statebar'>" + "	</div>" + "</div>" + "</div>",
+				
+		//按钮对象的html结构
 		button : "",
+		
+		//模态窗口是的背景
 		mask : "<div class='zwork-mask'></div>"
 	};
 	

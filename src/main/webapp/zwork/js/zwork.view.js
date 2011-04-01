@@ -21,7 +21,6 @@
 		 * 返回	无
 		 * */
 		var init = function(){
-			
 			this.initjqobj();
 			this.container(this.config.container);
 			this.containerStyle(this.config.containerStyle);

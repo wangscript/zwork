@@ -31,23 +31,17 @@
 		
 		//配置对象
 		var config = {
+			id : undefined,
 			title:"无标题窗口",
 			container : $("body"),	//窗口所在的容器
+			containerStyle:undefined,	//容器的样式
 			src : undefined,	//请求的页面地址
 			content : undefined, //接受纯文本或者html的内容
-			
-			animate : true,	//是否开启动画
-			animateType:"spread",	//动画方式
 			
 			top:0,	//顶位移
 			left:0,	//左位移
 			width:400,	//高度
 			height:300,	//宽度
-			
-			topTemp:0,	//顶位移-临时的
-			leftTemp:0,	//左位移-临时的
-			widthTemp:0,	//高度-临时的
-			heightTemp:0,	//宽度-临时的
 			
 			maxable:true,	//可否被最大化
 			minable:true,	//是否可以最小化
@@ -59,24 +53,23 @@
 			maxHeight: undefined,	//最大的宽度
 			maxWidth: undefined,	//最大的高度
 			
+			mask : false,	//是否启用模态窗口
+			iframe:false,	//是否启用iframe框架
+			
+			zindex:0,
+			
+			animate : true,	//是否开启动画
+			animateType:"spread",	//动画方式
+			taskbarid: undefined,	//它所属的task的id
+			
+			topTemp:0,	//顶位移-临时的
+			leftTemp:0,	//左位移-临时的
+			widthTemp:0,	//高度-临时的
+			heightTemp:0,	//宽度-临时的
+			
 			maxed:false,	//当前是不是最大化
 			mined:false,	//当前是不是最小化
 			closed:true,	//当前是不是被关闭了
-			
-			taskbarid: undefined,	//它所属的task的id
-			
-			fn : {
-				open:undefined,
-				close : undefined,
-				max : undefined,
-				min : undefined,
-				re : undefined
-			},
-			mask : false,	//是否启用模态窗口
-			curindex : 0,
-			iframe:false,	//是否启用iframe框架
-			containerStyle:undefined,
-			zindex:0,
 			
 			type : "window"
 		};
@@ -155,32 +148,49 @@
 		this.initjqobj = initjqobj;
 		
 		/**
-		 * 在init时回调函数
-		 * 参数	无
+		 * 在init执行时回调函数
+		 * 参数	init回调时传参，参数为当前对象
 		 * 返回	无
 		 * */
 		var oninit = function(_this){
 			
+			//拖动事件
 			jqobj.obj.draggable({
-				start: function() {
-					totop(_this);
-					jqobj.center_loading.show();
+				start: function() {	//拖动开始
+					if(!config.maxed){
+						totop(_this);
+						jqobj.center_loading.show();
+					}
 				},
-				drag: function() {
-					_this.top(jqobj.obj[0].offsetTop);
-					_this.left(jqobj.obj[0].offsetLeft);
+				drag: function() {	//拖动中
+					if(!config.maxed){
+						_this.top(jqobj.obj[0].offsetTop);
+						_this.left(jqobj.obj[0].offsetLeft);
+					}else{return false;}
 				},
-				stop: function() {
-					_this.top(jqobj.obj[0].offsetTop);
-					_this.left(jqobj.obj[0].offsetLeft);
-					jqobj.center_loading.hide();
+				stop: function() {	//拖动停止
+					if(!config.maxed){
+						_this.top(jqobj.obj[0].offsetTop);
+						_this.left(jqobj.obj[0].offsetLeft);
+						jqobj.center_loading.hide();
+					}
 				},
-				handle: jqobj.top,
+				handle: jqobj.top,	//生效区域
 				//containment: container(),
-				scroll:false,
-				cursor:"move"
-			}).resizable({
-				start: function() {
+				//scroll:false,	//滚动条
+				//snap:true,	//是否吸附
+				opacity:0.8,
+				cursor:"move"	//移动时鼠标样式
+				
+			})
+			//点击窗口时，窗口置顶。
+			.mousedown(function(){
+				totop(_this);
+			});
+			
+			//重置大小事件
+			jqobj.obj.resizable({
+				start: function() {	//开始
 					if(config.resizable){
 						totop(_this);
 						jqobj.center_loading.show();
@@ -188,30 +198,34 @@
 						return false;
 					}
 				},
-				resize: function() {
+				resize: function() {	//设置大小中
 					if(config.resizable){
 						_this.width(jqobj.obj.width());
 						_this.height(jqobj.obj.height());
+					}else{
+						return false;
 					}
 				},
-				stop:function(){
+				stop:function(){	//重置停止
 					if(config.resizable){
 						jqobj.center_loading.hide();
 					}
 				},
-				minHeight: minHeight(),
-				minWidth: minWidth(),
-				maxWidth : maxWidth(),
-				maxHeight : maxHeight()
-			}).mousedown(function(){
-				totop(_this);
+				minHeight: minHeight(),	//最小高度
+				minWidth: minWidth(),	//最小宽度
+				maxWidth : maxWidth(),	//最大宽度
+				maxHeight : maxHeight()	//最大高度
 			});
 			
+			//重置大小时感应区。
 			jqobj.ui_resizable_e = jqobj.obj.find(".ui-resizable-e");
 			jqobj.ui_resizable_s = jqobj.obj.find(".ui-resizable-s");
 			jqobj.ui_resizable_se = jqobj.obj.find(".ui-resizable-se");
 			
+			//关闭按钮事件
 			jqobj.top_titlebar_buttons_close.click(function(){close(_this);});
+			
+			//最大化按钮点击事件
 			jqobj.top_titlebar_buttons_maxre.click(function(){
 				if(config.maxed){
 					re(_this);
@@ -219,6 +233,8 @@
 					max(_this);
 				}
 			});
+			
+			//标题栏双击事件
 			jqobj.top_titlebar.dblclick(function(){
 				if(config.maxed){
 					re(_this);
@@ -226,20 +242,34 @@
 					max(_this);
 				}
 			});
+			
+			//最小化按钮点击事件
 			jqobj.top_titlebar_buttons_min.click(function(){min(_this);});
 			
+			//默认置顶
 			totop(_this);
 			
+			//调整状态不是为已经关闭
 			config.closed = false;
+			this.zindex(config.zindex);	//设置z轴
+			this.title(config.title);	//设置标题
+			this.iframe(config.iframe);	//设置iframe
+			this.src(config.src);	//加载url
+			this.mask(config.mask);	//模态
+			this.content(config.content);	//静态内容
 			
-			this.title(config.title);
-			this.iframe(config.iframe);
-			this.src(config.src);
-			this.mask(config.mask);
-			this.content(config.content);
+			maxable(config.maxable);
+			minable(config.minable);
+			resizable(config.resizable);
+			scroll(config.scroll);
 		};
 		this.oninit = oninit;
 		
+		/**
+		 * 设置或返回静态内容
+		 * 参数	内容（字符串）
+		 * 返回	内容（字符串）或当前对象（对象）
+		 * */
 		var content = function(_content){
 			if(_content == undefined){
 				return jqobj.center_content.html();
@@ -253,6 +283,11 @@
 		};
 		this.content = content;
 		
+		/**
+		 * 设置或返回是否模态
+		 * 参数	是否模态（布尔值）
+		 * 返回	是否模态（布尔值）或当前对象（对象）
+		 * */
 		var mask = function(_mask){
 			if(_mask == undefined){
 				return config.mask;
@@ -262,12 +297,18 @@
 					var maskObj = $($ui.html.mask);
 					maskObj.appendTo($("body"))
 					.css("z-index",this.zindex()-1);
+					minable(false);
 				}
 				return this;
 			}
 		};
 		this.mask = mask;
 		
+		/**
+		 * 设置或返回是否启用iframe
+		 * 参数	是否启用iframe（布尔值）
+		 * 返回	是否启用iframe（布尔值）或当前对象（对象）
+		 * */
 		var iframe = function(_iframe){
 			if(_iframe != undefined){
 				config.iframe = _iframe;
@@ -284,6 +325,11 @@
 		};
 		this.iframe = iframe;
 		
+		/**
+		 * 设置或返回页面地址
+		 * 参数	页面地址（字符串）
+		 * 返回	页面地址（字符串）或当前对象（对象）
+		 * */
 		var src = function(_src){
 			if(_src == undefined){
 				return config.src;
@@ -339,7 +385,6 @@
 			jqobj.center_scroll.height(centerHeight);
 			
 			jqobj.center_loading.height(jqobj.center_content.height());
-			jqobj.center_content.resizEvent();
 		};
 		this.setHeight = setHeight;
 		
@@ -365,7 +410,6 @@
 			
 			jqobj.center_loading.width(jqobj.center_content.width())
 			.css("left",jqobj.center_leftborder.width()).css("top",0);
-			jqobj.center_content.resizEvent();
 		};
 		this.setWidth = setWidth;
 		
@@ -457,6 +501,11 @@
 		};
 		this.totop = totop;
 		
+		/**
+		 * 当前对象是否是最高
+		 * 参数	当前对象（对象）或无
+		 * 返回	是否是最高（布尔值）
+		 * */
 		var istop = function(_this){
 			var obj = _this || this;
 			var containerHigh = obj.container().data("containerHigh");
@@ -472,6 +521,11 @@
 		};
 		this.istop = istop;
 		
+		/**
+		 * 查找最高的窗口
+		 * 参数	无
+		 * 返回	窗口对象（对象）
+		 * */
 		var findtop = function(){
 			
 			var t = 0;
@@ -518,10 +572,7 @@
 		 * */
 		var max = function(_this){
 			var obj = _this || this;
-			if(config.fn.max != undefined){	//执行用户自定义的方法
-				config.fn.max();
-			}
-			if(jqobj.obj != undefined){
+			if(jqobj.obj != undefined && config.maxable){
 				config.widthTemp = obj.width();
 				config.heightTemp = obj.height();
 				config.topTemp = obj.top();
@@ -531,8 +582,13 @@
 				obj.top(0);
 				obj.width(obj.container().width());
 				obj.height(obj.container().height());
+				
+				jqobj.ui_resizable_e.hide();
+				jqobj.ui_resizable_s.hide();
+				jqobj.ui_resizable_se.hide();
+				
+				config.maxed = true;
 			}
-			config.maxed = true;
 			return obj;
 		};
 		this.max = max;
@@ -544,10 +600,10 @@
 		 * */
 		var min = function(_this){
 			var obj = _this || this;
-			if(jqobj.obj != undefined){
+			if(jqobj.obj != undefined && config.minable){
 				jqobj.obj.hide();
+				config.mined = true;
 			}
-			config.mined = true;
 			return obj;
 		};
 		this.min = min;
@@ -568,12 +624,102 @@
 					obj.left(config.leftTemp);
 					obj.width(config.widthTemp);
 					obj.height(config.heightTemp);
+
+					if(config.resizable){
+						jqobj.ui_resizable_e.show();
+						jqobj.ui_resizable_s.show();
+						jqobj.ui_resizable_se.show();
+					}
+					
 					config.maxed = false;
 				}
 			}
 			return obj;
 		};
 		this.re = re;
+		
+		var minable = function(_minable){
+			if(_minable!=undefined){
+				config.minable = _minable;
+				if(jqobj.obj !=undefined){
+					if(_minable){
+						jqobj.top_titlebar_buttons_min.removeClass("disabled");	//添加不可最小化样式
+					}else{
+						jqobj.top_titlebar_buttons_min.addClass("disabled");	//添加不可最小化样式
+					}
+				}
+				return this;
+			}else{
+				return config.minable;
+			}
+		};
+		this.minable = minable;
+		
+		var maxable = function(_maxable){	//是否最大化
+			if(_maxable!=undefined){
+				config.maxable = _maxable;
+				if(jqobj.obj != undefined){
+					if(config.maxable){
+						jqobj.top_titlebar_buttons_maxre.removeClass("disabled");	//添加不可最大化样式
+					}else{
+						jqobj.top_titlebar_buttons_maxre.addClass("disabled");	//添加不可最大化样式
+					}
+				}
+				return this;
+			}else{
+				return config.maxable;
+			}
+		};
+		this.maxable = maxable;
+		
+		var resizable = function(_resizable){
+			if(_resizable == undefined){
+				return config.resizable;
+			}else{
+				config.resizable = _resizable;
+				if(jqobj.obj != undefined){
+					if(config.resizable){
+						jqobj.ui_resizable_e.show();
+						jqobj.ui_resizable_s.show();
+						jqobj.ui_resizable_se.show();
+						maxable(true);
+					}else{
+						jqobj.ui_resizable_e.hide();
+						jqobj.ui_resizable_s.hide();
+						jqobj.ui_resizable_se.hide();
+						maxable(false);
+					}
+				}
+				return this;
+			}
+		};
+		this.resizable = resizable;
+		
+		var scroll = function(_scroll){
+			if(_scroll == undefined){
+				return config.scroll;
+			}else{
+				config.scroll = _scroll;
+				if(jqobj.obj != undefined){
+					if(config.scroll){
+						if(config.iframe){
+							jqobj.center_content.children("iframe").css("overflow","auto");
+						}else{
+							jqobj.center_content.css("overflow","auto");
+						}
+						
+					}else{
+						if(config.iframe){
+							jqobj.center_content.children("iframe").css("overflow","hidden");
+						}else{
+							jqobj.center_content.css("overflow","hidden");
+						}
+					}
+				}
+				return this;
+			}
+		};
+		this.scroll = scroll;
 		
 	};
 	
