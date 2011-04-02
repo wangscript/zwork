@@ -15,6 +15,8 @@
 		var uid = $ui.util.guid();
 		this.uid = uid;
 		
+		this.initQueue = new Array();
+		
 		/**
 		 * 初始化
 		 * 参数	无
@@ -22,18 +24,34 @@
 		 * */
 		var init = function(){
 			this.initjqobj();
+			this.id(this.config.id);
 			this.container(this.config.container);
 			this.containerStyle(this.config.containerStyle);
 			this.top(this.config.top);
 			this.left(this.config.left);
 			this.height(this.config.height);
 			this.width(this.config.width);
-			
-			if(this.oninit != undefined){
-				this.oninit(this);
+			var _this = this;
+			for(i in this.initQueue){
+				this.initQueue[i](_this);
 			}
 		};
 		this.init = init;
+		
+		var id = function(_id){
+			
+			if(_id == undefined){
+				return this.config.id;
+			}else{
+				this.config.id = _id;
+				if(this.jqobj.obj != undefined){
+					jqobj.attr("id" , _id);
+				}
+				return this;
+			}
+			
+		};
+		this.id = id;
 		
 		/**
 		 * 设置或返回对象所在的容器

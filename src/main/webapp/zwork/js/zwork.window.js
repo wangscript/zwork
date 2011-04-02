@@ -1,5 +1,6 @@
 /* !
- * file : zwork.view
+ * file : zwork.window
+ * extend : zwork.view
  * author : 赵振华
  * 	窗口容器
  */
@@ -152,7 +153,7 @@
 		 * 参数	init回调时传参，参数为当前对象
 		 * 返回	无
 		 * */
-		var oninit = function(_this){
+		this.initQueue.push(function(_this){
 			
 			//拖动事件
 			jqobj.obj.draggable({
@@ -251,19 +252,19 @@
 			
 			//调整状态不是为已经关闭
 			config.closed = false;
-			this.zindex(config.zindex);	//设置z轴
-			this.title(config.title);	//设置标题
-			this.iframe(config.iframe);	//设置iframe
-			this.src(config.src);	//加载url
-			this.mask(config.mask);	//模态
-			this.content(config.content);	//静态内容
+			_this.zindex(_this.config.zindex);	//设置z轴
+			_this.title(_this.config.title);	//设置标题
+			_this.iframe(_this.config.iframe);	//设置iframe
+			_this.src(_this.config.src);	//加载url
+			_this.mask(_this.config.mask);	//模态
+			_this.content(_this.config.content);	//静态内容
 			
-			maxable(config.maxable);
-			minable(config.minable);
-			resizable(config.resizable);
-			scroll(config.scroll);
-		};
-		this.oninit = oninit;
+			_this.maxable(_this.config.maxable);
+			_this.minable(_this.config.minable);
+			_this.resizable(_this.config.resizable);
+			_this.scroll(_this.config.scroll);
+			
+		});
 		
 		/**
 		 * 设置或返回静态内容
@@ -274,9 +275,9 @@
 			if(_content == undefined){
 				return jqobj.center_content.html();
 			}else{
-				config.content = _content;
+				this.config.content = _content;
 				if(jqobj.obj != undefined){
-					jqobj.center_content.html(config.content);
+					jqobj.center_content.html(_content);
 				}
 				return this;
 			}
@@ -295,8 +296,22 @@
 				config.mask = _mask;
 				if(config.mask && jqobj.obj != undefined){
 					var maskObj = $($ui.html.mask);
-					maskObj.appendTo($("body"))
-					.css("z-index",this.zindex()-1);
+					maskObj.attr("uid",this.uid).appendTo($("body"));
+					
+					var ctn = this.container();
+					ctn.resizEvent("mask_resiz",function(_c){
+						maskObj.width(ctn.width());
+						maskObj.height(ctn.height());
+					});
+					
+					var mask_index = this.container().data("mask_index");
+					if(mask_index == undefined){
+						mask_index = 1000000;
+					}
+					mask_index ++;
+					this.container().data("mask_index",mask_index);
+					maskObj.css("z-index",mask_index - 1);
+					jqobj.obj.appendTo($("body")).css("z-index",mask_index);;
 					minable(false);
 				}
 				return this;
@@ -371,7 +386,7 @@
 		 * 返回	无
 		 * */
 		var setHeight = function(_height){
-			var temp = config.height;
+			var temp = _height;
 			if((config.height+"").indexOf("%") > 0){
 				var h = Number((config.height+"").replace("%",""));
 				temp = this.container().height()*(h/100);
@@ -394,7 +409,7 @@
 		 * 返回	无
 		 * */
 		var setWidth = function(_width){
-			var temp = config.width;
+			var temp = _width;
 			if((config.width+"").indexOf("%") > 0){
 				var w = Number((config.width+"").replace("%",""));
 				temp = this.container().width()*(w/100);
@@ -480,24 +495,26 @@
 		 * */
 		var totop = function(_this){
 			var obj = _this || this;
-			
-			var windows = $(".zwork-window",obj.container());
-			windows.each(function(){
-				$(this).find(".loading").show();
-			});
-			jqobj.center_loading.hide();
-			
-			var containerHigh = obj.container().data("containerHigh");
-			if(containerHigh == undefined){
-				containerHigh = 0;
-				obj.zindex(containerHigh + 1);
-			}
-			if(!istop(obj)){
-				containerHigh ++;
-				obj.zindex(containerHigh);
-				obj.container().data("containerHigh",containerHigh);
+			if(obj.type() != "messager"){
+				var windows = obj.container().children(".zwork-window");
+				windows.each(function(){
+					$(this).find(".loading").show();
+				});
+				jqobj.center_loading.hide();
+				
+				var containerHigh = obj.container().data("containerHigh");
+				if(containerHigh == undefined){
+					containerHigh = 0;
+					obj.zindex(containerHigh + 1);
+				}
+				if(!istop(obj)){
+					containerHigh ++;
+					obj.zindex(containerHigh);
+					obj.container().data("containerHigh",containerHigh);
+				}
 			}
 			return obj;
+			
 		};
 		this.totop = totop;
 		
@@ -550,10 +567,12 @@
 		 * */
 		var close = function(_this){
 			var obj = _this ||this;
-			obj.hide();
+			
 			if(config.mask){
-				$(".zwork-mask",$("body")).remove();
+				$("div[uid='"+obj.uid+"']",$("body")).remove();
 			}
+			
+			obj.hide();
 			var targetObj = findtop();
 			if(targetObj != undefined){
 				obj.container().data("containerHigh",targetObj.zindex());
@@ -638,6 +657,11 @@
 		};
 		this.re = re;
 		
+		/**
+		 * 是否允许最小化
+		 * 参数	是否允许（布尔值）
+		 * 返回	当前对象（对象）或是否允许（布尔值）
+		 * */
 		var minable = function(_minable){
 			if(_minable!=undefined){
 				config.minable = _minable;
@@ -655,6 +679,11 @@
 		};
 		this.minable = minable;
 		
+		/**
+		 * 是否允许最大化
+		 * 参数	是否允许（布尔值）
+		 * 返回	当前对象（对象）或是否允许（布尔值）
+		 * */
 		var maxable = function(_maxable){	//是否最大化
 			if(_maxable!=undefined){
 				config.maxable = _maxable;
@@ -672,6 +701,11 @@
 		};
 		this.maxable = maxable;
 		
+		/**
+		 * 是否允许重置大小
+		 * 参数	是否允许（布尔值）
+		 * 返回	当前对象（对象）或是否允许（布尔值）
+		 * */
 		var resizable = function(_resizable){
 			if(_resizable == undefined){
 				return config.resizable;
@@ -695,6 +729,11 @@
 		};
 		this.resizable = resizable;
 		
+		/**
+		 * 是否允许出现滚动条
+		 * 参数	是否允许（布尔值）
+		 * 返回	当前对象（对象）或是否允许（布尔值）
+		 * */
 		var scroll = function(_scroll){
 			if(_scroll == undefined){
 				return config.scroll;

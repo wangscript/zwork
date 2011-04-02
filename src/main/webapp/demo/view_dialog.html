@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>window</title>
+	<title>dialog</title>
 	<!-- jQuery lib -->
 	<script type="text/javascript" src="../zwork/js/lib/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="../zwork/js/lib/jquery.ui-1.8.9.min.js"></script>
@@ -27,6 +27,7 @@
 	
 	<!-- zwork 框架文件 -->
 	<script type="text/javascript" src="../zwork/js/zwork.window.js"></script>
+	<script type="text/javascript" src="../zwork/js/zwork.dialog.js"></script>
 	
 	<link href="../zwork/skin/dwz/zwork.core.css" rel="stylesheet" type="text/css">
 	<link href="../zwork/skin/dwz/zwork.window.css" rel="stylesheet" type="text/css">
@@ -41,7 +42,6 @@
 	</script>
 </head>
 <body>
-
 	<a href="../index.html">返回首页</a>
 	
 	<div>
@@ -62,8 +62,6 @@
 				<li>minWidth - 最小宽度</li>
 				<li>maxWidth - 最大宽度</li>
 				<li>maxHeight - 最大高度</li>
-				<li>mask - 是否启用模态窗口</li>
-				<li>minable - 是否能最小化</li>
 				<li>maxable - 是否允许最大化</li>
 				<li>resizable - 是否允许充值大小</li>
 				<li>scroll - 是否出现滚动条</li>
@@ -71,18 +69,6 @@
 			</ul>
 		</p>
 	</div>
-	
-	<div type="window" show="true" src="data_demo.html" title="被加载的页面" top="200" left="400" resizable="false" scroll="false">ddd</div>
-	<div type="window" show="true" title="启用iframe的窗口" src="data_demo.html" mask="true" iframe="true" minable="false" scroll="true"></div>
-	<div type="window" show="true" title="模态窗口 - 内容是静态书写的" mask="true" top="100" left="300" maxHeight="500" content="<b>我是书写的内容</b><br/>窗口最大高度：500">
-		<p>窗口的最大高度：500<br>
-		虽然在标签中有content属性，但是，如果在type=window的区域中有html内容，那么用此区域中的内容。<br>
-		当然如果不想显示此区域的内容，在div的开始标签和结束标签之间不能有换行符。
-		</p>
-	</div>
-	<div style="position: absolute;height: 500px;width: 800px; overflow: auto;top:0px;left:200px;">
-		<div type="window" show="true" src="data_demo.html" title="在一个容器内" top="200" left="400"></div>
-	</div>
-
+	<div type="dialog" show="true"></div>
 </body>
 </html>

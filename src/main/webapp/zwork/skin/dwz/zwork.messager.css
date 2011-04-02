@@ -1,0 +1,5 @@
+.zwork-messager{}
+.zwork-messager .msg{overflow: auto;}
+.zwork-messager .bar{height: 29px;border-top: 1px solid #B4D1D3;}
+.zwork-messager .bar .ok{float: right;height: 25px;line-height: 25px;margin: 2px;width: 50px;}
+.zwork-messager .bar .cancel{float: right;height: 25px;line-height: 25px;margin: 2px;width: 50px;}
