@@ -119,6 +119,38 @@
 			}
 			
 		});
+		listener.add("div_type_dialog",function(_c,_p){
+			var list = _c.flc("dialog");
+			for(i in list){
+				var dialog = list[i];
+				var config = {};
+				config.container = dialog.parent();
+				config.height = dialog.attr("height") || 400;
+				config.width = dialog.attr("width") || 500;
+				config.left = Number(dialog.attr("left")) || 0;
+				config.top = Number(dialog.attr("top")) || 0;
+				config.src = dialog.attr("src") || undefined;
+				config.title = dialog.attr("title") || "无标题对话框";
+				config.iframe = eval(dialog.attr("iframe") || false);
+				config.maxable = eval(dialog.attr("maxable") || true);
+				config.resizable = eval(dialog.attr("resizable") || true);
+				config.scroll = eval(dialog.attr("scroll") || true);
+				config.minWidth = dialog.attr("minWidth") || 100;
+				config.minHeight = dialog.attr("minHeight") || 100;
+				config.maxWidth = dialog.attr("maxWidth") || undefined;
+				config.maxHeight = dialog.attr("maxHeight") || undefined;
+				config.content = dialog.attr("content") || undefined;
+				if(config.src == undefined && dialog.html() != "")
+					config.content = dialog.html();
+				
+				var zobj = $ui.dialog(config);
+				if(dialog.attr("show") || dialog.attr("show") == "true"){
+					zobj.show();
+				}
+				dialog.remove();
+			}
+			
+		});
 		
 		//注册给zwork
 		$ui.listener = listener;

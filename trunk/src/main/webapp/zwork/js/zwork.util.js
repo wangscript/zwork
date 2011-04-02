@@ -25,6 +25,22 @@
 					guid += "-";
 			}
 			return guid;
+		},
+		
+		/**
+		 * 使body标签的大小与浏览器同步
+		 * 参数	无
+		 * 返回	无
+		 * */
+		fitbody : function(){
+			$("body").height($(window).height());
+			$("body").width($(window).width());
+			$(window).resize(function(){
+				$("body").height($(window).height());
+				$("body").width($(window).width());
+				$("body").resizEvent();
+				$("body").resizEvent("mask_resiz");
+			});
 		}
 	
 	};

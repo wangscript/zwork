@@ -43,6 +43,7 @@
 			
 			if(config.listen != undefined)
 				$ui(config.listen);
+			$ui.util.fitbody();
 			
 			$ui.debug("当前版本 " + $ui.version);
 			

@@ -49,10 +49,10 @@
 		 * 参数	事件（方法）	如果有参数则添加事件，如果没有，则执行事件。
 		 * 返回	jQuery对象（对象）
 		 * */
-		resizEvent : function(_event){
+		resizEvent : function(_eventName,_event){
 			var current = $(this);
 			
-			if(_event == undefined){
+			if(_eventName == undefined && _event == undefined){
 				//执行操作
 				var timeoutID = current.data("resizEvent_timeoutID");
 				clearTimeout(timeoutID);
@@ -62,26 +62,50 @@
 					if(width != current.width() || height != current.height()){	//如果有一项改变了，那么代码大小被改变了。
 						current.data("resizEvent_oldWidth",current.width());
 						current.data("resizEvent_oldHeight",current.height());
-							var eventList = current.data("resizEvent_list");
-							if(eventList != undefined){
-								for(var i = 0;i<eventList.length;i++){
-									eventList[i]();	//执行
-								}
+						
+						var eventList = current.data("resizEvent_list");
+						if(eventList != undefined && eventList.length > 0){
+							for(var i = 0;i<eventList.length;i++){
+								if(eventList[i] != undefined)
+									eventList[i](current);	//执行
 							}
+						}
 					}
 					current.children().each(function(){
 						$(this).resizEvent();
 					});
 				},10);
 				current.data("resizEvent_timeoutID",timeoutID);
-			}else{
-				//添加事件
-				var eventList = current.data("resizEvent_list");
-				if(eventList == undefined){
-					eventList = new Array();
+				
+			}else if(_eventName != undefined && _event == undefined){
+				
+				if(typeof _eventName == "function"){
+					
+					//添加事件
+					var eventList = current.data("resizEvent_list");
+					if(eventList == undefined){
+						eventList = new Array();
+					}
+					eventList.push(_event);
+					current.data("resizEvent_list",eventList);
+					
+				}else if(typeof _eventName == "string"){
+					
+					var timeoutID = current.data("resizEvent_timeoutID");
+					clearTimeout(timeoutID);
+					timeoutID = setTimeout(function() {
+						var fn = current.data(_eventName);
+						if(fn!=undefined)
+							fn(current);
+					}, 10);
+					current.data("resizEvent_timeoutID",timeoutID);
+					
 				}
-				eventList.push(_event);
-				current.data("resizEvent_list",eventList);
+				
+			}else if(_eventName != undefined && _event != undefined){
+				
+				current.data(_eventName,_event);
+				
 			}
 			
 			return current;
@@ -93,6 +117,7 @@
 		 * firstLevelChildren简称olc，第一级子元素。
 		 * */
 		flc : function(_value , _tag){
+
 			if(_tag == undefined){
 				_tag = "type";
 			}
@@ -101,11 +126,11 @@
 			var find = function(obj,_value){
 				obj.children("*").each(function(){
 					var cur = $(this);
-					var value = $(this).attr(_tag);
-					if(value != undefined && value == _value){
+					var type = $(this).attr(_tag);
+					if(type && type == _value){
 						childrenList.push(cur);
 					}else{
-						find(cur,_tag);
+						find(cur,_value);
 					}
 				});
 			};

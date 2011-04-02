@@ -35,7 +35,13 @@
 		button : "",
 		
 		//模态窗口是的背景
-		mask : "<div class='zwork-mask'></div>"
+		mask : "<div class='zwork-mask'></div>",
+		
+		//消息弹出框
+		messager:"<div class='zwork-messager'><div class='msg'></div>" +
+				"<div class='bar'>" +
+				"<div class='ok'>确定</div><div class='cancel'>取消</div>" +
+				"</div></div>"
 	};
 	
 	//注册给zwork
