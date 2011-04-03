@@ -32,6 +32,7 @@
 		$ui.extend(this,$ui.window(_config));	//继承zwork.window
 		
 		var config = {
+			id : undefined,
 			title : "无标题对话框",
 			minable : false,
 			type : "dialog"

@@ -32,7 +32,11 @@
 				+ "	<div class='statebar'>" + "	</div>" + "</div>" + "</div>",
 				
 		//按钮对象的html结构
-		button : "",
+		button : "<div class='zwork-button'>" +
+				"<div class='left'></div>" +
+				"<div class='center'></div>" +
+				"<div class='right'></div>" +
+				"</div>",
 		
 		//模态窗口是的背景
 		mask : "<div class='zwork-mask'></div>",
@@ -40,7 +44,7 @@
 		//消息弹出框
 		messager:"<div class='zwork-messager'><div class='msg'></div>" +
 				"<div class='bar'>" +
-				"<div class='ok'>确定</div><div class='cancel'>取消</div>" +
+				"<div type='button' position='right' id='ok'>确定</div><div id='cancel' type='button' label='取消' position='right'></div>" +
 				"</div></div>"
 	};
 	

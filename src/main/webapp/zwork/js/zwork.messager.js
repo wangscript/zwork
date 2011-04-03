@@ -32,9 +32,11 @@
 		
 		//配置对象
 		var config = {
+			id : undefined,
 			title : "弹出消息",
 			msgContent :"",
 			container : $("body"),
+			callback:undefined,
 			width:400,
 			height:200,
 			minable : false,
@@ -61,10 +63,20 @@
 			
 			var contentdiv = _this.jqobj.obj.find(".zwork-messager .msg");
 			var bardiv = _this.jqobj.obj.find(".zwork-messager .bar");
-			var ok = $(".ok",bardiv);
-			var cancel = $(".cancel",bardiv);
+			var ok = $("#ok",bardiv);
+			ok.click(function(){
+				if(config.callback != undefined){
+					config.callback();
+				}
+				_this.close();
+			});
+			var cancel = $("#cancel",bardiv);
 			if(_this.config.msgType == "alert"){
 				cancel.hide();
+			}else{
+				cancel.click(function(){
+					_this.close();
+				});
 			}
 			
 			var contentHeight = _this.jqobj.center_content.height() - bardiv.height();
