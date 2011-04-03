@@ -32,8 +32,8 @@
 		
 		//配置对象
 		var config = {
-			id : undefined,
-			title:"无标题窗口",
+			id : undefined,	//窗口id
+			title:"无标题窗口",	//窗口标题
 			container : $("body"),	//窗口所在的容器
 			containerStyle:undefined,	//容器的样式
 			src : undefined,	//请求的页面地址
@@ -255,7 +255,7 @@
 			_this.zindex(_this.config.zindex);	//设置z轴
 			_this.title(_this.config.title);	//设置标题
 			_this.iframe(_this.config.iframe);	//设置iframe
-			_this.src(_this.config.src);	//加载url
+			_this.src(_this.config.src,_this);	//加载url
 			_this.mask(_this.config.mask);	//模态
 			_this.content(_this.config.content);	//静态内容
 			
@@ -278,6 +278,7 @@
 				this.config.content = _content;
 				if(jqobj.obj != undefined){
 					jqobj.center_content.html(_content);
+					$ui(jqobj.center_content,this);
 				}
 				return this;
 			}
@@ -345,7 +346,9 @@
 		 * 参数	页面地址（字符串）
 		 * 返回	页面地址（字符串）或当前对象（对象）
 		 * */
-		var src = function(_src){
+		var src = function(_src,_this){
+			var obj = _this || this;
+			
 			if(_src == undefined){
 				return config.src;
 			}else{
@@ -354,7 +357,9 @@
 					if(config.iframe){
 						jqobj.center_content.children("iframe").attr("src",config.src);
 					}else{
-						jqobj.center_content.load(config.src);
+						jqobj.center_content.load(config.src,function(){
+							$ui(jqobj.center_content,obj);
+						});
 					}
 				}
 				return this;
@@ -495,10 +500,14 @@
 		 * */
 		var totop = function(_this){
 			var obj = _this || this;
-			if(obj.type() != "messager"){
+
+			if(!obj.config.mask){
+				
 				var windows = obj.container().children(".zwork-window");
 				windows.each(function(){
-					$(this).find(".loading").show();
+					if(!$ui.find($(this)).mask()){
+						$(this).find(".loading").show();
+					}
 				});
 				jqobj.center_loading.hide();
 				
@@ -513,6 +522,7 @@
 					obj.container().data("containerHigh",containerHigh);
 				}
 			}
+			
 			return obj;
 			
 		};
@@ -543,12 +553,13 @@
 		 * 参数	无
 		 * 返回	窗口对象（对象）
 		 * */
-		var findtop = function(){
+		var findtop = function(_this){
+			var obj = _this ||this;
 			
 			var t = 0;
 			var topWindow = undefined;
-			var ctn = this.container;
-			var windows = $(".zwork-window",ctn);
+			var ctn = obj.config.container;
+			var windows = ctn.children(".zwork-window");
 			windows.each(function(){
 				var index = $(this).css("z-index");
 				if(index > t){
@@ -573,7 +584,8 @@
 			}
 			
 			obj.hide();
-			var targetObj = findtop();
+			
+			var targetObj = findtop(obj);
 			if(targetObj != undefined){
 				obj.container().data("containerHigh",targetObj.zindex());
 				targetObj.totop();

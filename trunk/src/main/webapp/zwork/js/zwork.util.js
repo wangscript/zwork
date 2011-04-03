@@ -41,6 +41,12 @@
 				$("body").resizEvent();
 				$("body").resizEvent("mask_resiz");
 			});
+		},
+		
+		document_keypress : function(){
+			$(document).keypress(function(){
+				alert("---");
+			});
 		}
 	
 	};

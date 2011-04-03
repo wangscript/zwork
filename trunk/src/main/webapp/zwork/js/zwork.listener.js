@@ -92,6 +92,7 @@
 				var config = {};
 				config.container = window.parent();
 				config.height = window.attr("height") || 400;
+				config.id = window.attr("id") || undefined;
 				config.width = window.attr("width") || 500;
 				config.left = Number(window.attr("left")) || 0;
 				config.top = Number(window.attr("top")) || 0;
@@ -111,13 +112,12 @@
 				if(config.src == undefined && window.html() != "")
 					config.content = window.html();
 				
-				var zobj = $ui.window(config);
+				var zobj = $ui.window(config,_p);
 				if(window.attr("show") || window.attr("show") == "true"){
 					zobj.show();
 				}
 				window.remove();
 			}
-			
 		});
 		listener.add("div_type_dialog",function(_c,_p){
 			var list = _c.flc("dialog");
@@ -125,6 +125,7 @@
 				var dialog = list[i];
 				var config = {};
 				config.container = dialog.parent();
+				config.id = dialog.attr("id") || undefined;
 				config.height = dialog.attr("height") || 400;
 				config.width = dialog.attr("width") || 500;
 				config.left = Number(dialog.attr("left")) || 0;
@@ -143,11 +144,34 @@
 				if(config.src == undefined && dialog.html() != "")
 					config.content = dialog.html();
 				
-				var zobj = $ui.dialog(config);
+				var zobj = $ui.dialog(config,_p);
 				if(dialog.attr("show") || dialog.attr("show") == "true"){
 					zobj.show();
 				}
 				dialog.remove();
+			}
+		});
+		listener.add("div_type_button",function(_c,_p){
+			var list = _c.flc("button");
+			for(i in list){
+				var button = list[i];
+				var config = {};
+				config.container = button.parent();
+				config.id = button.attr("id") || undefined;
+				config.width = button.attr("width") || 100;
+				if(button.html()!=""){config.label = button.html();}
+				config.label = (button.attr("label") || config.label) || "按钮";
+				config.fitWidth = eval(button.attr("fitWidth") || true);
+				config.active = eval(button.attr("active") || false);
+				config.click = button.attr("click") || undefined;
+				config.action = button.attr("action") || "button";
+				config.position = button.attr("position") || "right";
+				
+				var zobj = $ui.button(config,_p);
+				if(button.attr("show") == undefined || button.attr("show") == "true"){
+					zobj.show();
+				}
+				button.remove();
 			}
 			
 		});

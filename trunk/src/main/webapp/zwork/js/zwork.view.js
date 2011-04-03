@@ -45,7 +45,7 @@
 			}else{
 				this.config.id = _id;
 				if(this.jqobj.obj != undefined){
-					jqobj.attr("id" , _id);
+					this.jqobj.obj.attr("id" , _id);
 				}
 				return this;
 			}
