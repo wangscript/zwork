@@ -113,6 +113,7 @@
 					config.content = window.html();
 				
 				var zobj = $ui.window(config,_p);
+				zobj.addClass(window.attr("class"));
 				if(window.attr("show") || window.attr("show") == "true"){
 					zobj.show();
 				}
@@ -145,6 +146,7 @@
 					config.content = dialog.html();
 				
 				var zobj = $ui.dialog(config,_p);
+				zobj.addClass(dialog.attr("class"));
 				if(dialog.attr("show") || dialog.attr("show") == "true"){
 					zobj.show();
 				}
@@ -163,17 +165,125 @@
 				config.label = (button.attr("label") || config.label) || "按钮";
 				config.fitWidth = eval(button.attr("fitWidth") || true);
 				config.active = eval(button.attr("active") || false);
-				config.click = button.attr("click") || undefined;
+				config.click = button.attr("fn") || undefined;
 				config.action = button.attr("action") || "button";
-				config.position = button.attr("position") || "right";
+				config.position = button.attr("position") || "left";
 				
 				var zobj = $ui.button(config,_p);
+				zobj.addClass(button.attr("class"));
 				if(button.attr("show") == undefined || button.attr("show") == "true"){
 					zobj.show();
 				}
 				button.remove();
 			}
-			
+		});
+		
+		listener.add("div_type_layout",function(_c,_p){
+			var list = _c.flc("layout");
+			for(i in list){
+				var layout = list[i];
+				var config = {};
+				config.container = layout.parent();
+				config.id = layout.attr("id") || undefined;
+				config.width = layout.attr("width") || "100%";
+				config.height = layout.attr("height") || "100%";
+				config.containerStyle = layout.attr("containerStyle");
+				
+				var north = layout.children("*[position='north']");
+				if(north.get(0) != undefined){
+					config.north = {};
+					config.north.id = north.attr("id") || undefined;
+					config.north.title = north.attr("title") || undefined;
+					config.north.iframe = eval(north.attr("iframe")) || false;
+					config.north.src = north.attr("src") || undefined;
+					config.north.height = north.attr("height") || 0;
+					config.north.border = eval(north.attr("border") || true);
+					config.north.content = north.attr("content") || undefined;
+					if(north.html() != ""){config.north.content = north.html();}
+					config.north.className = new Array();
+					config.north.className.push(north.attr("class"));
+				}
+				
+				var south = layout.children("*[position='south']");
+				if(south.get(0) != undefined){
+					config.south = {};
+					config.south.id = south.attr("id") || undefined;
+					config.south.title = south.attr("title") || undefined;
+					config.south.iframe = eval(south.attr("iframe")) || false;
+					config.south.src = south.attr("src") || undefined;
+					config.south.height = south.attr("height") || 0;
+					config.south.border = eval(south.attr("border") || true);
+					config.south.content = south.attr("content") || undefined;
+					if(south.html() != ""){config.south.content = south.html();}
+					config.south.className = new Array();
+					config.south.className.push(south.attr("class"));
+				}
+				
+				var west = layout.children("*[position='west']");
+				if(west.get(0) != undefined){
+					config.west = {};
+					config.west.id = west.attr("id") || undefined;
+					config.west.title = west.attr("title") || undefined;
+					config.west.iframe = eval(west.attr("iframe")) || false;
+					config.west.src = west.attr("src") || undefined;
+					config.west.width = west.attr("width") || 0;
+					config.west.border = eval(west.attr("border") || true);
+					config.west.content = west.attr("content") || undefined;
+					if(west.html() != ""){config.west.content = west.html();}
+					config.west.className = new Array();
+					config.west.className.push(west.attr("class"));
+				}
+				
+				var east = layout.children("*[position='east']");
+				if(east.get(0) != undefined){
+					config.east = {};
+					config.east.id = east.attr("id") || undefined;
+					config.east.title = east.attr("title") || undefined;
+					config.east.iframe = eval(east.attr("iframe")) || false;
+					config.east.src = east.attr("src") || undefined;
+					config.east.width = east.attr("width") || 0;
+					config.east.border = eval(east.attr("border") || true);
+					config.east.content = east.attr("content") || undefined;
+					config.east.className = new Array();
+					config.east.className.push(east.attr("class"));
+					if(east.html() != ""){config.east.content = east.html();}
+				}
+				
+				var center = layout.children("*[position='center']");
+				if(center.get(0) != undefined){
+					config.center = {};
+					config.center.id = center.attr("id") || undefined;
+					config.center.title = center.attr("title") || undefined;
+					config.center.iframe = eval(center.attr("iframe")) || false;
+					config.center.src = center.attr("src") || undefined;
+					config.center.content = center.attr("content") || undefined;
+					if(center.html() != ""){config.center.content = center.html();}
+					config.center.className = new Array();
+					config.center.className.push(center.attr("class"));
+				}
+				
+				var zobj = $ui.layout(config,_p);
+				zobj.addClass(layout.attr("class"));
+				if(layout.attr("show") == undefined || layout.attr("show") == "true"){
+					zobj.show();
+				}
+				layout.remove();
+			}
+		});
+		
+		listener.add("a_target_ajax",function(_c,_p){
+			$("a[target='ajax']",_c).each(function(){
+				var current = $(this);
+				current.click(function(){
+					var href = current.attr("href");
+					var rel = current.attr("rel");
+					$("#"+rel,_c).load(href,function(){
+						$ui($(this),_p);
+					});
+					
+					return false;
+				});
+			});
 		});
 		
 		//注册给zwork

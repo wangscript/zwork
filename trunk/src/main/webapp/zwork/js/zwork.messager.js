@@ -47,6 +47,7 @@
 			mask:true,
 			msgType:"alert",
 			
+			className : new Array(),	//用户自定义的样式名
 			type : "messager"
 		};
 		this.config = config;
@@ -61,8 +62,8 @@
 			_this.top((_this.container().height() - _this.config.height)/2);
 			_this.left((_this.container().width() - _this.config.width)/2);
 			
-			var contentdiv = _this.jqobj.obj.find(".zwork-messager .msg");
-			var bardiv = _this.jqobj.obj.find(".zwork-messager .bar");
+			var contentdiv = _this.jqobj.obj.find(".zwork-messager .messager_content");
+			var bardiv = _this.jqobj.obj.find(".zwork-messager .messager_bar");
 			var ok = $("#ok",bardiv);
 			ok.click(function(){
 				if(config.callback != undefined){

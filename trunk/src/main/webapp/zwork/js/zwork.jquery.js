@@ -49,10 +49,11 @@
 		 * 参数	事件（方法）	如果有参数则添加事件，如果没有，则执行事件。
 		 * 返回	jQuery对象（对象）
 		 * */
-		resizEvent : function(_eventName,_event){
+		resizEvent : function(_event){
+			
 			var current = $(this);
 			
-			if(_eventName == undefined && _event == undefined){
+			if(_event == undefined){
 				//执行操作
 				var timeoutID = current.data("resizEvent_timeoutID");
 				clearTimeout(timeoutID);
@@ -62,50 +63,26 @@
 					if(width != current.width() || height != current.height()){	//如果有一项改变了，那么代码大小被改变了。
 						current.data("resizEvent_oldWidth",current.width());
 						current.data("resizEvent_oldHeight",current.height());
-						
-						var eventList = current.data("resizEvent_list");
-						if(eventList != undefined && eventList.length > 0){
-							for(var i = 0;i<eventList.length;i++){
-								if(eventList[i] != undefined)
-									eventList[i](current);	//执行
+							var eventList = current.data("resizEvent_list");
+							if(eventList != undefined){
+								for(var i = 0;i<eventList.length;i++){
+									eventList[i]();	//执行
+								}
 							}
-						}
 					}
 					current.children().each(function(){
 						$(this).resizEvent();
 					});
 				},10);
 				current.data("resizEvent_timeoutID",timeoutID);
-				
-			}else if(_eventName != undefined && _event == undefined){
-				
-				if(typeof _eventName == "function"){
-					
-					//添加事件
-					var eventList = current.data("resizEvent_list");
-					if(eventList == undefined){
-						eventList = new Array();
-					}
-					eventList.push(_event);
-					current.data("resizEvent_list",eventList);
-					
-				}else if(typeof _eventName == "string"){
-					
-					var timeoutID = current.data("resizEvent_timeoutID");
-					clearTimeout(timeoutID);
-					timeoutID = setTimeout(function() {
-						var fn = current.data(_eventName);
-						if(fn!=undefined)
-							fn(current);
-					}, 10);
-					current.data("resizEvent_timeoutID",timeoutID);
-					
+			}else{
+				//添加事件
+				var eventList = current.data("resizEvent_list");
+				if(eventList == undefined){
+					eventList = new Array();
 				}
-				
-			}else if(_eventName != undefined && _event != undefined){
-				
-				current.data(_eventName,_event);
-				
+				eventList.push(_event);
+				current.data("resizEvent_list",eventList);
 			}
 			
 			return current;
@@ -137,6 +114,19 @@
 			find($this,_value);
 			return childrenList;
 			
+		},
+		
+		copyAttr : function(){
+			var current = $(this);
+			var list = ["id","class","style"];
+			var map = new $ui.hashmap();
+			for(i in list){
+				var at = list[i];
+				if(current.attr(at)!=undefined && current.attr(at)!=""){
+					map.put(at,current.attr(at));
+				}
+			}
+			return map;
 		}
 		
 	});

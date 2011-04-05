@@ -72,6 +72,7 @@
 			mined:false,	//当前是不是最小化
 			closed:true,	//当前是不是被关闭了
 			
+			className : new Array(),	//用户自定义的样式名
 			type : "window"
 		};
 		this.config = config;
@@ -300,10 +301,6 @@
 					maskObj.attr("uid",this.uid).appendTo($("body"));
 					
 					var ctn = this.container();
-					ctn.resizEvent("mask_resiz",function(_c){
-						maskObj.width(ctn.width());
-						maskObj.height(ctn.height());
-					});
 					
 					var mask_index = this.container().data("mask_index");
 					if(mask_index == undefined){
@@ -391,12 +388,7 @@
 		 * 返回	无
 		 * */
 		var setHeight = function(_height){
-			var temp = _height;
-			if((config.height+"").indexOf("%") > 0){
-				var h = Number((config.height+"").replace("%",""));
-				temp = this.container().height()*(h/100);
-			}
-			jqobj.obj.height(temp);
+			jqobj.obj.height(_height);
 			var centerHeight = jqobj.obj.height() - jqobj.top.height() - jqobj.bottom.height();
 			jqobj.center.height(centerHeight);
 			jqobj.center_content.height(centerHeight);
@@ -414,12 +406,7 @@
 		 * 返回	无
 		 * */
 		var setWidth = function(_width){
-			var temp = _width;
-			if((config.width+"").indexOf("%") > 0){
-				var w = Number((config.width+"").replace("%",""));
-				temp = this.container().width()*(w/100);
-			}
-			jqobj.obj.width(temp);
+			jqobj.obj.width(_width);
 			var tempWidth = jqobj.obj.width();
 			jqobj.top_border_center.width(tempWidth - jqobj.top_border_left.width() - jqobj.top_border_right.width());
 			jqobj.bottom_border_center.width(tempWidth - jqobj.bottom_border_left.width() - jqobj.bottom_border_right.width());
