@@ -35,6 +35,8 @@
 			id : undefined,
 			title : "无标题对话框",
 			minable : false,
+			
+			className : new Array(),	//用户自定义的样式名
 			type : "dialog"
 		};
 		this.config = config;

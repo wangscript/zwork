@@ -31,6 +31,7 @@
 			this.left(this.config.left);
 			this.height(this.config.height);
 			this.width(this.config.width);
+			this.addClass();
 			var _this = this;
 			for(i in this.initQueue){
 				this.initQueue[i](_this);
@@ -53,6 +54,20 @@
 		};
 		this.id = id;
 		
+		var addClass = function(_class){
+			
+			if(_class != undefined)
+				this.config.className.push(_class);
+			
+			if(this.jqobj.obj != undefined){
+				for(i in this.config.className)
+					this.jqobj.obj.addClass(this.config.className[i]);
+			};
+			
+			return this;
+		};
+		this.addClass = addClass;
+		
 		/**
 		 * 设置或返回对象所在的容器
 		 * 参数	容器（对象）
@@ -61,11 +76,12 @@
 		var container = function(_container){
 			if(_container != undefined){
 				this.config.container = _container;
+				var _this = this;
 				if(this.jqobj.obj != undefined){
 					this.jqobj.obj.appendTo(this.config.container);
 					this.config.container.resizEvent(function(){
-						if(this.jqobj.obj != undefined && this.resizEvent != undefined){
-							this.resizEvent();
+						if(_this.jqobj.obj != undefined && _this.resizEvent != undefined){
+							_this.resizEvent();
 						}
 					});
 				}
@@ -154,7 +170,14 @@
 			}else{
 				this.config.height = _height;
 				if(this.jqobj.obj !=undefined && this.setHeight != undefined){
-					this.setHeight(_height);
+					
+					var temp = _height;
+					if((this.config.height+"").indexOf("%") > 0){
+						var h = Number((this.config.height+"").replace("%",""));
+						temp = this.container().height()*(h/100);
+					}
+					
+					this.setHeight(temp);
 				}
 				return this;
 			}
@@ -172,7 +195,14 @@
 			}else{
 				this.config.width = _width;
 				if(this.jqobj.obj !=undefined && this.setWidth != undefined){
-					this.setWidth(_width);
+					
+					var temp = _width;
+					if((this.config.width+"").indexOf("%") > 0){
+						var w = Number((this.config.width+"").replace("%",""));
+						temp = this.container().width()*(w/100);
+					}
+					
+					this.setWidth(temp);
 				}
 				return this;
 			}

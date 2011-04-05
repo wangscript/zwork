@@ -43,6 +43,7 @@
 			position : "right",	//位置	可选值：right|left
 			active : false,	//是否是活动的
 			
+			className : new Array(),	//用户自定义的样式名
 			type : "button"
 		};
 		this.config = config;
@@ -72,6 +73,7 @@
 			}).mouseoverout("zwork-button_hover");
 		});
 		
+		//jQuery对象
 		var jqobj ={
 			obj : undefined,
 			left : undefined,
@@ -80,15 +82,25 @@
 		};
 		this.jqobj = jqobj;
 		
+		/**
+		 * 初始化jQuery对象
+		 * 参数	无
+		 * 返回	当前对象（对象）
+		 * */
 		var initjqobj = function(){
 			jqobj.obj = $($ui.html.button);
-			jqobj.left = jqobj.obj.children(".left");
-			jqobj.center = jqobj.obj.children(".center");
-			jqobj.right = jqobj.obj.children(".right");
+			jqobj.left = jqobj.obj.children(".button_left");
+			jqobj.center = jqobj.obj.children(".button_center");
+			jqobj.right = jqobj.obj.children(".button_right");
 			return this;
 		};
 		this.initjqobj = initjqobj;
 		
+		/**
+		 * 清除jQuery对象
+		 * 参数	无
+		 * 返回	当前对象（对象）
+		 * */
 		var clearjqobj = function(){
 			jqobj.obj = undefined;
 			jqobj.left = undefined;
@@ -98,6 +110,11 @@
 		};
 		this.clearjqobj = clearjqobj;
 		
+		/**
+		 * 设置或返回按钮上显示的文字
+		 * 参数	无或文字（字符串）
+		 * 返回	当前对象（对象）或按钮文字（字符串）
+		 * */
 		var label = function(_label){
 			if(_label == undefined){
 				return config.label;
@@ -112,6 +129,11 @@
 		};
 		this.label = label;
 		
+		/**
+		 * 设置宽度
+		 * 参数	无
+		 * 返回	无
+		 * */
 		var setWidth = function(_width){
 			if(config.fitWidth){
 				jqobj.obj.width(10000);
@@ -119,17 +141,17 @@
 				var width = center_width + jqobj.left.width() + jqobj.right.width();
 				jqobj.obj.width(width);
 			}else{
-				var temp = _width;
-				if((config.width+"").indexOf("%") > 0){
-					var w = Number((config.width+"").replace("%",""));
-					temp = this.container().width()*(w/100);
-				}
-				jqobj.obj.width(temp);
+				jqobj.obj.width(_width);
 				jqobj.center.width(temp - jqobj.left.width() - jqobj.right.width());
 			}
 		};
 		this.setWidth = setWidth;
 		
+		/**
+		 * 设置是否适应文字宽度
+		 * 参数	无或是否适应（布尔值）
+		 * 返回	当前对象（对象）或是否适应（布尔值）
+		 * */
 		var fitWidth = function(_fitWidth){
 			if(_fitWidth == undefined){
 				return config.fitWidth;
@@ -141,6 +163,11 @@
 		};
 		this.fitWidth = fitWidth;
 		
+		/**
+		 * 设置或返回按钮点击事件
+		 * 参数	无或事件（字符串）
+		 * 返回	当前对象（对象）或事件（字符串）
+		 * */
 		var click = function(_click){
 			if(_click == undefined){
 				return config.click;
@@ -151,6 +178,11 @@
 		};
 		this.click = click;
 		
+		/**
+		 * 设置或返回按钮操作类型
+		 * 参数	无或操作类型（字符串）
+		 * 返回	当前对象（对象）或操作类型（字符串）
+		 * */
 		var action = function(_action){
 			if(_action == undefined){
 				return config.action;
@@ -161,6 +193,11 @@
 		};
 		this.action = action;
 		
+		/**
+		 * 设置或返回按钮位置
+		 * 参数	无或位置（字符串）
+		 * 返回	当前对象（对象）或按钮位置（字符串）
+		 * */
 		var position = function(_position){
 			if(_position == undefined){
 				return config.position;
@@ -174,6 +211,11 @@
 		};
 		this.position = position;
 		
+		/**
+		 * 设置或返回按钮当前是否是活动的
+		 * 参数	无或是否为活动状态（布尔值）
+		 * 返回	当前对象（对象）或是否为活动状态（布尔值）
+		 * */
 		var active = function(_active){
 			if(_active == undefined){
 				return config.active;

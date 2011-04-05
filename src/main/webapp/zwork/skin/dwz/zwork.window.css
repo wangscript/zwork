@@ -5,7 +5,7 @@
 .zwork-window .top .border .center{ width: 390px; height: 28px; background: url(image/window/border.png) repeat-x 0 -100px; float: left; }
 .zwork-window .top .border .right{ width: 5px; height: 28px; background: url(image/window/border.png) no-repeat 0 -50px; float: left; }
 .zwork-window .top .titlebar{position: absolute;width: 100%;height: 30px;z-index: 2;overflow: hidden;}
-.zwork-window .top .titlebar .ico{width: 25px;height: 20px;background: url("image/window/ico.gif") right center no-repeat;float: left;margin-top: 5px;}
+.zwork-window .top .titlebar .ico{width: 25px;height: 20px;float: left;margin-top: 5px;}
 .zwork-window .top .titlebar .title{height: 20px;line-height: 20px;width: 310px;float: left;text-align: center;overflow: hidden;font-weight: bold;color: #666666;margin-top: 5px;}
 .zwork-window .top .titlebar .buttons{height: 19px;width: 65px;float: left;margin-top: 5px;overflow: hidden;}
 .zwork-window .top .titlebar .buttons div{width: 19px;height: 19px;margin-right: 2px;float: left;border: 0;margin-bottom: 0px;cursor: pointer;}

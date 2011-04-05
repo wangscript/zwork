@@ -39,7 +39,6 @@
 				$("body").height($(window).height());
 				$("body").width($(window).width());
 				$("body").resizEvent();
-				$("body").resizEvent("mask_resiz");
 			});
 		},
 		
