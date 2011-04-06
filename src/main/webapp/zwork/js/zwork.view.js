@@ -24,6 +24,7 @@
 		 * */
 		var init = function(){
 			this.initjqobj();
+			this.jqobj.obj.data("uid",this.uid);
 			this.id(this.config.id);
 			this.container(this.config.container);
 			this.containerStyle(this.config.containerStyle);

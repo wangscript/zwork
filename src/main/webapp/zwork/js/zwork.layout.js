@@ -38,6 +38,7 @@
 			width:"100%",
 			height:"100%",
 			north :{
+				state:false,	//是否可见
 				id:undefined,
 				title:undefined,	//标题
 				iframe:false,	//其实启用iframe
@@ -49,6 +50,7 @@
 				className : new Array()	//用户自定义的样式名
 			},
 			west :{
+				state:false,	//是否可见
 				id:undefined,
 				title:undefined,	//标题
 				iframe:false,	//其实启用iframe
@@ -60,6 +62,7 @@
 				className : new Array()	//用户自定义的样式名
 			},
 			east :{
+				state:false,	//是否可见
 				id:undefined,
 				title:undefined,	//标题
 				iframe:false,	//其实启用iframe
@@ -71,6 +74,7 @@
 				className : new Array()	//用户自定义的样式名
 			},
 			south :{
+				state:false,	//是否可见
 				id:undefined,
 				title:undefined,	//标题
 				iframe:false,	//其实启用iframe
@@ -193,10 +197,10 @@
 					center.hide();
 					northBorder.animate({
 						top : tempHeight - northBorder.height()
-					},200);
+					});
 					north.animate({
 						height : tempHeight
-					},200,repaintMiddle);
+					},repaintMiddle);
 					north.data("hidden",false);
 					northButton.removeClass("layout_button_hidden");
 				}else{
@@ -204,10 +208,10 @@
 					center.hide();
 					northBorder.animate({
 						top : 0
-					},200);
+					});
 					north.animate({
 						height : northBorder.height()
-					},200,repaintMiddle);
+					},repaintMiddle);
 					north.data("hidden",true);
 					northButton.addClass("layout_button_hidden");
 				}
@@ -264,21 +268,21 @@
 					center.hide();
 					southBorder.animate({
 						top : current.height() - tempHeight
-					},200);
+					});
 					south.animate({
 						height : tempHeight
-					},200,repaintMiddle);
+					},repaintMiddle);
 					south.data("hidden",false);
-					southButton.removeClass("button_hidden");
+					southButton.removeClass("layout_button_hidden");
 				}else{
 					south.attr("height",south.height());
 					center.hide();
 					southBorder.animate({
 						top : current.height() - southBorder.height()
-					},200);
+					});
 					south.animate({
 						height : southBorder.height()
-					},200,repaintMiddle);
+					},repaintMiddle);
 					south.data("hidden",true);
 					southButton.addClass("layout_button_hidden");
 				}
@@ -335,21 +339,21 @@
 					center.hide();
 					westBorder.animate({
 						left : tempWidth - westBorder.width()
-					},200);
+					});
 					west.animate({
 						width : tempWidth
-					},200,repaintMiddle);
+					},repaintMiddle);
 					west.data("hidden",false);
-					westButton.removeClass("button_hidden");
+					westButton.removeClass("layout_button_hidden");
 				}else{
 					west.attr("width",west.width());
 					center.hide();
 					westBorder.animate({
 						left : 0
-					},200);
+					});
 					west.animate({
 						width : westBorder.width()
-					},200,repaintMiddle);
+					},repaintMiddle);
 					west.data("hidden",true);
 					westButton.addClass("layout_button_hidden");
 				}
@@ -409,21 +413,21 @@
 					center.hide();
 					eastBorder.animate({
 						left : current.width() - tempWidth
-					},200);
+					});
 					east.animate({
 						width : tempWidth
-					},200,repaintMiddle);
+					},repaintMiddle);
 					east.data("hidden",false);
-					eastButton.removeClass("button_hidden");
+					eastButton.removeClass("layout_button_hidden");
 				}else{
 					east.attr("width",east.width());
 					center.hide();
 					eastBorder.animate({
 						left : current.width() - eastBorder.width()
-					},200);
+					});
 					east.animate({
 						width : eastBorder.width()
-					},200,repaintMiddle);
+					},repaintMiddle);
 					east.data("hidden",true);
 					eastButton.addClass("layout_button_hidden");
 				}
@@ -548,6 +552,11 @@
 			_this.blockClass("west",config.west.className,_this);
 			_this.blockClass("east",config.east.className,_this);
 			
+			_this.blockState("north",config.north.state,_this);
+			_this.blockState("south",config.south.state,_this);
+			_this.blockState("west",config.west.state,_this);
+			_this.blockState("east",config.east.state,_this);
+			
 			_this.blockId("north",config.north.id,_this);
 			_this.blockId("south",config.south.id,_this);
 			_this.blockId("center",config.center.id,_this);
@@ -570,12 +579,60 @@
 			var obj = _this || this;
 			if(_title == undefined || typeof _title == "object"){
 				obj = _title || this;
-				return eval("config."+_position+".title;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.title;
+		        		break;
+		        	case "south" : 
+		        		return config.south.title;
+		        		break;
+		        	case "center" : 
+		        		return config.center.title;
+		        		break;
+		        	case "west" : 
+		        		return config.west.title;
+		        		break;
+		        	case "east" : 
+		        		return config.east.title;
+		        		break;
+		        	default:
+		        		break;
+				}     
 			}else if(typeof _title == "string"){
-				eval("config."+_position+".title = _title;" +
-						"if(jqobj.obj != undefined){"+
-					"jqobj."+_position+".title.show().html(_title);"+
-				"}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.title = _title;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.north.title.show().html(_title);
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.title = _title;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.south.title.show().html(_title);
+		        		}
+		        		break;
+		        	case "center" :
+		        		config.center.title = _title;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.center.title.show().html(_title);
+		        		}
+		        		break;
+		        	case "west" :
+		        		config.west.title = _title;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.west.title.show().html(_title);
+		        		}
+		        		break;
+		        	case "east" :
+		        		config.east.title = _title;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.east.title.show().html(_title);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}  
 				return this;
 			}
 			
@@ -586,9 +643,45 @@
 			var obj = _this || this;
 			if(_iframe == undefined || typeof _iframe == "object"){
 				obj = _iframe || this;
-				return eval("config."+_position+".iframe;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.iframe;
+		        		break;
+		        	case "south" : 
+		        		return config.south.iframe;
+		        		break;
+		        	case "center" : 
+		        		return config.center.iframe;
+		        		break;
+		        	case "west" : 
+		        		return config.west.iframe;
+		        		break;
+		        	case "east" : 
+		        		return config.east.iframe;
+		        		break;
+		        	default:
+		        		break;
+				}    
 			}else if(typeof _iframe == "boolean"){
-				eval("config."+_position+".iframe = _iframe;");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.iframe = _iframe;
+		        		break;
+		        	case "south" : 
+		        		config.south.iframe = _iframe;
+		        		break;
+		        	case "center" : 
+		        		config.center.iframe = _iframe;
+		        		break;
+		        	case "west" : 
+		        		config.west.iframe = _iframe;
+		        		break;
+		        	case "east" : 
+		        		config.east.iframe = _iframe;
+		        		break;
+		        	default:
+		        		break;
+				}
 				return this;
 			}
 			
@@ -599,19 +692,90 @@
 			var obj = _this || this;
 			if(_src == undefined || typeof _src == "object"){
 				obj = _src || this;
-				return eval("config."+_position+".src;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.src;
+		        		break;
+		        	case "south" : 
+		        		return config.south.src;
+		        		break;
+		        	case "center" : 
+		        		return config.center.src;
+		        		break;
+		        	case "west" : 
+		        		return config.west.src;
+		        		break;
+		        	case "east" : 
+		        		return config.east.src;
+		        		break;
+		        	default:
+		        		break;
+				}    
 			}else if(typeof _src == "string"){
-				var iframeHtml = "<iframe width='100%' height='100%' frameborder='0'></iframe>";
-				eval("config."+_position+".src = _src;"+
-				"if(config."+_position+".iframe){"+
-				"	jqobj."+_position+".content.html("+iframeHtml+");"+
-				"	var iframe = $('iframe',jqobj."+_position+".content);"+
-				"	iframe.attr('src',_src);"+
-				"}else{"+
-				"	jqobj."+_position+".content.load(_src,function(){"+
-				"		$ui(jqobj."+_position+".content,obj);"+
-				"	});"+
-				"}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.src = _src;
+		        		if(config.north.iframe){
+		        			jqobj.north.content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+		        			var iframe = $("iframe",jqobj.north.content);
+		        			iframe.attr("src",_src);
+		        		}else{
+		        			jqobj.north.content.load(_src,function(){
+		        				$ui(jqobj.north.content,obj);
+		        			});
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.src = _src;
+		        		if(config.south.iframe){
+		        			jqobj.south.content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+		        			var iframe = $("iframe",jqobj.south.content);
+		        			iframe.attr("src",_src);
+		        		}else{
+		        			jqobj.south.content.load(_src,function(){
+		        				$ui(jqobj.south.content,obj);
+		        			});
+		        		}
+		        		break;
+		        	case "center" : 
+		        		config.center.src = _src;
+		        		if(config.center.iframe){
+		        			jqobj.center.content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+		        			var iframe = $("iframe",jqobj.center.content);
+		        			iframe.attr("src",_src);
+		        		}else{
+		        			jqobj.center.content.load(_src,function(){
+		        				$ui(jqobj.center.content,obj);
+		        			});
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.src = _src;
+		        		if(config.west.iframe){
+		        			jqobj.west.content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+		        			var iframe = $("iframe",jqobj.west.content);
+		        			iframe.attr("src",_src);
+		        		}else{
+		        			jqobj.west.content.load(_src,function(){
+		        				$ui(jqobj.west.content,obj);
+		        			});
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.src = _src;
+		        		if(config.east.iframe){
+		        			jqobj.east.content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+		        			var iframe = $("iframe",jqobj.east.content);
+		        			iframe.attr("src",_src);
+		        		}else{
+		        			jqobj.east.content.load(_src,function(){
+		        				$ui(jqobj.east.content,obj);
+		        			});
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				} 
 				return this;
 			}
 			
@@ -622,12 +786,65 @@
 			var obj = _this || this;
 			if(_content == undefined || typeof _content == "object"){
 				obj = _content || this;
-				return eval("config."+_position+".content;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.content;
+		        		break;
+		        	case "south" : 
+		        		return config.south.content;
+		        		break;
+		        	case "center" : 
+		        		return config.center.content;
+		        		break;
+		        	case "west" : 
+		        		return config.west.content;
+		        		break;
+		        	case "east" : 
+		        		return config.east.content;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else if(typeof _content == "string"){
-				eval("config."+_position+".content = _content;"+
-				"if(jqobj.obj!=undefined){"+
-				"	jqobj."+_position+".content.html(_content);"+
-				"}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.content = _content;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.north.content.html(_content);
+		        			$ui(jqobj.north.content,obj);
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.content = _content;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.south.content.html(_content);
+		        			$ui(jqobj.south.content,obj);
+		        		}
+		        		break;
+		        	case "center" : 
+		        		config.center.content = _content;
+		        		if(jqobj.obj != undefined){
+		        			jqobj.center.content.html(_content);
+		        			$ui(jqobj.center.content,obj);
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.content = _content;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.west.content.html(_content);
+		        			$ui(jqobj.west.content,obj);
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.content = _content;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.east.content.html(_content);
+		        			$ui(jqobj.east.content,obj);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				return this;
 			}
 			
@@ -638,27 +855,215 @@
 			var obj = _this || this;
 			if(_border == undefined || typeof _border == "object"){
 				obj = _border || this;
-				return eval("config."+_position+".border;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.border;
+		        		break;
+		        	case "south" : 
+		        		return config.south.border;
+		        		break;
+		        	case "center" : 
+		        		return config.center.border;
+		        		break;
+		        	case "west" : 
+		        		return config.west.border;
+		        		break;
+		        	case "east" : 
+		        		return config.east.border;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else if(typeof _border == "boolean"){
-				eval("config."+_position+".border = _border;"+
-				"if(jqobj.obj!=undefined){if(config."+_position+".border){jqobj."+_position+".border.show();}else{jqobj."+_position+".border.hide();}}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.border = _border;
+		        		if(jqobj.obj != undefined){
+		        			if(config.north.border){
+		        				jqobj.north.border.show();
+		        			}else{
+		        				jqobj.north.border.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.border = _border;
+		        		if(jqobj.obj != undefined){
+		        			if(config.south.border){
+		        				jqobj.south.border.show();
+		        			}else{
+		        				jqobj.south.border.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "center" : 
+		        		config.center.border = _border;
+		        		if(jqobj.obj != undefined){
+		        			if(config.center.border){
+		        				jqobj.center.border.show();
+		        			}else{
+		        				jqobj.center.border.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.border = _border;
+		        		if(jqobj.obj != undefined){
+		        			if(config.west.border){
+		        				jqobj.west.border.show();
+		        			}else{
+		        				jqobj.west.border.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.border = _border;
+		        		if(jqobj.obj != undefined){
+		        			if(config.east.border){
+		        				jqobj.east.border.show();
+		        			}else{
+		        				jqobj.east.border.hide();
+		        			}
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				return this;
 			}
 			
 		};
 		this.border = border;
 		
+		var blockState = function(_p,_s,_this){
+			var obj = _this || this;
+			if(_s == undefined || _s.type != undefined){
+				obj = _s || this;
+				switch(_p){  
+		        	case "north" : 
+		        		return config.north.state;
+		        		break;
+		        	case "south" : 
+		        		return config.south.state;
+		        		break;
+		        	case "west" : 
+		        		return config.west.state;
+		        		break;
+		        	case "east" : 
+		        		return config.east.state;
+		        		break;
+		        	default:
+		        		break;
+				}
+			}else{
+				switch(_p){  
+		        	case "north" : 
+		        		config.north.state = _s;
+		        		if(jqobj.obj!=undefined){
+		        			if(_s){
+		        				jqobj.north.obj.show();
+		        			}else{
+		        				jqobj.north.obj.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.state = _s;
+		        		if(jqobj.obj!=undefined){
+		        			if(_s){
+		        				jqobj.south.obj.show();
+		        			}else{
+		        				jqobj.south.obj.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.state = _s;
+		        		if(jqobj.obj!=undefined){
+		        			if(_s){
+		        				jqobj.west.obj.show();
+		        			}else{
+		        				jqobj.west.obj.hide();
+		        			}
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.state = _s;
+		        		if(jqobj.obj!=undefined){
+		        			if(_s){
+		        				jqobj.east.obj.show();
+		        			}else{
+		        				jqobj.east.obj.hide();
+		        			}
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
+				return obj;
+			}
+		};
+		this.blockState = blockState;
+		
 		var blockClass = function(_position,_class,_this){
 			var obj = _this || this;
 			
 			if(_class == undefined || _class.type != undefined){
 				obj = _class || this;
-				return eval("config."+_position+".className;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.className;
+		        		break;
+		        	case "south" : 
+		        		return config.south.className;
+		        		break;
+		        	case "center" : 
+		        		return config.center.className;
+		        		break;
+		        	case "west" : 
+		        		return config.west.className;
+		        		break;
+		        	case "east" : 
+		        		return config.east.className;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else{
-				eval("config."+_position+".className = _class;"+
-				"for(i in config."+_position+".className){"+
-				"	jqobj."+_position+".obj.addClass(config."+_position+".className[i]);" +
-				"}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.className = _class;
+		        		for(i in config.north.className){
+		        			jqobj.north.obj.addClass(config.north.className[i]);
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.className = _class;
+		        		for(i in config.south.className){
+		        			jqobj.south.obj.addClass(config.south.className[i]);
+		        		}
+		        		break;
+		        	case "center" : 
+		        		config.center.className = _class;
+		        		for(i in config.center.className){
+		        			jqobj.center.obj.addClass(config.center.className[i]);
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.className = _class;
+		        		for(i in config.west.className){
+		        			jqobj.west.obj.addClass(config.west.className[i]);
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.className = _class;
+		        		for(i in config.east.className){
+		        			jqobj.east.obj.addClass(config.east.className[i]);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				return obj;
 			}
 		};
@@ -669,10 +1074,60 @@
 			
 			if(_id == undefined || _id.type != undefined){
 				obj = _id || this;
-				return eval("config."+_p+".id;");
+				switch(_p){  
+		        	case "north" : 
+		        		return config.north.id;
+		        		break;
+		        	case "south" : 
+		        		return config.south.id;
+		        		break;
+		        	case "center" : 
+		        		return config.center.id;
+		        		break;
+		        	case "west" : 
+		        		return config.west.id;
+		        		break;
+		        	case "east" : 
+		        		return config.east.id;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else{
-				eval("config."+_p+".id = _id;"+
-				"	jqobj."+_p+".obj.attr('id',_id);");
+				switch(_p){  
+		        	case "north" : 
+		        		config.north.id = _id;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.north.obj.attr("id",_id);
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.id = _id;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.south.obj.attr("id",_id);
+		        		}
+		        		break;
+		        	case "center" : 
+		        		config.center.id = _id;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.center.obj.attr("id",_id);
+		        		}
+		        		break;
+		        	case "west" : 
+		        		config.west.id = _id;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.west.obj.attr("id",_id);
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.id = _id;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.east.obj.attr("id",_id);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				return obj;
 			}
 		};
@@ -682,12 +1137,33 @@
 			var obj = _this || this;
 			if(_width == undefined || typeof _width == "object"){
 				obj = _width || this;
-				return eval("config."+_position+".width;");
+				switch(_position){  
+		        	case "west" : 
+		        		return config.west.width;
+		        		break;
+		        	case "east" : 
+		        		return config.east.width;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else if(typeof _width == "string" || typeof _width == "number"){
-				eval("config."+_position+".width = _width;"+
-				"if(jqobj.obj!=undefined){" +
-				"	jqobj."+_position+".obj.width(_width);" +
-				"}");
+				switch(_position){  
+		        	case "west" : 
+		        		config.west.width = _width;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.west.obj.width(_width);
+		        		}
+		        		break;
+		        	case "east" : 
+		        		config.east.width = _width;
+		        		if(jqobj.obj!=undefined){
+		        			jqobj.east.obj.width(_width);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				obj.width(config.width);
 				return obj;
 			}
@@ -698,12 +1174,33 @@
 			var obj = _this || this;
 			if(_height == undefined || typeof _height == "object"){
 				obj = _height || this;
-				return eval("config."+_position+".height;");
+				switch(_position){  
+		        	case "north" : 
+		        		return config.north.height;
+		        		break;
+		        	case "south" : 
+		        		return config.south.height;
+		        		break;
+		        	default:
+		        		break;
+				}
 			}else if(typeof _height == "string" || typeof _height == "number"){
-				eval("config."+_position+".height = _height;"+
-				"if(jqobj.obj!=undefined){" +
-				"	jqobj."+_position+".obj.height(_height);" +
-				"}");
+				switch(_position){  
+		        	case "north" : 
+		        		config.north.height = _height;
+		        		if(jqobj.obj != undefined){
+		        			jqobj.north.obj.height(_height);
+		        		}
+		        		break;
+		        	case "south" : 
+		        		config.south.height = _height;
+		        		if(jqobj.obj != undefined){
+		        			jqobj.south.obj.height(_height);
+		        		}
+		        		break;
+		        	default:
+		        		break;
+				}
 				obj.height(config.height);
 				return obj;
 			}
@@ -711,22 +1208,29 @@
 		this.blockHeight = blockHeight;
 		
 		var setWidth = function(_width){
-			jqobj.obj.width(_width);
-			jqobj.center.obj.width(_width - jqobj.west.obj.width() - jqobj.east.obj.width());
+			jqobj.obj.width(_width);	//对象宽度
 			
-			jqobj.west.border.css("top",jqobj.north.obj.height())
-			.css("left",jqobj.west.obj.width() - jqobj.west.border.width());
+			jqobj.center.obj.width(_width - jqobj.west.obj.width() - jqobj.east.obj.width());	//中间部分的宽度
 			
-			jqobj.east.border.css("top",jqobj.north.obj.height())
-			.css("left",_width - jqobj.east.obj.width());
+			jqobj.center.content.width(jqobj.center.obj.width());	//中间内容区域的宽度
+			jqobj.north.content.width(_width);	//北部内容区域的宽度
+			jqobj.south.content.width(_width);	//南部内容区域的宽度
+			jqobj.east.content.width(jqobj.east.obj.width() - jqobj.east.border.width());	//东部内容区域的宽度
+			jqobj.west.content.width(jqobj.west.obj.width() - jqobj.west.border.width());	//西部内容区域的宽度
 			
-			jqobj.north.border.width(_width);
+			jqobj.west.border.css("top",jqobj.north.obj.height())	//西部边框的top
+			.css("left",jqobj.west.obj.width() - jqobj.west.border.width());	//西部边框的left
+			
+			jqobj.east.border.css("top",jqobj.north.obj.height())	//东部边框top
+			.css("left",_width - jqobj.east.obj.width());	//东部边框left
+			
+			jqobj.north.border.width(_width).css("position","absolute");	//北部边框的宽度
 			var button_north = $(".layout_button",jqobj.north.border);
-			button_north.css("left",(_width - button_north.width())/2);
+			button_north.css("left",(_width - button_north.width())/2);	//北部按钮的left值
 			
-			jqobj.south.border.width(_width);
+			jqobj.south.border.width(_width).css("position","absolute");//南部边框的宽度
 			var button_south = $(".layout_button",jqobj.south.border);
-			button_south.css("left",(_width - button_south.width())/2);
+			button_south.css("left",(_width - button_south.width())/2);//男部按钮的left值
 		};
 		this.setWidth = setWidth;
 		
@@ -736,6 +1240,22 @@
 			jqobj.center.obj.height(_height - jqobj.north.obj.height() - jqobj.south.obj.height());
 			var centerHeight = jqobj.center.obj.height();
 			
+			var titleHeight = 0;
+			if(config.center.title){titleHeight = jqobj.center.title.height();}
+			jqobj.center.content.height(centerHeight - titleHeight);	//中间内容区域的高度
+			titleHeight = 0;
+			if(config.north.title){titleHeight = jqobj.north.title.height();}
+			jqobj.north.content.height(jqobj.north.obj.height() - titleHeight - jqobj.north.border.height());	//北部内容区域的高度
+			titleHeight = 0;
+			if(config.south.title){titleHeight = jqobj.south.title.height();}
+			jqobj.south.content.height(jqobj.south.obj.height() - titleHeight - jqobj.south.border.height());	//南部内容区域的高度
+			titleHeight = 0;
+			if(config.east.title){titleHeight = jqobj.east.title.height();}
+			jqobj.east.content.height(centerHeight - titleHeight);	//东部内容区域的高度
+			titleHeight = 0;
+			if(config.west.title){titleHeight = jqobj.west.title.height();}
+			jqobj.west.content.height(centerHeight - titleHeight);	//西部内容区域的高度
+			
 			jqobj.west.obj.height(centerHeight);
 			jqobj.east.obj.height(centerHeight);
 			jqobj.north.border.css("top",jqobj.north.obj.height() - jqobj.north.border.height())
@@ -744,11 +1264,11 @@
 			.css("left",0);
 			
 			
-			jqobj.west.border.height(centerHeight);
+			jqobj.west.border.height(centerHeight).css("position","absolute");
 			var button_west = $(".layout_button",jqobj.west.border);
 			button_west.css("top",(centerHeight - button_west.height())/2);
 			
-			jqobj.east.border.height(centerHeight);
+			jqobj.east.border.height(centerHeight).css("position","absolute");
 			var button_east = $(".layout_button",jqobj.east.border);
 			button_east.css("top",(centerHeight - button_east.height())/2);
 		};

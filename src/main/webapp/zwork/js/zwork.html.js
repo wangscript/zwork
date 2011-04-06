@@ -13,23 +13,23 @@
 		
 		//窗口对象的html结构
 		window : "<div class='zwork-window' zobj>" 
-				+ "<div class='top'>" + "	<div class='border'>"
-				+ "		<div class='left'></div>" + "		<div class='center'></div>"
-				+ "		<div class='right'></div>" + "	</div>"
-				+ "	<div class='titlebar'>" + "		<div class='ico'></div>"
-				+ "		<div class='title'></div>" + "		<div class='buttons'>"
-				+ "			<div class='min'></div>" + "			<div class='maxre'></div>"
-				+ "			<div class='close'></div>" + "		</div>" + "	</div>"
-				+ "</div>" + "<div class='center'>"
-				+ "<div class='loading'></div>"
-				+ "	<div class='leftborder'></div>"
-				+ "	<div class='content'></div>"
-				+ "	<div class='scroll'></div>"
-				+ "	<div class='rightborder'></div>" + "</div>"
-				+ "<div class='bottom'>" + "	<div class='border'>"
-				+ "		<div class='left'></div>" + "		<div class='center'></div>"
-				+ "		<div class='right'></div>" + "	</div>"
-				+ "	<div class='statebar'>" + "	</div>" + "</div>" + "</div>",
+				+ "<div class='window_top'>" + "	<div class='window_border'>"
+				+ "		<div class='window_left'></div>" + "		<div class='window_center'></div>"
+				+ "		<div class='window_right'></div>" + "	</div>"
+				+ "	<div class='window_titlebar'>" + "		<div class='window_ico'></div>"
+				+ "		<div class='window_title'></div>" + "		<div class='window_buttons'>"
+				+ "			<div class='window_min'></div>" + "			<div class='window_maxre'></div>"
+				+ "			<div class='window_close'></div>" + "		</div>" + "	</div>"
+				+ "</div>" + "<div class='window_center'>"
+				+ "<div class='window_loading'></div>"
+				+ "	<div class='window_leftborder'></div>"
+				+ "	<div class='window_content'></div>"
+				+ "	<div class='window_scroll'></div>"
+				+ "	<div class='window_rightborder'></div>" + "</div>"
+				+ "<div class='window_bottom'>" + "	<div class='window_border'>"
+				+ "		<div class='window_left'></div>" + "		<div class='window_center'></div>"
+				+ "		<div class='window_right'></div>" + "	</div>"
+				+ "	<div class='window_statebar'>" + "	</div>" + "</div>" + "</div>",
 				
 		//按钮对象的html结构
 		button : "<div class='zwork-button'>" +
@@ -49,15 +49,19 @@
 		
 		layout:"<div class='zwork-layout'>" +
 				"<div class='layout_north'><div class='layout_title'></div><div class='layout_content'></div></div>" +
-				"<div class='layout_west'><div class='layout_title'></div><div class='layout_content'><iframe width='100%' height='100%' frameborder='0'></iframe></div></div>" +
-				"<div class='layout_center'><div class='layout_title'></div><div class='layout_content'><iframe width='100%' height='100%' frameborder='0'></iframe></div></div>" +
-				"<div class='layout_east'><div class='layout_title'></div><div class='layout_content'><iframe width='100%' height='100%' frameborder='0'></iframe></div></div>" +
-				"<div class='layout_south'><div class='layout_title'></div><div class='layout_content'><iframe width='100%' height='100%' frameborder='0'></iframe></div></div>" +
+				"<div class='layout_west'><div class='layout_title'></div><div class='layout_content'></div></div>" +
+				"<div class='layout_center'><div class='layout_title'></div><div class='layout_content'></div></div>" +
+				"<div class='layout_east'><div class='layout_title'></div><div class='layout_content'></div></div>" +
+				"<div class='layout_south'>" +
+				"<div class='layout_title'></div><div class='layout_content'></div></div>" +
+				
 				"<div class='layout_border_north'><div class='layout_button'></div></div>" +
 				"<div class='layout_border_west'><div class='layout_button'></div></div>" +
 				"<div class='layout_border_east'><div class='layout_button'></div></div>" +
 				"<div class='layout_border_south'><div class='layout_button'></div></div>" +
-				"</div>"
+				"</div>",
+		
+		accordion : "<div class='zwork-accordion'></div>"
 	};
 	
 	//注册给zwork

@@ -94,7 +94,8 @@
 		 * firstLevelChildren简称olc，第一级子元素。
 		 * */
 		flc : function(_value , _tag){
-
+			var container = ["window","layout","button","dialog"];
+			
 			if(_tag == undefined){
 				_tag = "type";
 			}
@@ -103,11 +104,18 @@
 			var find = function(obj,_value){
 				obj.children("*").each(function(){
 					var cur = $(this);
-					var type = $(this).attr(_tag);
-					if(type && type == _value){
+					var value = cur.attr(_tag);
+					if(value && value == _value){
 						childrenList.push(cur);
-					}else{
-						find(cur,_value);
+					}else {
+						var has = false;
+						for(i in container){
+							if(value == container[i]){
+								has = true;
+							}
+						}
+						if(!has)
+							find(cur,_value);
 					}
 				});
 			};
