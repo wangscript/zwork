@@ -1,13 +1,13 @@
 .zwork-layout{overflow: hidden;}
-.zwork-layout .layout_north{overflow: auto;}
-.zwork-layout .layout_west{float: left;overflow: auto;}
-.zwork-layout .layout_center{overflow: auto;float: left;}
-.zwork-layout .layout_east{float: left;overflow: auto;}
-.zwork-layout .layout_south{overflow: auto;clear: left;}
+.zwork-layout .layout_north{overflow: hidden;}
+.zwork-layout .layout_west{overflow: hidden;float: left;}
+.zwork-layout .layout_center{overflow: hidden;float: left;}
+.zwork-layout .layout_east{overflow: hidden;float: left;}
+.zwork-layout .layout_south{overflow: hidden;clear: left;}
 
-.zwork-layout .layout_title{height: 30px;width: 100%;line-height: 30px;font-weight: bold;color: #3c3c3c;text-indent: 15px;background: url("image/layout/bg.gif");display: none;}
+.zwork-layout .layout_title{height: 25px;width: 100%;line-height: 25px;font-weight: bold;color: #3c3c3c;text-indent: 10px;background: url("image/layout/bg.gif");display: none;}
 
-.zwork-layout .layout_content{overflow: auto;width: 100%;}
+.zwork-layout .layout_content{overflow: auto;width: 100%;clear: both;}
 
 .zwork-layout .layout_border_west{width: 5px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;}
 .zwork-layout .layout_border_west .layout_button{width: 5px;height: 40px;background: url("image/layout/y.gif") 0px 0px;cursor: pointer;}

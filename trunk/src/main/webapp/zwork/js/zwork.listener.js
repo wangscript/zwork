@@ -91,6 +91,7 @@
 				var window = list[i];
 				var config = {};
 				config.container = window.parent();
+				config.containerStyle = window.attr("containerStyle");
 				config.height = window.attr("height") || 400;
 				config.id = window.attr("id") || undefined;
 				config.width = window.attr("width") || 500;
@@ -126,6 +127,7 @@
 				var dialog = list[i];
 				var config = {};
 				config.container = dialog.parent();
+				config.containerStyle = dialog.attr("containerStyle");
 				config.id = dialog.attr("id") || undefined;
 				config.height = dialog.attr("height") || 400;
 				config.width = dialog.attr("width") || 500;
@@ -160,7 +162,8 @@
 				var config = {};
 				config.container = button.parent();
 				config.id = button.attr("id") || undefined;
-				config.width = button.attr("width") || 100;
+				config.width = button.attr("width") || undefined;
+				config.containerStyle = button.attr("containerStyle");
 				if(button.html()!=""){config.label = button.html();}
 				config.label = (button.attr("label") || config.label) || "按钮";
 				config.fitWidth = eval(button.attr("fitWidth") || true);
@@ -177,7 +180,6 @@
 				button.remove();
 			}
 		});
-		
 		listener.add("div_type_layout",function(_c,_p){
 			var list = _c.flc("layout");
 			for(i in list){
@@ -270,17 +272,58 @@
 				layout.remove();
 			}
 		});
-		
+		listener.add("div_type_accordion",function(_c,_p){
+			var list = _c.flc("accordion");
+			for(i in list){
+				var accordion = list[i];
+				var config = {};
+				config.container = accordion.parent();
+				config.containerStyle = accordion.attr("containerStyle");
+				config.id = accordion.attr("id") || undefined;
+				config.width = accordion.attr("width") || "100%";
+				config.height = accordion.attr("height") || "100%";
+				
+				var items = new Array();
+				accordion.children("div").each(function(){
+					var current = $(this);
+					var item = {};
+					item.id = current.attr("id") || undefined;
+					item.src = current.attr("src") || undefined;
+					item.title = current.attr("title") || undefined;
+					item.show = eval(current.attr("show") || false);
+					item.content = current.html();
+					items.push(item);
+				});
+				
+				config.items = items;
+				
+				var zobj = $ui.accordion(config,_p);
+				zobj.addClass(accordion.attr("class"));
+				
+				if(accordion.attr("show") == undefined || accordion.attr("show") == "true"){
+					zobj.show();
+				}
+				accordion.remove();
+			}
+		});
 		listener.add("a_target_ajax",function(_c,_p){
 			$("a[target='ajax']",_c).each(function(){
 				var current = $(this);
-				current.click(function(){
+				current.unbind("click");
+				current.bind("click",function(){
 					var href = current.attr("href");
 					var rel = current.attr("rel");
-					$("#"+rel,_c).load(href,function(){
+					var scope = current.attr("scope");
+					
+					var container = _c;
+					if(scope == undefined || scope == "container")
+						container = _c;
+					else
+						container = $(document);
+					
+					$("#"+rel,container).load(href,function(){
 						$ui($(this),_p);
 					});
-					
 					return false;
 				});
 			});

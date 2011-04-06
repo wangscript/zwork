@@ -36,7 +36,7 @@
 			container : $("body"),	//所在的容器
 			containerStyle:undefined,	//容器的样式
 			label : "按钮",	//按钮显示的文字
-			width : 100,	//宽度
+			width : undefined,	//宽度
 			fitWidth : true,	//是否根据文字的宽度自适应宽度	可选值：true|false
 			click : undefined,	//点击时出发的事件
 			action : "button",	//按钮的类型	可选值：button|submit|reset
@@ -59,18 +59,6 @@
 			_this.position(config.position);
 			_this.active(config.active);
 			
-			var current = _this;
-			jqobj.obj.click(function(){
-				if(config.action == "button"){
-					if(config.click != undefined){
-						eval(config.click);
-					}
-				}else if(config.action == "submit"){
-					jqobj.obj.parents("form").get(0).submit();
-				}else if(config.action == "reset"){
-					jqobj.obj.parents("form").get(0).reset();
-				}
-			}).mouseoverout("zwork-button_hover");
 		});
 		
 		//jQuery对象
@@ -89,6 +77,19 @@
 		 * */
 		var initjqobj = function(){
 			jqobj.obj = $($ui.html.button);
+			
+			jqobj.obj.click(function(){
+				if(config.action == "button"){
+					if(config.click != undefined){
+						eval(config.click);
+					}
+				}else if(config.action == "submit"){
+					jqobj.obj.parents("form").get(0).submit();
+				}else if(config.action == "reset"){
+					jqobj.obj.parents("form").get(0).reset();
+				}
+			}).mouseoverout("zwork-button_hover");
+			
 			jqobj.left = jqobj.obj.children(".button_left");
 			jqobj.center = jqobj.obj.children(".button_center");
 			jqobj.right = jqobj.obj.children(".button_right");
@@ -122,6 +123,7 @@
 				config.label = _label;
 				if(jqobj.obj != undefined){
 					jqobj.center.html(_label);
+					$ui(jqobj.center,this);
 					this.width(config.width);
 				}
 				return this;
@@ -142,7 +144,7 @@
 				jqobj.obj.width(width);
 			}else{
 				jqobj.obj.width(_width);
-				jqobj.center.width(temp - jqobj.left.width() - jqobj.right.width());
+				jqobj.center.width(_width - jqobj.left.width() - jqobj.right.width());
 			}
 		};
 		this.setWidth = setWidth;

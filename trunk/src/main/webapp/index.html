@@ -4,10 +4,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>zwork - UI框架 - 基于javascript的html扩展</title>
 	
-	<!-- theme files -->
-	<link href="zwork/theme/classical/zwork.css" rel="stylesheet" type="text/css">
-	<!-- theme files -->
-	
 	<!-- jQuery lib -->
 	<script type="text/javascript" src="zwork/js/lib/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="zwork/js/lib/jquery.ui-1.8.9.min.js"></script>
@@ -36,44 +32,57 @@
 	<script type="text/javascript" src="zwork/js/zwork.messager.js"></script>
 	<script type="text/javascript" src="zwork/js/zwork.button.js"></script>
 	<script type="text/javascript" src="zwork/js/zwork.layout.js"></script>
+	<script type="text/javascript" src="zwork/js/zwork.accordion.js"></script>
 	
 	<link href="zwork/skin/dwz/zwork.core.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.window.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.messager.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.button.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.layout.css" rel="stylesheet" type="text/css">
+	<link href="zwork/skin/dwz/zwork.accordion.css" rel="stylesheet" type="text/css">
 	<!-- zwork 框架文件 -->
+	
+	<!-- theme files -->
+	<link href="zwork/theme/classical/zwork.css" rel="stylesheet" type="text/css">
+	<!-- theme files -->
 	
 	<script type="text/javascript">
 	$(function(){
-		
 		$ui.init({
 			listen : $("body"),	//监听的区域
 			debug : false	//禁用调试
 		});
 		$ui.messager.alert("zwork欢迎您的来访<br/>zwork正在紧张的开发中<br/>本站会随时更新。","欢迎您！");
+		$(document).bind("ajaxStart",function(){
+			alert("---");
+		});
+		
 	});
 	</script>
 	
 </head>
 <body style="overflow: hidden;" scroll="no">
-
 <div type="layout" class="container">
-	<div position="north" height="51" border="false" class="logo">
+	
+	<div position="north" height="56" border="false" class="header">
+		<div class="logo">
+			<a href=""><img alt="zwork" src="image/logo.gif" height="46px;"/></a>
+		</div>
+		<div class="navi">
+			<a href="">切换主题</a> | 
+			<a href="">切换皮肤</a> | 
+			<a href="http://topjquery.com/forum" target="_blank">zwork社区</a>
+		</div>
 	</div>
-	<div position="west" width="200" class="left" title="功能演示">
-		<ul>
-			<li><a href="demo/view_window.html" target="ajax" rel="main">窗口</a></li>
-			<li><a href="demo/view_dialog.html" target="ajax" rel="main">对话框</a></li>
-			<li><a href="demo/view_messager.html" target="ajax" rel="main">信息框</a></li>
-			<li><a href="demo/view_layout.html" target="ajax" rel="main">布局框架</a></li>
-			<li><a href="demo/view_button.html" target="ajax" rel="main">按钮</a></li>
-		</ul>
-	</div>
+	
+	<div position="west" width="220" class="left" src="demo/left.html"></div>
+	
 	<div position="center" id="main" src="demo/index.html"></div>
+	
 	<div position="south" height="30" border="false" class="footer">
 		zwork.org - zwork - UI框架
 	</div>
+	
 </div>
 </body>
 </html>
