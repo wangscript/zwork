@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>进度条</title>
+<script type="text/javascript">
+$(function(){
+	var valueUp = function(){
+		var zobj = $ui.find($("#progressbar_demo"));
+		if(zobj!=undefined){
+			zobj.value(zobj.value() + 2 );
+			if(zobj.value() == 100){
+				zobj.value(0)
+			}
+		}
+		setTimeout(valueUp,100);
+	}
+	valueUp();
+})
+</script>
+</head>
+<body>
+<div type="progressbar" id="progressbar_demo" value="30"></div>
+</body>
+</html>

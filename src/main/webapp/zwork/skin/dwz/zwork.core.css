@@ -9,3 +9,4 @@ caption{position:relative; margin:0px; padding:0px; font-size:12px;border: 0;}
 table, tbody, tfoot, thead, tr, th, td {font-size: 12px;margin: 0px;padding: 0px;border: 0;}
 
 .zwork-mask{height: 100%;width: 100%;background: url("image/mask.png");position: absolute;left: 0px;top: 0px;}
+.zwork-ajax_loading{background: #EEF4F4;height: 100%;width:100%;}

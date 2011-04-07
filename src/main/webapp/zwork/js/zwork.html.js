@@ -61,7 +61,11 @@
 				"<div class='layout_border_south'><div class='layout_button'></div></div>" +
 				"</div>",
 		
-		accordion : "<div class='zwork-accordion'></div>"
+		accordion : "<div class='zwork-accordion'></div>",
+		
+		progressbar : "<div class='zwork-progressbar'>" +
+				"<div class='progressbar_value'></div>" +
+				"</div>"
 	};
 	
 	//注册给zwork
