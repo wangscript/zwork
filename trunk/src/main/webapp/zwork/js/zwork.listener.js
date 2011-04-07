@@ -180,6 +180,27 @@
 				button.remove();
 			}
 		});
+		listener.add("div_type_progressbar",function(_c,_p){
+			var list = _c.flc("progressbar");
+			for(i in list){
+				var progressbar = list[i];
+				var config = {};
+				config.container = progressbar.parent();
+				config.id = progressbar.attr("id") || undefined;
+				config.width = progressbar.attr("width") || 200;
+				config.height = progressbar.attr("height") || 15;
+				config.value = Number(progressbar.attr("value") || 0);
+				config.maxValue = Number(progressbar.attr("maxValue") || 100);
+				
+				var zobj = $ui.progressbar(config,_p);
+				zobj.addClass(progressbar.attr("class"));
+				if(progressbar.attr("show") == undefined || progressbar.attr("show") == "true"){
+					zobj.show();
+				}
+				
+				progressbar.remove();
+			}
+		});
 		listener.add("div_type_layout",function(_c,_p){
 			var list = _c.flc("layout");
 			for(i in list){
