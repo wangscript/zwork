@@ -14,21 +14,15 @@
 	 * 返回	窗口对象（对象）
 	 * */
 	var messager = function(_config,_parent){
-		var obj = new messager.messager(_config);
-		if(_parent == undefined){
-			pid = "root";
-		}else{
-			pid = _parent.uid;
-		}
-		$ui.memory.tree.add(pid,obj);
+		var obj = new messager.messager(_config,_parent);
 		return obj;
 	};
 	
 	/**
 	 * messager对象
 	 * */
-	messager.messager = function(_config){
-		$ui.extend(this,$ui.window(_config));	//继承zwork.window
+	messager.messager = function(_config,_parent){
+		$ui.extend(this,$ui.window(_config,_parent));	//继承zwork.window
 		
 		//配置对象
 		var config = {

@@ -54,20 +54,21 @@
 			 */
 			find : function(_uid) {
 				var result = undefined;
+				
 				var children = function(_children) {
 					var map = _children;
-					var has = false;
-					map.call(function(obj) {
-						if (obj.uid == _uid) {
-							result = obj;
-							has = true;
+					
+					if(map!=undefined){
+						for(var i in map.container){
+							var obj = map.container[i];
+							if (obj.uid == _uid) {
+								result = obj;
+							}else{
+								children(obj.children);
+							}
 						}
-					});
-					if(!has){
-						map.call(function(obj){
-							children(obj.children);
-						});
 					}
+					
 				};
 
 				if ($ui.memory.tree.root.obj.uid == _uid) {
@@ -75,6 +76,7 @@
 				} else {
 					children($ui.memory.tree.root.obj.children);
 				}
+				
 				return result;
 			},
 

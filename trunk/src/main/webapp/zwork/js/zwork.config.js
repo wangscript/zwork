@@ -21,7 +21,9 @@
 		},
 		
 		//是否启用debug模式	布尔值	可选值：true|false
-		debug : false
+		debug : false,
+		
+		ajax_animate : true	//是否开始加载等待动画
 	};
 	
 })(zwork,jQuery);

@@ -65,7 +65,23 @@
 		
 		progressbar : "<div class='zwork-progressbar'>" +
 				"<div class='progressbar_value'></div>" +
-				"</div>"
+				"</div>",
+				
+		ajaxanimate :"<div class='zwork-ajaxanimate'>" +
+					"	<table cellspacing='0' cellpadding='0' border='0' width='100%' height='100%'>" +
+					"		<tr>" +
+					"			<td valign='middle' align='center'>" +
+					"				<table width='150px' height='150px'>" +
+					"					<tr><td valign='middle' align='center'>" +
+					"						<img alt='zwork' src='image/logo.gif' height='46px;'/>" +
+					"					</td></tr>" +
+					"					<tr><td height='40px' valign='middle' align='center'>请求数据</td></tr>" +
+					"					<tr><td height='20px' valign='middle' align='center'><div type='progressbar' height='10' width='150' id='ajaxanimate_progressbar'></div></td></tr>" +
+					"				</table>" +
+					"			</td>" +
+					"		</tr>" +
+					"	</table>" +
+					"</div>"
 	};
 	
 	//注册给zwork

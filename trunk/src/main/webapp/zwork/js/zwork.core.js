@@ -34,15 +34,20 @@
 			//定义默认的config样例
 			var config = {
 				debug : false,
-				listen : undefined
+				listen : undefined,
+				ajax_animate:true
 			};
 			//设置用户自定义config
 			$.extend(config,_config);
 			//处理config
 			$ui.config.init(config);
 			
+			if(config.ajax_animate)
+				$ui.ajaxanimate.init();
+			
 			if(config.listen != undefined)
 				$ui(config.listen);
+			
 			$ui.util.fitbody();
 			
 			$ui.debug("当前版本 " + $ui.version);
