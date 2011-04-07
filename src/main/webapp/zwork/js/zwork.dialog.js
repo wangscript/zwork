@@ -14,22 +14,16 @@
 	 * 返回	窗口对象（对象）
 	 * */
 	var dialog = function(_config,_parent){
-		var obj = new dialog.dialog(_config);
-		if(_parent == undefined){
-			pid = "root";
-		}else{
-			pid = _parent.uid;
-		}
-		$ui.memory.tree.add(pid,obj);
+		var obj = new dialog.dialog(_config,_parent);
 		return obj;
 	};
 	
 	/**
 	 * dialog对象
 	 * */
-	dialog.dialog = function(_config){
+	dialog.dialog = function(_config,_parent){
 		
-		$ui.extend(this,$ui.window(_config));	//继承zwork.window
+		$ui.extend(this,$ui.window(_config,_parent));	//继承zwork.window
 		
 		var config = {
 			id : undefined,

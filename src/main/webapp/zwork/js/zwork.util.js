@@ -42,6 +42,11 @@
 			});
 		},
 		
+		/**
+		 * 当前文档检测到按钮按下时触发
+		 * 参数	无
+		 * 返回	无
+		 * */
 		document_keypress : function(){
 			$(document).keypress(function(){
 				alert("---");
