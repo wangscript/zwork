@@ -6,22 +6,30 @@
 		timeId : undefined,
 		closeAnimate : function(){
 			var _this = this;
-			_this.animate = false;
-			_this.obj.fadeOut(100);
 			
-			var zobj = $ui.find($("#ajaxanimate_progressbar"));
-			zobj.value(100).maxValue(100);
+			clearTimeout(_this.timeId);
+			_this.timeId = setTimeout(function(){
+				_this.animate = false;
+				_this.obj.fadeOut();
+				
+				var zobj = $ui.find($("#ajaxanimate_progressbar"));
+				zobj.value(100).maxValue(100);
+			},200);
+			
 		},
 		openAnimate : function(){
 			var _this = this;
 			
-			_this.animate = true;
-			_this.obj.fadeIn(100);
-			
-			var zobj = $ui.find($("#ajaxanimate_progressbar"));
-			zobj.value(0).maxValue(100);
-			
-			_this.progressUpdate();
+			clearTimeout(_this.timeId);
+			_this.timeId = setTimeout(function(){
+				_this.animate = true;
+				_this.obj.fadeIn();
+				
+				var zobj = $ui.find($("#ajaxanimate_progressbar"));
+				zobj.value(0).maxValue(100);
+				
+				_this.progressUpdate();
+			},200);
 			
 		},
 		init : function(){
