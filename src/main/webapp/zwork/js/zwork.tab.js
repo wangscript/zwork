@@ -187,7 +187,8 @@
 					title = $(titleHtml);
 					title.appendTo(jqobj.top_navi_titles);
 					
-					var contentHtml = "<div></div>";
+					var contentHtml = "<div style='overflow:auto;'></div>";
+					
 					content = $(contentHtml);
 					content.appendTo(jqobj.center_content);
 					

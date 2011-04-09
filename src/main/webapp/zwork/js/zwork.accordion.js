@@ -90,7 +90,7 @@
 				});
 				var content = $("#"+_id,jqobj.obj).next();
 				content.stop().animate({
-					height:jqobj.obj.height() - all_height
+					height : jqobj.obj.height() - all_height
 				});
 			}
 		};
@@ -162,7 +162,7 @@
 			var content = jqobj.obj.find(".accordion_content");
 			content.each(function(){
 				if($(this).height()!=0){
-					$(this).height(_height - 2 - all_height);
+					$(this).stop().height(_height - 2 - all_height);
 				}
 			});
 			
