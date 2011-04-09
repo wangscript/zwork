@@ -23,7 +23,9 @@
 		//是否启用debug模式	布尔值	可选值：true|false
 		debug : false,
 		
-		ajax_animate : true	//是否开始加载等待动画
+		ajax_animate : true,	//是否开始加载等待动画
+		
+		systab : "#systab"	//系统默认会寻找的tab，接受一个css选择器
 	};
 	
 })(zwork,jQuery);

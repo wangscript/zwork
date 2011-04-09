@@ -81,7 +81,35 @@
 					"			</td>" +
 					"		</tr>" +
 					"	</table>" +
-					"</div>"
+					"</div>",
+					
+		tab:"<div class='zwork-tab'> "+
+			"	<div class='tab_top'>"+
+			"		<div class='tab_border'>"+
+			"			<div class='tab_left'></div>"+
+			"			<div class='tab_center'></div>"+
+			"			<div class='tab_right'></div>"+
+			"		</div>"+
+			"		<div class='tab_navi'>"+
+			"			<div class='tab_prev'></div>"+
+			"			<div class='tab_titles'>"+
+			"			</div>"+
+			"			<div class='tab_next'></div>"+
+			"			<div class='tab_list'></div>"+
+			"		</div>"+
+			"	</div>"+
+			"	<div class='tab_center'>"+
+			"		<div class='tab_left'></div>"+
+			"		<div class='tab_content'></div>"+
+			"		<div class='tab_right'></div>"+
+			"	</div>"+
+			"	<div class='tab_bottom'>"+
+			"		<div class='tab_left'></div>"+
+			"		<div class='tab_center'></div>"+
+			"		<div class='tab_right'></div>"+
+			"	</div>"+
+			"</div>"
+		
 	};
 	
 	//注册给zwork

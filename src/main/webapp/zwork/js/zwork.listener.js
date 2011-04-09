@@ -327,27 +327,39 @@
 				accordion.remove();
 			}
 		});
-		listener.add("a_target_ajax",function(_c,_p){
-			$("a[target='ajax']",_c).each(function(){
-				var current = $(this);
-				current.unbind("click");
-				current.bind("click",function(){
-					var href = current.attr("href");
-					var rel = current.attr("rel");
-					var scope = current.attr("scope");
-					
-					var container = _c;
-					if(scope == undefined || scope == "container")
-						container = _c;
-					else
-						container = $(document);
-					
-					$("#"+rel,container).load(href,function(){
-						$ui($(this),_p);
-					});
-					return false;
+		listener.add("div_type_tab",function(_c,_p){
+			var list = _c.flc("tab");
+			for(i in list){
+				var tab = list[i];
+				var config = {};
+				config.container = tab.parent();
+				config.containerStyle = tab.attr("containerStyle");
+				config.id = tab.attr("id") || undefined;
+				config.width = tab.attr("width") || "100%";
+				config.height = tab.attr("height") || "100%";
+				
+				config.items = new $ui.hashmap();
+				var items = tab.children("div");
+				items.each(function(){
+					var cur = $(this);
+					var item = {};
+					item.id = cur.attr("id") || "_blank";
+					item.title = cur.attr("title") || "无标题标签页";
+					if(cur.html()!="")
+						item.content = cur.html();
+					item.src = cur.attr("src") || undefined;
+					item.iframe = eval(cur.attr("iframe") || false);
+					config.items.put(item.id,item);
 				});
-			});
+				
+				var zobj = $ui.tab(config,_p);
+				zobj.addClass(tab.attr("class"));
+				
+				if(tab.attr("show") == undefined || tab.attr("show") == "true"){
+					zobj.show();
+				}
+				tab.remove();
+			}
 		});
 		
 		//注册给zwork
