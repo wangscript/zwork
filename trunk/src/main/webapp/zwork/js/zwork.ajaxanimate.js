@@ -14,6 +14,7 @@
 				
 				var zobj = $ui.find($("#ajaxanimate_progressbar"));
 				zobj.value(100).maxValue(100);
+				
 			},200);
 			
 		},
@@ -37,19 +38,14 @@
 			
 			_this.obj = $($ui.html.ajaxanimate);
 			_this.obj.appendTo($("body"));
-			_this.obj.stop().fadeIn();
-			
 			$ui($("body"));
-			
-			$("body").attr("onload","$ui.ajaxanimate.closeAnimate();");
+			_this.obj.hide();
 			
 			_this.obj.bind("ajaxStart",function(e){
 				_this.openAnimate();
 			}).bind("ajaxStop",function(){
 				_this.closeAnimate();
 			});
-			
-			_this.openAnimate();
 			
 		},
 		progressUpdate : function(){

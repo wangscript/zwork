@@ -124,17 +124,65 @@
 			
 		},
 		
-		copyAttr : function(){
+		box : function(){
 			var current = $(this);
-			var list = ["id","class","style"];
-			var map = new $ui.hashmap();
-			for(i in list){
-				var at = list[i];
-				if(current.attr(at)!=undefined && current.attr(at)!=""){
-					map.put(at,current.attr(at));
-				}
-			}
-			return map;
+			
+			var box = {
+				borderTop : 0,
+				borderBottom : 0,
+				borderLeft : 0,
+				borderRight : 0,
+				
+				marginTop:0,
+				marginBottom:0,
+				marginLeft:0,
+				marginRight:0,
+				
+				paddingTop:0,
+				paddingBottom:0,
+				paddingLeft:0,
+				paddingRight:0,
+				
+				paddingX:0,
+				paddingY:0,
+				
+				borderX:0,
+				borderY:0,
+				
+				marginX:0,
+				marginY:0
+			};
+			
+			var getWidth = function(_target){
+				var str = current.css(_target);
+				return Number(str.substring(0, str.indexOf("px")));
+			};
+			
+			box.marginTop = getWidth("margin-top");
+			box.marginLeft = getWidth("margin-left");
+			box.marginRight = getWidth("margin-right");
+			box.marginBottom = getWidth("margin-bottom");
+			
+			box.paddingTop = getWidth("padding-top");
+			box.paddingLeft = getWidth("padding-left");
+			box.paddingRight = getWidth("padding-right");
+			box.paddingBottom = getWidth("padding-bottom");
+			
+			box.borderTop = getWidth("border-top-width");
+			box.borderLeft = getWidth("border-left-width");
+			box.borderRight = getWidth("border-right-width");
+			box.borderBottom = getWidth("border-bottom-width");
+			
+			box.marginX = box.marginLeft + box.marginRight;
+			box.marginY = box.marginTop + box.marginBottom;
+			
+			box.borderX = box.borderLeft + box.borderRight;
+			box.borderY = box.borderBottom + box.borderTop;
+			
+			box.paddingX = box.paddingLeft + box.paddingRight;
+			box.paddingY = box.paddingBottom + box.paddingTop;
+			
+			return box;
 		}
 		
 	});

@@ -136,9 +136,7 @@
 					title.click(function(){
 						_this.display($(this).attr("id"));
 					});
-					setTimeout(function(){
-						_this.display(title.eq(0).attr("id"));
-					},100);
+					_this.display(title.eq(0).attr("id"));
 				}
 				return this;
 			}
@@ -146,12 +144,15 @@
 		this.items = items;
 		
 		var setWidth = function(_width){
-			jqobj.obj.width(_width - 2);
+			var box = jqobj.obj.box();
+			jqobj.obj.width(_width - box.paddingX - box.borderX);
 		};
 		this.setWidth = setWidth;
 		
 		var setHeight = function(_height){
-			jqobj.obj.height(_height - 2);
+			var box = jqobj.obj.box();
+			
+			jqobj.obj.height(_height - box.paddingY - box.borderY);
 			
 			var all_height = 0;
 			var all = $(".accordion_title",jqobj.obj);

@@ -1,0 +1,42 @@
+.zwork-tab{width: 500px;height: 300px;}
+
+.zwork-tab .tab_top{height: 28px;overflow: hidden;}
+.zwork-tab .tab_top .tab_border{position: absolute;height: 28px;z-index: 1;}
+.zwork-tab .tab_top .tab_border .tab_left{height: 28px;width:5px;background: url("image/tab/bg.png") 0px 0px;float:left;}
+.zwork-tab .tab_top .tab_border .tab_center{height: 28px;width:490px;background: url("image/tab/bg.png") 0px -100px;float:left;}
+.zwork-tab .tab_top .tab_border .tab_right{height: 28px;width:5px;background: url("image/tab/bg.png") 0px -50px;float:left;}
+
+.zwork-tab .tab_top .tab_navi{height: 28px;position: absolute;z-index: 2;}
+.zwork-tab .tab_top .tab_navi .tab_prev{height: 23px;margin-top:5px;width: 17px;float: left;background:url("image/tab/control.png") 0px -100px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_titles{height: 28px;width: 449px;float: left;overflow: hidden;}
+
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title{height: 28px;width: 110px;float: left;margin-left: 2px;margin-right: 2px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_left{height: 28px;width:5px;float: left;background: url("image/tab/bg.png") 0px -150px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_content{height: 28px;float: left;background: url("image/tab/bg.png") 0px -250px;line-height: 28px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button{height: 28px;width:16px;float: left;background: url("image/tab/bg.png") 0px -250px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button .tab_close{width: 11px;height: 11px;margin-top: 8px;margin-left: 5px;background: url("image/tab/button.png") 0px 0px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button .tab_close_hover{background: url("image/tab/button.png") 0px -50px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_right{height: 28px;width:5px;float: left;background: url("image/tab/bg.png") 0px -200px;}
+
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_hover .tab_left{background: url("image/tab/bg.png") 0px -300px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_hover .tab_content{background: url("image/tab/bg.png") 0px -400px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_hover .tab_button{background: url("image/tab/bg.png") 0px -400px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_hover .tab_right{background: url("image/tab/bg.png") 0px -350px;}
+
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_left{background: url("image/tab/bg.png") 0px -450px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_content{background: url("image/tab/bg.png") 0px -550px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_button{background: url("image/tab/bg.png") 0px -550px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_right{background: url("image/tab/bg.png") 0px -500px;}
+
+.zwork-tab .tab_top .tab_navi .tab_next{height: 23px;width: 17px;margin-top:5px;float: left;background:url("image/tab/control.png") 0px -250px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_list{height: 23px;width: 17px;margin-top:5px;float: left;background:url("image/tab/control.png") 0px -300px;cursor: pointer;}
+
+.zwork-tab .tab_center {width: 500px;height: 267px;}
+.zwork-tab .tab_center .tab_left{width: 1px;height:267px;background: #B4D1D3;float:left;overflow: hidden;}
+.zwork-tab .tab_center .tab_content{width: 498px;height:267px;float:left;}
+.zwork-tab .tab_center .tab_right{width: 1px;height:267px;background: #B4D1D3;float:left;overflow: hidden;}
+
+.zwork-tab .tab_bottom {width: 500px;height: 5px;overflow: hidden;}
+.zwork-tab .tab_bottom .tab_left{width: 5px;height:5px;background: url("image/tab/bg.png") 0px -600px;float:left;overflow: hidden;}
+.zwork-tab .tab_bottom .tab_center{width: 490px;height:5px;background:url("image/tab/bg.png") 0px -700px; float:left;overflow: hidden;}
+.zwork-tab .tab_bottom .tab_right{width: 5px;height:5px;background: url("image/tab/bg.png") 0px -650px;float:left;overflow: hidden;}
