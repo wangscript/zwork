@@ -1,6 +1,6 @@
 .zwork-button{height: 23px;cursor: pointer;margin: 2px;}
 .zwork-button .button_left{width: 5px;height: 23px;background: url("image/button/button.gif") no-repeat 0 0;float: left;}
-.zwork-button .button_center{height: 23px;background: url("image/button/button.gif") repeat-x 0 -23px;float: left;text-align: center;overflow: hidden;line-height: 20px;}
+.zwork-button .button_center{height: 23px;background: url("image/button/button.gif") repeat-x 0 -23px;float: left;text-align: center;overflow: hidden;line-height: 23px;}
 .zwork-button .button_right{width: 5px;height: 23px;background: url("image/button/button.gif") no-repeat 0 -46px;float: left;}
 
 .zwork-button_hover .button_left{background: url("image/button/button.gif") no-repeat 0 -69px;}
