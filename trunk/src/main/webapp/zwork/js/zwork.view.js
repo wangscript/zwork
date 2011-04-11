@@ -23,6 +23,7 @@
 		 * 返回	无
 		 * */
 		var init = function(){
+			this.original(this.config.original);
 			this.initjqobj();
 			this.jqobj.obj.data("uid",this.uid);
 			this.id(this.config.id);
@@ -32,7 +33,6 @@
 			this.left(this.config.left);
 			this.height(this.config.height);
 			this.width(this.config.width);
-			this.addClass();
 			var _this = this;
 			for(i in this.initQueue){
 				this.initQueue[i](_this);
@@ -55,19 +55,18 @@
 		};
 		this.id = id;
 		
-		var addClass = function(_class){
-			
-			if(_class != undefined)
-				this.config.className.push(_class);
-			
-			if(this.jqobj.obj != undefined){
-				for(i in this.config.className)
-					this.jqobj.obj.addClass(this.config.className[i]);
-			};
-			
-			return this;
+		var original = function(_original){
+			if(_original == undefined){
+				return this.config.original;
+			}else{
+				if(_original == null)
+					this.config.original = undefined;
+				else
+					this.config.original = _original;
+				return this;
+			}
 		};
-		this.addClass = addClass;
+		this.original = original;
 		
 		/**
 		 * 设置或返回对象所在的容器

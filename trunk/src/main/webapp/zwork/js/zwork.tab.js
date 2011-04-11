@@ -50,7 +50,7 @@
 			 * }
 			 * */
 			
-			className : new Array(),	//用户自定义的样式名
+			original : undefined,
 			type : "button"
 		};
 		this.config = config;
@@ -91,7 +91,13 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.tab);
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.tab);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.tab).html());
+			}
+			jqobj.obj.addClass("zwork-tab");
 			
 			jqobj.top = jqobj.obj.children(".tab_top");
 			jqobj.top_border = jqobj.top.children(".tab_border");
@@ -269,7 +275,7 @@
 			var title = $("#"+_id , jqobj.top_navi_titles);
 			var content = $("#"+_id , jqobj.center_content);
 			if(title.get(0)!=undefined){
-				if(!title.is(":hidden")){
+				if(!content.is(":hidden")){
 					var prev = title.prev();
 					var next = title.next();
 					if(prev.get(0) != undefined){

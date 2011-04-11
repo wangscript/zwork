@@ -72,7 +72,7 @@
 			mined:false,	//当前是不是最小化
 			closed:true,	//当前是不是被关闭了
 			
-			className : new Array(),	//用户自定义的样式名
+			original : undefined,
 			type : "window"
 		};
 		this.config = config;
@@ -117,7 +117,14 @@
 		 * 返回	无
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.window);
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.window);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.window).html());
+			}
+			jqobj.obj.addClass("zwork-window");
+			
 			jqobj.top = jqobj.obj.children(".window_top");
 			jqobj.top_border = jqobj.top.children(".window_border");
 			jqobj.top_border_left = jqobj.top_border.children(".window_left");
@@ -171,8 +178,16 @@
 				},
 				stop: function() {	//拖动停止
 					if(!config.maxed){
-						_this.top(jqobj.obj[0].offsetTop);
-						_this.left(jqobj.obj[0].offsetLeft);
+						if(jqobj.obj[0].offsetTop < 0)
+							_this.top(0);
+						else
+							_this.top(jqobj.obj[0].offsetTop);
+						
+						if(jqobj.obj[0].offsetLeft < 0)
+							_this.left(0);
+						else
+							_this.left(jqobj.obj[0].offsetLeft);
+						
 						jqobj.center_loading.hide();
 					}
 				},
@@ -296,6 +311,8 @@
 			}else{
 				config.mask = _mask;
 				if(config.mask && jqobj.obj != undefined){
+					this.container($("body"));
+					
 					var maskObj = $($ui.html.mask);
 					maskObj.attr("uid",this.uid).appendTo($("body"));
 					
@@ -665,9 +682,9 @@
 				config.minable = _minable;
 				if(jqobj.obj !=undefined){
 					if(_minable){
-						jqobj.top_titlebar_buttons_min.removeClass("disabled");	//添加不可最小化样式
+						jqobj.top_titlebar_buttons_min.removeClass("window_disabled");	//添加不可最小化样式
 					}else{
-						jqobj.top_titlebar_buttons_min.addClass("disabled");	//添加不可最小化样式
+						jqobj.top_titlebar_buttons_min.addClass("window_disabled");	//添加不可最小化样式
 					}
 				}
 				return this;
@@ -687,9 +704,9 @@
 				config.maxable = _maxable;
 				if(jqobj.obj != undefined){
 					if(config.maxable){
-						jqobj.top_titlebar_buttons_maxre.removeClass("disabled");	//添加不可最大化样式
+						jqobj.top_titlebar_buttons_maxre.removeClass("window_disabled");	//添加不可最大化样式
 					}else{
-						jqobj.top_titlebar_buttons_maxre.addClass("disabled");	//添加不可最大化样式
+						jqobj.top_titlebar_buttons_maxre.addClass("window_disabled");	//添加不可最大化样式
 					}
 				}
 				return this;
@@ -757,6 +774,17 @@
 			}
 		};
 		this.scroll = scroll;
+		
+		var resizEvent = function(){
+			if(config.maxed){
+				this.width(this.container().width());
+				this.height(this.container().height());
+			}else{
+				this.width(config.width);
+				this.height(config.height);
+			}
+		};
+		this.resizEvent = resizEvent;
 		
 	};
 	

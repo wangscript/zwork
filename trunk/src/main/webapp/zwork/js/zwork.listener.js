@@ -91,6 +91,7 @@
 				var window = list[i];
 				var config = {};
 				config.container = window.parent();
+				config.original = window;
 				config.containerStyle = window.attr("containerStyle");
 				config.height = window.attr("height") || 400;
 				config.id = window.attr("id") || undefined;
@@ -114,11 +115,10 @@
 					config.content = window.html();
 				
 				var zobj = $ui.window(config,_p);
-				zobj.addClass(window.attr("class"));
 				if(window.attr("show") || window.attr("show") == "true"){
 					zobj.show();
 				}
-				window.remove();
+				window.removeAttr("type");
 			}
 		});
 		listener.add("div_type_dialog",function(_c,_p){
@@ -127,6 +127,7 @@
 				var dialog = list[i];
 				var config = {};
 				config.container = dialog.parent();
+				config.original = dialog;
 				config.containerStyle = dialog.attr("containerStyle");
 				config.id = dialog.attr("id") || undefined;
 				config.height = dialog.attr("height") || 400;
@@ -136,6 +137,7 @@
 				config.src = dialog.attr("src") || undefined;
 				config.title = dialog.attr("title") || "无标题对话框";
 				config.iframe = eval(dialog.attr("iframe") || false);
+				config.mask = eval(dialog.attr("mask") || false);
 				config.maxable = eval(dialog.attr("maxable") || true);
 				config.resizable = eval(dialog.attr("resizable") || true);
 				config.scroll = eval(dialog.attr("scroll") || true);
@@ -148,11 +150,10 @@
 					config.content = dialog.html();
 				
 				var zobj = $ui.dialog(config,_p);
-				zobj.addClass(dialog.attr("class"));
 				if(dialog.attr("show") || dialog.attr("show") == "true"){
 					zobj.show();
 				}
-				dialog.remove();
+				dialog.removeAttr("type");
 			}
 		});
 		listener.add("div_type_button",function(_c,_p){
@@ -161,8 +162,9 @@
 				var button = list[i];
 				var config = {};
 				config.container = button.parent();
+				config.original = button;
 				config.id = button.attr("id") || undefined;
-				config.width = button.attr("width") || undefined;
+				config.width = button.attr("width") || 100;
 				config.containerStyle = button.attr("containerStyle");
 				if(button.html()!=""){config.label = button.html();}
 				config.label = (button.attr("label") || config.label) || "按钮";
@@ -170,14 +172,13 @@
 				config.active = eval(button.attr("active") || false);
 				config.click = button.attr("fn") || undefined;
 				config.action = button.attr("action") || "button";
-				config.position = button.attr("position") || "left";
+				config.position = button.attr("position") || undefined;
 				
 				var zobj = $ui.button(config,_p);
-				zobj.addClass(button.attr("class"));
 				if(button.attr("show") == undefined || button.attr("show") == "true"){
 					zobj.show();
 				}
-				button.remove();
+				button.removeAttr("type");
 			}
 		});
 		listener.add("div_type_progressbar",function(_c,_p){
@@ -186,6 +187,7 @@
 				var progressbar = list[i];
 				var config = {};
 				config.container = progressbar.parent();
+				config.original = progressbar;
 				config.id = progressbar.attr("id") || undefined;
 				config.width = progressbar.attr("width") || 200;
 				config.height = progressbar.attr("height") || 15;
@@ -193,12 +195,11 @@
 				config.maxValue = Number(progressbar.attr("maxValue") || 100);
 				
 				var zobj = $ui.progressbar(config,_p);
-				zobj.addClass(progressbar.attr("class"));
 				if(progressbar.attr("show") == undefined || progressbar.attr("show") == "true"){
 					zobj.show();
 				}
 				
-				progressbar.remove();
+				progressbar.removeAttr("type"); 
 			}
 		});
 		listener.add("div_type_layout",function(_c,_p){
@@ -207,6 +208,7 @@
 				var layout = list[i];
 				var config = {};
 				config.container = layout.parent();
+				config.original = layout;
 				config.id = layout.attr("id") || undefined;
 				config.width = layout.attr("width") || "100%";
 				config.height = layout.attr("height") || "100%";
@@ -215,6 +217,8 @@
 				var north = layout.children("*[position='north']");
 				if(north.get(0) != undefined){
 					config.north = {};
+					config.north.original = north;
+					config.north.state = true;
 					config.north.id = north.attr("id") || undefined;
 					config.north.title = north.attr("title") || undefined;
 					config.north.iframe = eval(north.attr("iframe")) || false;
@@ -223,13 +227,13 @@
 					config.north.border = eval(north.attr("border") || true);
 					config.north.content = north.attr("content") || undefined;
 					if(north.html() != ""){config.north.content = north.html();}
-					config.north.className = new Array();
-					config.north.className.push(north.attr("class"));
 				}
 				
 				var south = layout.children("*[position='south']");
 				if(south.get(0) != undefined){
 					config.south = {};
+					config.south.original = south;
+					config.south.state = true;
 					config.south.id = south.attr("id") || undefined;
 					config.south.title = south.attr("title") || undefined;
 					config.south.iframe = eval(south.attr("iframe")) || false;
@@ -238,13 +242,13 @@
 					config.south.border = eval(south.attr("border") || true);
 					config.south.content = south.attr("content") || undefined;
 					if(south.html() != ""){config.south.content = south.html();}
-					config.south.className = new Array();
-					config.south.className.push(south.attr("class"));
 				}
 				
 				var west = layout.children("*[position='west']");
 				if(west.get(0) != undefined){
 					config.west = {};
+					config.west.original = west;
+					config.west.state = true;
 					config.west.id = west.attr("id") || undefined;
 					config.west.title = west.attr("title") || undefined;
 					config.west.iframe = eval(west.attr("iframe")) || false;
@@ -253,13 +257,13 @@
 					config.west.border = eval(west.attr("border") || true);
 					config.west.content = west.attr("content") || undefined;
 					if(west.html() != ""){config.west.content = west.html();}
-					config.west.className = new Array();
-					config.west.className.push(west.attr("class"));
 				}
 				
 				var east = layout.children("*[position='east']");
 				if(east.get(0) != undefined){
 					config.east = {};
+					config.east.original = east;
+					config.east.state = true;
 					config.east.id = east.attr("id") || undefined;
 					config.east.title = east.attr("title") || undefined;
 					config.east.iframe = eval(east.attr("iframe")) || false;
@@ -267,30 +271,27 @@
 					config.east.width = east.attr("width") || 0;
 					config.east.border = eval(east.attr("border") || true);
 					config.east.content = east.attr("content") || undefined;
-					config.east.className = new Array();
-					config.east.className.push(east.attr("class"));
 					if(east.html() != ""){config.east.content = east.html();}
 				}
 				
 				var center = layout.children("*[position='center']");
 				if(center.get(0) != undefined){
 					config.center = {};
+					config.center.original = center;
+					config.center.state = true;
 					config.center.id = center.attr("id") || undefined;
 					config.center.title = center.attr("title") || undefined;
 					config.center.iframe = eval(center.attr("iframe")) || false;
 					config.center.src = center.attr("src") || undefined;
 					config.center.content = center.attr("content") || undefined;
 					if(center.html() != ""){config.center.content = center.html();}
-					config.center.className = new Array();
-					config.center.className.push(center.attr("class"));
 				}
 				
 				var zobj = $ui.layout(config,_p);
-				zobj.addClass(layout.attr("class"));
 				if(layout.attr("show") == undefined || layout.attr("show") == "true"){
 					zobj.show();
 				}
-				layout.remove();
+				layout.removeAttr("type");
 			}
 		});
 		listener.add("div_type_accordion",function(_c,_p){
@@ -299,6 +300,7 @@
 				var accordion = list[i];
 				var config = {};
 				config.container = accordion.parent();
+				config.original = accordion;
 				config.containerStyle = accordion.attr("containerStyle");
 				config.id = accordion.attr("id") || undefined;
 				config.width = accordion.attr("width") || "100%";
@@ -319,12 +321,11 @@
 				config.items = items;
 				
 				var zobj = $ui.accordion(config,_p);
-				zobj.addClass(accordion.attr("class"));
 				
 				if(accordion.attr("show") == undefined || accordion.attr("show") == "true"){
 					zobj.show();
 				}
-				accordion.remove();
+				accordion.removeAttr("type");
 			}
 		});
 		listener.add("div_type_tab",function(_c,_p){
@@ -333,6 +334,7 @@
 				var tab = list[i];
 				var config = {};
 				config.container = tab.parent();
+				config.original = tab;
 				config.containerStyle = tab.attr("containerStyle");
 				config.id = tab.attr("id") || undefined;
 				config.width = tab.attr("width") || "100%";
@@ -353,12 +355,10 @@
 				});
 				
 				var zobj = $ui.tab(config,_p);
-				zobj.addClass(tab.attr("class"));
-				
 				if(tab.attr("show") == undefined || tab.attr("show") == "true"){
 					zobj.show();
 				}
-				tab.remove();
+				tab.removeAttr("type");
 			}
 		});
 		

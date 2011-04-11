@@ -36,14 +36,14 @@
 			container : $("body"),	//所在的容器
 			containerStyle:undefined,	//容器的样式
 			label : "按钮",	//按钮显示的文字
-			width : undefined,	//宽度
+			width : 100,	//宽度
 			fitWidth : true,	//是否根据文字的宽度自适应宽度	可选值：true|false
 			click : undefined,	//点击时出发的事件
 			action : "button",	//按钮的类型	可选值：button|submit|reset
-			position : "right",	//位置	可选值：right|left
+			position : undefined,	//位置	可选值：right|left
 			active : false,	//是否是活动的
 			
-			className : new Array(),	//用户自定义的样式名
+			original : undefined,
 			type : "button"
 		};
 		this.config = config;
@@ -76,7 +76,13 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.button);
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.button);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.button).html());
+			}
+			jqobj.obj.addClass("zwork-button");
 			
 			jqobj.obj.click(function(){
 				if(config.action == "button"){

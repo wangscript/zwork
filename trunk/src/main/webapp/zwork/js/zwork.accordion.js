@@ -40,6 +40,7 @@
 			height:"100%",
 			items : undefined,	//子元素
 			
+			original : undefined,
 			type : "accordion"
 		};
 		this.config = config;
@@ -62,7 +63,13 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.accordion);
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.accordion);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.accordion).html());
+			}
+			jqobj.obj.addClass("zwork-accordion");
 		};
 		this.initjqobj = initjqobj;
 		

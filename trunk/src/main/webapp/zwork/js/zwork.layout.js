@@ -47,7 +47,7 @@
 				height:0,
 				border:false,
 				
-				className : new Array()	//用户自定义的样式名
+				original : undefined
 			},
 			west :{
 				state:false,	//是否可见
@@ -59,7 +59,7 @@
 				width:0,
 				border:false,
 				
-				className : new Array()	//用户自定义的样式名
+				original : undefined
 			},
 			east :{
 				state:false,	//是否可见
@@ -71,7 +71,7 @@
 				width:0,
 				border:false,
 				
-				className : new Array()	//用户自定义的样式名
+				original : undefined
 			},
 			south :{
 				state:false,	//是否可见
@@ -83,7 +83,7 @@
 				height:0,
 				border:false,
 				
-				className : new Array()	//用户自定义的样式名
+				original : undefined
 			},
 			center :{
 				id:undefined,
@@ -92,10 +92,10 @@
 				src:undefined,	//加载的地址
 				content:undefined,	//内容
 				
-				className : new Array()	//用户自定义的样式名
+				original : undefined
 			},
 			
-			className : new Array(),	//用户自定义的样式名
+			original : undefined,
 			type : "layout"
 		};
 		this.config = config;
@@ -140,27 +140,74 @@
 		
 		var initjqobj = function(){
 			var _this = this;
-			jqobj.obj = $($ui.html.layout);
+			_this.blockOriginal("north",config.north.original,_this);
+			_this.blockOriginal("south",config.south.original,_this);
+			_this.blockOriginal("center",config.center.original,_this);
+			_this.blockOriginal("west",config.west.original,_this);
+			_this.blockOriginal("east",config.east.original,_this);
+			
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.layout);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.layout).html());
+			}
+			jqobj.obj.addClass("zwork-layout");
 			
 			jqobj.north.obj = jqobj.obj.children(".layout_north");
+			if(config.north.original != undefined){
+				jqobj.north.obj.remove();
+				jqobj.north.obj = config.north.original;
+				jqobj.north.obj.appendTo(jqobj.obj);
+				jqobj.north.obj.addClass("layout_north");
+				jqobj.north.obj.html("<div class='layout_title'></div><div class='layout_content'></div>");
+			}
 			jqobj.north.title = jqobj.north.obj.children(".layout_title");
 			jqobj.north.content = jqobj.north.obj.children(".layout_content");
 			
-			jqobj.south.obj = jqobj.obj.children(".layout_south");
-			jqobj.south.title = jqobj.south.obj.children(".layout_title");
-			jqobj.south.content = jqobj.south.obj.children(".layout_content");
-			
 			jqobj.west.obj = jqobj.obj.children(".layout_west");
+			if(config.west.original != undefined){
+				jqobj.west.obj.remove();
+				jqobj.west.obj = config.west.original;
+				jqobj.west.obj.appendTo(jqobj.obj);
+				jqobj.west.obj.addClass("layout_west");
+				jqobj.west.obj.html("<div class='layout_title'></div><div class='layout_content'></div>");
+			}
 			jqobj.west.title = jqobj.west.obj.children(".layout_title");
 			jqobj.west.content = jqobj.west.obj.children(".layout_content");
 			
+			jqobj.center.obj = jqobj.obj.children(".layout_center");
+			if(config.center.original != undefined){
+				jqobj.center.obj.remove();
+				jqobj.center.obj = config.center.original;
+				jqobj.center.obj.appendTo(jqobj.obj);
+				jqobj.center.obj.addClass("layout_center");
+				jqobj.center.obj.html("<div class='layout_title'></div><div class='layout_content'></div>");
+			}
+			jqobj.center.title = jqobj.center.obj.children(".layout_title");
+			jqobj.center.content = jqobj.center.obj.children(".layout_content");
+			
 			jqobj.east.obj = jqobj.obj.children(".layout_east");
+			if(config.east.original != undefined){
+				jqobj.east.obj.remove();
+				jqobj.east.obj = config.east.original;
+				jqobj.east.obj.appendTo(jqobj.obj);
+				jqobj.east.obj.addClass("layout_east");
+				jqobj.east.obj.html("<div class='layout_title'></div><div class='layout_content'></div>");
+			}
 			jqobj.east.title = jqobj.east.obj.children(".layout_title");
 			jqobj.east.content = jqobj.east.obj.children(".layout_content");
 			
-			jqobj.center.obj = jqobj.obj.children(".layout_center");
-			jqobj.center.title = jqobj.center.obj.children(".layout_title");
-			jqobj.center.content = jqobj.center.obj.children(".layout_content");
+			jqobj.south.obj = jqobj.obj.children(".layout_south");
+			if(config.south.original != undefined){
+				jqobj.south.obj.remove();
+				jqobj.south.obj = config.south.original;
+				jqobj.south.obj.appendTo(jqobj.obj);
+				jqobj.south.obj.addClass("layout_south");
+				jqobj.south.obj.html("<div class='layout_title'></div><div class='layout_content'></div>");
+			}
+			jqobj.south.title = jqobj.south.obj.children(".layout_title");
+			jqobj.south.content = jqobj.south.obj.children(".layout_content");
 			
 			jqobj.north.border = jqobj.obj.children(".layout_border_north");
 			jqobj.south.border = jqobj.obj.children(".layout_border_south");
@@ -546,12 +593,6 @@
 			_this.border("west",config.west.border,_this);
 			_this.border("east",config.east.border,_this);
 			
-			_this.blockClass("north",config.north.className,_this);
-			_this.blockClass("south",config.south.className,_this);
-			_this.blockClass("center",config.center.className,_this);
-			_this.blockClass("west",config.west.className,_this);
-			_this.blockClass("east",config.east.className,_this);
-			
 			_this.blockState("north",config.north.state,_this);
 			_this.blockState("south",config.south.state,_this);
 			_this.blockState("west",config.west.state,_this);
@@ -935,6 +976,69 @@
 		};
 		this.border = border;
 		
+		var blockOriginal = function(_p,_o,_this){
+			var obj = _this || this;
+			if(_o == undefined || _o.type != undefined){
+				obj = _o || this;
+				switch(_p){  
+		        	case "north" : 
+		        		return config.north.original;
+		        		break;
+		        	case "south" : 
+		        		return config.south.original;
+		        		break;
+		        	case "center" : 
+		        		return config.center.original;
+		        		break;
+		        	case "west" : 
+		        		return config.west.original;
+		        		break;
+		        	case "east" : 
+		        		return config.east.original;
+		        		break;
+		        	default:
+		        		break;
+				}
+			}else{
+				switch(_p){  
+		        	case "north" : 
+		        		if(_o == null)
+		        			config.north.original = undefined;
+		        		else
+		        			config.north.original = _o;
+		        		break;
+		        	case "south" : 
+		        		if(_o == null)
+		        			config.south.original = undefined;
+		        		else
+		        			config.south.original = _o;
+		        		break;
+		        	case "center" : 
+		        		if(_o == null)
+		        			config.center.original = undefined;
+		        		else
+		        			config.center.original = _o;
+		        		break;
+		        	case "west" : 
+		        		if(_o == null)
+		        			config.west.original = undefined;
+		        		else
+		        			config.west.original = _o;
+		        		break;
+		        	case "east" : 
+		        		if(_o == null)
+		        			config.east.original = undefined;
+		        		else
+		        			config.east.original = _o;
+		        		break;
+		        	default:
+		        		break;
+				}
+				return this;
+			}
+		};
+		this.blockOriginal = blockOriginal;
+		
 		var blockState = function(_p,_s,_this){
 			var obj = _this || this;
 			if(_s == undefined || _s.type != undefined){
@@ -1004,70 +1108,6 @@
 			}
 		};
 		this.blockState = blockState;
-		
-		var blockClass = function(_position,_class,_this){
-			var obj = _this || this;
-			
-			if(_class == undefined || _class.type != undefined){
-				obj = _class || this;
-				switch(_position){  
-		        	case "north" : 
-		        		return config.north.className;
-		        		break;
-		        	case "south" : 
-		        		return config.south.className;
-		        		break;
-		        	case "center" : 
-		        		return config.center.className;
-		        		break;
-		        	case "west" : 
-		        		return config.west.className;
-		        		break;
-		        	case "east" : 
-		        		return config.east.className;
-		        		break;
-		        	default:
-		        		break;
-				}
-			}else{
-				switch(_position){  
-		        	case "north" : 
-		        		config.north.className = _class;
-		        		for(i in config.north.className){
-		        			jqobj.north.obj.addClass(config.north.className[i]);
-		        		}
-		        		break;
-		        	case "south" : 
-		        		config.south.className = _class;
-		        		for(i in config.south.className){
-		        			jqobj.south.obj.addClass(config.south.className[i]);
-		        		}
-		        		break;
-		        	case "center" : 
-		        		config.center.className = _class;
-		        		for(i in config.center.className){
-		        			jqobj.center.obj.addClass(config.center.className[i]);
-		        		}
-		        		break;
-		        	case "west" : 
-		        		config.west.className = _class;
-		        		for(i in config.west.className){
-		        			jqobj.west.obj.addClass(config.west.className[i]);
-		        		}
-		        		break;
-		        	case "east" : 
-		        		config.east.className = _class;
-		        		for(i in config.east.className){
-		        			jqobj.east.obj.addClass(config.east.className[i]);
-		        		}
-		        		break;
-		        	default:
-		        		break;
-				}
-				return obj;
-			}
-		};
-		this.blockClass = blockClass;
 		
 		var blockId = function(_p,_id,_this){
 			var obj = _this || this;
