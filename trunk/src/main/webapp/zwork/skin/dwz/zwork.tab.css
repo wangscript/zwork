@@ -12,7 +12,7 @@
 
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title{height: 28px;width: 110px;float: left;margin-left: 2px;margin-right: 2px;cursor: pointer;}
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_left{height: 28px;width:5px;float: left;background: url("image/tab/bg.png") 0px -150px;}
-.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_content{height: 28px;float: left;background: url("image/tab/bg.png") 0px -250px;line-height: 28px;}
+.zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_content{height: 28px;float: left;background: url("image/tab/bg.png") 0px -250px;line-height: 28px;white-space:nowrap;overflow: auto;}
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button{height: 28px;width:16px;float: left;background: url("image/tab/bg.png") 0px -250px;}
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button .tab_close{width: 11px;height: 11px;margin-top: 8px;margin-left: 5px;background: url("image/tab/button.png") 0px 0px;}
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title .tab_button .tab_close_hover{background: url("image/tab/button.png") 0px -50px;}

@@ -95,9 +95,26 @@
 						height:0
 					});
 				});
-				var content = $("#"+_id,jqobj.obj).next();
+				var title = $("#"+_id,jqobj.obj);
+				var content = title.next();
+				
 				content.stop().animate({
 					height : jqobj.obj.height() - all_height
+				});
+				
+				title.prevAll().each(function(){
+					if($(this).hasClass("accordion_title")){
+						$(this).removeClass("accordion_top");
+						$(this).addClass("accordion_bottom");
+					}
+				});
+				title.removeClass("accordion_top");
+				title.addClass("accordion_bottom");
+				title.nextAll().each(function(){
+					if($(this).hasClass("accordion_title")){
+						$(this).removeClass("accordion_bottom");
+						$(this).addClass("accordion_top");
+					}
 				});
 			}
 		};
@@ -142,7 +159,7 @@
 					var title = $(".accordion_title",jqobj.obj);
 					title.click(function(){
 						_this.display($(this).attr("id"));
-					});
+					}).mouseoverout("accordion_title_hover");
 					_this.display(title.eq(0).attr("id"));
 				}
 				return this;
