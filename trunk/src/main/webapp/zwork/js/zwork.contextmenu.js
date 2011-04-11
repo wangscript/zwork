@@ -150,6 +150,7 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var add = function(_item){
+			var _this = this;
 			if(_item != undefined){
 				if(_item.id == undefined){
 					_item.id = "_blank";
@@ -189,11 +190,49 @@
 						label.width(rw);
 						item.width(ico.box().width + label.width() + more.width());
 						
-						item.mouseoverout("contextmenu_item_hover").click(function(){
-							if(_item.fn!=undefined){
+						var childrenMenu = undefined;
+						
+						if(_item.children != undefined){
+							childrenMenu = $ui.contextmenu({
+								items:_item.children
+							},_this);
+						}
+
+						item.mouseoverout("contextmenu_item_hover").click(function(e){
+							if(_item.fn!=undefined && _item.children == undefined){
 								_item.fn();
+								_this.hide();
+							}
+							return false;
+						}).mouseover(function(e){
+							var child = $ui.find(_this.uid).children;
+							if(child != undefined){
+								child.call(function(obj){
+									obj.hide();
+								});
+							}
+							
+							if(childrenMenu){
+								var allitem = jqobj.center_center.children("div");
+								var top = 0;
+								for(var i=0; allitem.size();i++){
+									var cur = allitem.eq(i);
+									if(cur.attr("id") == id){
+										break;
+									}else{
+										top = top + cur.box().height;
+									}
+								}
+								childrenMenu.top(top + _this.top()).left(_this.left()+_this.width() - 6).show();
+							}
+							
+						}).mouseout(function(){
+							if(childrenMenu){
+								//childrenMenu.hide();
 							}
 						});
+						
+						
 					}
 					this.fitWidth();
 				}

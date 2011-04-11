@@ -18,7 +18,7 @@
 		 * 返回：无
 		 */
 		var zwork = function(_container,_parent){
-			$ui.listener(_container,_parent);
+			zwork.listener(_container,_parent);
 		};
 		
 		//注册给window，提供俩个调用变量。
@@ -29,7 +29,7 @@
 		 * 参数：配置内容（json对象）
 		 * 返回：无
 		 * */
-		$ui.init = function(_config){
+		zwork.init = function(_config){
 			
 			//定义默认的config样例
 			var config = {
@@ -62,7 +62,7 @@
 		 * 参数：jQuery对象（对象）或内存uid（字符串）
 		 * 返回：组件对象（对象）
 		 * */
-		$ui.find = function(_obj){
+		zwork.find = function(_obj){
 			if(_obj!=undefined){
 				if(typeof _obj == "string"){
 					return $ui.memory.tree.find(_obj);
@@ -76,7 +76,7 @@
 		};
 
 		//版本
-		$ui.version = "1.1.6";
+		zwork.version = "1.1.6";
 		
 	})();
 	
