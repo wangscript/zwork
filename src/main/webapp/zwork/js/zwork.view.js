@@ -263,6 +263,12 @@
 				this.jqobj.obj.remove();
 				this.clearjqobj();
 			}
+			var children = $ui.find(this.uid).children;	//关闭子对象
+			if(children != undefined){
+				children.call(function(obj){
+					obj.hide();
+				});
+			}
 			return this;
 		};
 		this.hide = hide;

@@ -516,7 +516,7 @@
 				
 				var containerHigh = obj.container().data("containerHigh");
 				if(containerHigh == undefined){
-					containerHigh = 0;
+					containerHigh = 5;
 					obj.zindex(containerHigh + 1);
 				}
 				if(!istop(obj)){
