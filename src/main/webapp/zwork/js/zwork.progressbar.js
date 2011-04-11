@@ -40,7 +40,7 @@
 			value: 0,
 			maxValue : 100,
 			
-			className : new Array(),	//用户自定义的样式名
+			original : undefined,
 			type : "button"
 		};
 		this.config = config;
@@ -64,7 +64,14 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.progressbar);
+			if(config.original == undefined){
+				jqobj.obj = $($ui.html.progressbar);
+			}else{
+				jqobj.obj = config.original;
+				jqobj.obj.html($($ui.html.progressbar).html());
+			}
+			jqobj.obj.addClass("zwork-progressbar");
+			
 			jqobj.value = jqobj.obj.children(".progressbar_value");
 			return this;
 		};

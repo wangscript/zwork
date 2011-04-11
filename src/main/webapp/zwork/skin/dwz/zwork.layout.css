@@ -9,26 +9,26 @@
 
 .zwork-layout .layout_content{overflow: auto;width: 100%;clear: both;}
 
-.zwork-layout .layout_border_west{width: 5px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;}
+.zwork-layout .layout_border_west{width: 5px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;z-index: 2;}
 .zwork-layout .layout_border_west .layout_button{width: 5px;height: 40px;background: url("image/layout/y.gif") 0px 0px;cursor: pointer;}
 .zwork-layout .layout_border_west .layout_button_mo{background: url("image/layout/y.gif") -6px 0px;}
 .zwork-layout .layout_border_west .layout_button_hidden{background: url("image/layout/y.gif") -12px 0px;}
 .zwork-layout .layout_border_west .layout_button_hidden_mo{background: url("image/layout/y.gif") -18px 0px;}
 
-.zwork-layout .layout_border_east{width: 5px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;}
+.zwork-layout .layout_border_east{width: 5px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;z-index: 2;}
 .zwork-layout .layout_border_east .layout_button{width: 5px;height: 40px;background: url("image/layout/y.gif") -12px 0px;cursor: pointer;}
 .zwork-layout .layout_border_east .layout_button_mo{background: url("image/layout/y.gif") -18px 0px;}
 .zwork-layout .layout_border_east .layout_button_hidden{background: url("image/layout/y.gif") 0px 0px;}
 .zwork-layout .layout_border_east .layout_button_hidden_mo{background: url("image/layout/y.gif") -6px 0px;}
 
-.zwork-layout .layout_border_north{height: 5px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;}
+.zwork-layout .layout_border_north{height: 5px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;z-index: 2;}
 .zwork-layout .layout_border_north .layout_button{height: 5px;width: 40px;background: url("image/layout/x.gif") 0px 0px;cursor: pointer;}
 .zwork-layout .layout_border_north .layout_button_mo{background: url("image/layout/x.gif") 0px -6px;}
 .zwork-layout .layout_border_north .layout_button_hidden{background: url("image/layout/x.gif") 0px -12px;}
 .zwork-layout .layout_border_north .layout_button_hidden_mo{background: url("image/layout/x.gif") 0px -18px;}
 
 
-.zwork-layout .layout_border_south{height: 5px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;}
+.zwork-layout .layout_border_south{height: 5px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;z-index: 2;}
 .zwork-layout .layout_border_south .layout_button{height: 5px;width: 40px;background: url("image/layout/x.gif") 0px -12px;cursor: pointer;}
 .zwork-layout .layout_border_south .layout_button_mo{background: url("image/layout/x.gif") 0px -18px;}
 .zwork-layout .layout_border_south .layout_button_hidden{background: url("image/layout/x.gif") 0px 0px;}
