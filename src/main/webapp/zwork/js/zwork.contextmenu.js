@@ -35,7 +35,7 @@
 			id : undefined,
 			container : $("body"),	//所在的容器
 			containerStyle:undefined,	//容器的样式
-			items:undefined,
+			items:new $ui.hashmap(),
 			/**
 			 * item结构
 			 * {
@@ -49,6 +49,7 @@
 			top:0,
 			left:0,
 			
+			trigger:undefined,	//触发对象
 			original : undefined,
 			type : "contextmenu"
 		};
@@ -200,7 +201,7 @@
 
 						item.mouseoverout("contextmenu_item_hover").click(function(e){
 							if(_item.fn!=undefined && _item.children == undefined){
-								_item.fn();
+								_item.fn(config.trigger);
 								_this.hide();
 							}
 							return false;
@@ -237,6 +238,7 @@
 					this.fitWidth();
 				}
 			}
+			return _this;
 		};
 		this.add = add;
 		
@@ -276,10 +278,65 @@
 		};
 		this.update = update;
 		
-		var remove = function(_item){
-			
+		var remove = function(_id){
+			this.config.items.remove(_id);
+			if(jqobj.obj != undefined)
+				jqobj.center_center.find("#"+_id).remove();
 		};
 		this.remove = remove;
+		
+		var size = function(){
+			var size = 0;
+			this.config.items.call(function(_value,_key){
+				size++;
+			});
+			return size;
+		};
+		this.size = size;
+		
+		/**
+		 * 设置或返回top偏移
+		 * 参数	top值（数字）
+		 * 返回	当前对象或top值（对象或数字）
+		 * */
+		var top = function(_top){
+			if(_top != undefined){
+				this.config.top = _top;
+				if(this.jqobj.obj!=undefined){
+					if(_top + jqobj.obj.height() > this.container().height()){
+						_top = _top - jqobj.obj.height();
+					}
+					
+					this.jqobj.obj.css("top",_top);
+				}
+				return this;
+			}else{
+				return this.config.top;
+			}
+		};
+		this.top = top;
+		
+		/**
+		 * 设置或返回left偏移
+		 * 参数	left值（数字）
+		 * 返回	当前对象或left值（对象或数字）
+		 * */
+		var left = function(_left){
+			if(_left != undefined){
+				this.config.left = _left;
+				if(this.jqobj.obj!=undefined){
+					if(_left + jqobj.obj.width() > this.container().width()){
+						_left = _left - jqobj.obj.width();
+					}
+					
+					this.jqobj.obj.css("left",_left);
+				}
+				return this;
+			}else{
+				return this.config.left;
+			}
+		};
+		this.left = left;
 		
 		var setHeight = function(_height){
 			jqobj.obj.height(_height);
@@ -317,6 +374,14 @@
 			});
 		};
 		this.setWidth = setWidth;
+		
+		this.show = function(_trigger){
+			config.trigger = _trigger;
+			if(this.jqobj.obj == undefined){
+				this.init();
+			}
+			return this;
+		};
 		
 	};
 	

@@ -776,12 +776,14 @@
 		this.scroll = scroll;
 		
 		var resizEvent = function(){
-			if(config.maxed){
-				this.width(this.container().width());
-				this.height(this.container().height());
-			}else{
-				this.width(config.width);
-				this.height(config.height);
+			if(this.type() != "messager"){
+				if(config.maxed){
+					this.width(this.container().width());
+					this.height(this.container().height());
+				}else{
+					this.width(config.width);
+					this.height(config.height);
+				}
 			}
 		};
 		this.resizEvent = resizEvent;

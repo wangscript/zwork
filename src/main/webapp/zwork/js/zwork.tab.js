@@ -50,6 +50,8 @@
 			 * }
 			 * */
 			
+			contextmenu_changtab : undefined,
+			contextmenu_title:undefined,
 			original : undefined,
 			type : "button"
 		};
@@ -59,6 +61,44 @@
 		//被父类回调
 		this.initQueue.push(function(_this){
 			_this.items(config.items);
+			
+			if(config.contextmenu_title == undefined){
+				config.contextmenu_title = $ui.contextmenu();
+				config.contextmenu_title.add({
+					id:"closeCurrent",
+					label:"关闭当前",
+					fn:function(trigger){
+						var id = trigger.attr("id");
+						_this.close(id);
+					}
+				}).add({
+					id:"closeOther",
+					label:"关闭其他",
+					fn:function(trigger){
+						var id = trigger.attr("id");
+						$(".tab_title",jqobj.top_navi_titles).each(function(){
+							if($(this).attr("id") != id)
+								_this.close($(this).attr("id"));
+						});
+					}
+				}).add({
+					id:"mark",
+					mark:true
+				}).add({
+					id:"closeAll",
+					label:"关闭所有",
+					fn:function(trigger){
+						var idList = new Array();
+						$(".tab_title",jqobj.top_navi_titles).each(function(){
+							idList.push($(this).attr("id"));
+						});
+						for(i in idList){
+							_this.close(idList[i]);
+						}
+					}
+				});
+			}
+			
 		});
 		
 		//jQuery对象
@@ -110,6 +150,11 @@
 			jqobj.top_navi_titles = jqobj.top_navi.children(".tab_titles");
 			jqobj.top_navi_next = jqobj.top_navi.children(".tab_next");
 			jqobj.top_navi_list = jqobj.top_navi.children(".tab_list");
+			jqobj.top_navi_list.click(function(e){
+				var menu = config.contextmenu_changtab;
+				if(menu.size() != 0)menu.show().top(e.pageY).left(e.pageX);
+				return false;
+			});
 			
 			jqobj.center = jqobj.obj.children(".tab_center");
 			jqobj.center_left = jqobj.center.children(".tab_left");
@@ -165,8 +210,6 @@
 			map.call(function(_obj,_key){
 				_this.add(_obj);
 			});
-//			var titles = jqobj.top_navi_titles.find(".tab_title");
-//			_this.open(titles.eq(0).attr("id"));
 		};
 		this.items = items;
 		
@@ -205,13 +248,13 @@
 				title.attr("src",_item.src);
 				title.data("loaded",false);	//没有加载过
 				
-				title.width(10000);
 				var left = $(".tab_left",title);
 				var title_content = $(".tab_content",title);
 				var button = $(".tab_button",title);
 				var close = $(".tab_close",button);
 				var right = $(".tab_right",title);
-				title_content.html(_item.title);
+				title_content.width(10).css("overflow","auto").html(_item.title);
+				title_content.width(title_content[0].scrollWidth).css("overflow","hidden");
 				title.width(left.width() + right.width() + title_content.width() + button.width());
 				
 				close.mouseoverout("tab_close_hover")
@@ -228,9 +271,23 @@
 				
 				title.click(function(){
 					_this.open(_item.id);
-				}).mouseoverout("tab_title_hover");
+				}).mouseoverout("tab_title_hover").bind("contextmenu",function(e){
+					config.contextmenu_title.show(title).top(e.pageY).left(e.pageX);
+					return false;
+				});
 				
 				_this.open(_item.id);
+				
+				if(config.contextmenu_changtab == undefined){
+					config.contextmenu_changtab = $ui.contextmenu();
+				}
+				config.contextmenu_changtab.add({
+					id:_item.id,
+					label:_item.title,
+					fn:function(){
+						_this.open(_item.id);
+					}
+				});
 				
 			}
 		};
@@ -256,13 +313,19 @@
 				content.show();
 				
 				if(!loaded && title.attr("src")!=undefined){
-					clearTimeout(_this.loadTimeId);
-					_this.loadTimeId = setTimeout(function(){
-						title.data("loaded",true);	//没有加载过
-						content.load(title.attr("src"),function(){
-							$ui(content,_this);
-						});
-					},200);
+					var iframe = config.items.get(_id).iframe;
+					if(iframe){
+						content.html("<iframe width='100%' height='100%' frameborder='0'></iframe>");
+						content.children("iframe").attr("src",title.attr("src"));
+					}else{
+						clearTimeout(_this.loadTimeId);
+						_this.loadTimeId = setTimeout(function(){
+							title.data("loaded",true);	//没有加载过
+							content.load(title.attr("src"),function(){
+								$ui(content,_this);
+							});
+						},200);
+					}
 				}
 				
 			}
@@ -288,7 +351,10 @@
 				title.remove();
 				content.remove();
 				config.items.remove(_id);
+				
+				config.contextmenu_changtab.remove(_id);
 			}
+			return this;
 		};
 		this.close = close;
 		
