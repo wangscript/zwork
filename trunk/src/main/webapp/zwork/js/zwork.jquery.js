@@ -150,7 +150,10 @@
 				borderY:0,
 				
 				marginX:0,
-				marginY:0
+				marginY:0,
+				
+				height:0,
+				width:0
 			};
 			
 			var getWidth = function(_target){
@@ -181,6 +184,9 @@
 			
 			box.paddingX = box.paddingLeft + box.paddingRight;
 			box.paddingY = box.paddingBottom + box.paddingTop;
+			
+			box.height = box.marginY + box.paddingY + box.borderY + current.height();
+			box.width = box.marginX + box.paddingX + box.borderX + current.width();
 			
 			return box;
 		}

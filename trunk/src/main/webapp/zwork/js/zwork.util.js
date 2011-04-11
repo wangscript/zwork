@@ -52,7 +52,67 @@
 		 * */
 		document_keypress : function(){
 			$(document).keypress(function(){
-				alert("---");
+			});
+		},
+		
+		close_default_contextmenu:function(){
+			
+			var items = new $ui.hashmap();
+			items.put("1",{
+				id:"1",
+				label:"排列方式"
+			});
+			items.put("2",{
+				id:"2",
+				label:"刷新"
+			});
+			items.put("3",{
+				id:"3",
+				mark:true
+			});
+			
+			var subitem = new $ui.hashmap();
+			subitem.put("1",{
+				id:"1",
+				label:"桌面"
+			});
+			subitem.put("2",{
+				id:"2",
+				label:"可移动硬盘"
+			});
+			
+			items.put("4",{
+				id:"4",
+				label:"复制到...",
+				children:subitem
+			});
+			items.put("5",{
+				id:"5",
+				label:"粘贴"
+			});
+			items.put("6",{
+				id:"6",
+				label:"显示属性",
+				fn:function(){
+					$ui.window().show();
+				}
+			});
+			
+			var menu = $ui.contextmenu({
+				items:items
+			});
+			
+			$(document).bind("contextmenu",function(e){
+				menu.top(e.pageY).left(e.pageX).show();
+				return false;
+			});
+		},
+		
+		system_click_event:function(){
+			$(document).bind("click",function(){
+				$(".zwork-contextmenu").each(function(){
+					$ui.find($(this)).hide();
+				});
 			});
 		}
 	

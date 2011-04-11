@@ -46,6 +46,9 @@
 				$ui.ajaxanimate.init();
 			
 			$ui.util.fitbody();
+			$ui.util.close_default_contextmenu();	//关闭默认的右键菜单
+			$ui.util.document_keypress();	//监听按键
+			$ui.util.system_click_event();
 			
 			if(config.listen != undefined)
 				$ui(config.listen);

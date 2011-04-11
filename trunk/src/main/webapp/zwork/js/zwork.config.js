@@ -25,7 +25,9 @@
 		
 		ajax_animate : true,	//是否开始加载等待动画
 		
-		systab : "#systab"	//系统默认会寻找的tab，接受一个css选择器
+		systab : "#systab",	//系统默认会寻找的tab，接受一个css选择器
+			
+		close_default_contextmenu : true
 	};
 	
 })(zwork,jQuery);
