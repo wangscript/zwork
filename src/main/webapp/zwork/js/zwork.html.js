@@ -108,7 +108,26 @@
 			"		<div class='tab_center'></div>"+
 			"		<div class='tab_right'></div>"+
 			"	</div>"+
-			"</div>"
+			"</div>",
+		
+		contextmenu:"<div class='zwork-contextmenu'>"+
+					"	<div class='contextmenu_top'>"+
+					"		<div class='contextmenu_left'></div>"+
+					"		<div class='contextmenu_center'></div>"+
+					"		<div class='contextmenu_right'></div>"+
+					"	</div>"+
+					"	<div class='contextmenu_center'>"+
+					"		<div class='contextmenu_left'></div>"+
+					"		<div class='contextmenu_center'>"+
+					"		</div>"+
+					"		<div class='contextmenu_right'></div>"+
+					"	</div>"+
+					"	<div class='contextmenu_bottom'>"+
+					"		<div class='contextmenu_left'></div>"+
+					"		<div class='contextmenu_center'></div>"+
+					"		<div class='contextmenu_right'></div>"+
+					"	</div>"+
+					"</div>"
 		
 	};
 	
