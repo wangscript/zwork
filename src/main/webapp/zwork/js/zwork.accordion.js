@@ -117,7 +117,7 @@
 				//展开
 				content.show().stop().animate({
 					height : jqobj.obj.height() - all_height
-				},300);
+				},300).css("overflow","auto");
 				
 				showed.attr("show","fasle");
 				title.attr("show","true");
@@ -211,7 +211,7 @@
 			var content = jqobj.obj.find(".accordion_content");
 			content.each(function(){
 				if($(this).height() != 0){
-					$(this).stop().height(_height - box.y - all_height).css("font-size","12px");
+					$(this).stop().height(_height - box.y - all_height);
 				}else{
 					$(this).height(0).hide();
 				}
