@@ -86,22 +86,44 @@
 		
 		var display = function(_id){
 			var _this = this;
+			
 			if(_id != undefined){
+				
+				//计算出title的总高度
 				var all_height = 0;
 				var all = $(".accordion_title",jqobj.obj);
 				all.each(function(){
-					all_height = all_height + $(this).height();
-					$(this).next().animate({
-						height:0
-					});
+					all_height = all_height + $(this).box().height;
 				});
+				
+				//获取当前title
 				var title = $("#"+_id,jqobj.obj);
 				var content = title.next();
 				
-				content.stop().animate({
-					height : jqobj.obj.height() - all_height
-				});
+				//获取当前显示的
+				var showed = $("div[show='true']",jqobj.obj);
+				if(showed.get(0) == undefined){
+					showed = title;
+				};
 				
+				//如果俩个不是同一个，那么久关闭之前的
+				if(title.attr("id") != showed.attr("id")){
+					showed.next().stop().animate({
+						height : 0
+					},350,function(){
+						showed.next().hide();
+					});
+				}
+				//展开
+				content.show().stop().animate({
+					height : jqobj.obj.height() - all_height
+				},300);
+				
+				showed.attr("show","fasle");
+				title.attr("show","true");
+				
+				
+				//下面是切换边框的位置
 				title.prevAll().each(function(){
 					if($(this).hasClass("accordion_title")){
 						$(this).removeClass("accordion_top");
@@ -117,6 +139,7 @@
 					}
 				});
 			}
+			
 		};
 		this.display = display;
 		
@@ -174,19 +197,23 @@
 		this.setWidth = setWidth;
 		
 		var setHeight = function(_height){
+			var _this = this;
 			var box = jqobj.obj.box();
 			
-			jqobj.obj.height(_height - box.paddingY - box.borderY);
+			jqobj.obj.height(_height - box.y);
 			
 			var all_height = 0;
 			var all = $(".accordion_title",jqobj.obj);
 			all.each(function(){
-				all_height = all_height + $(this).height();
+				all_height = all_height + $(this).box().height;
 			});
+			
 			var content = jqobj.obj.find(".accordion_content");
 			content.each(function(){
-				if($(this).height()!=0){
-					$(this).stop().height(_height - 2 - all_height);
+				if($(this).height() != 0){
+					$(this).stop().height(_height - box.y - all_height).css("font-size","12px");
+				}else{
+					$(this).height(0).hide();
 				}
 			});
 			

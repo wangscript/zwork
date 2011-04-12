@@ -7,7 +7,7 @@
 .zwork-tab .tab_top .tab_border .tab_right{height: 28px;width:5px;background: url("image/tab/bg.png") 0px -50px;float:left;}
 
 .zwork-tab .tab_top .tab_navi{height: 28px;position: absolute;z-index: 2;}
-.zwork-tab .tab_top .tab_navi .tab_prev{height: 23px;margin-top:5px;width: 17px;float: left;background:url("image/tab/control.png") 0px -100px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_prev{height: 23px;margin-top:2px;width: 17px;float: left;background:url("image/tab/control.png") 0px -100px;cursor: pointer;}
 .zwork-tab .tab_top .tab_navi .tab_titles{height: 28px;width: 449px;float: left;overflow: hidden;}
 
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title{height: 28px;width: 110px;float: left;margin-left: 2px;margin-right: 2px;cursor: pointer;}
@@ -28,8 +28,8 @@
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_button{background: url("image/tab/bg.png") 0px -550px;}
 .zwork-tab .tab_top .tab_navi .tab_titles .tab_title_selected .tab_right{background: url("image/tab/bg.png") 0px -500px;}
 
-.zwork-tab .tab_top .tab_navi .tab_next{height: 23px;width: 17px;margin-top:5px;float: left;background:url("image/tab/control.png") 0px -250px;cursor: pointer;}
-.zwork-tab .tab_top .tab_navi .tab_list{height: 23px;width: 17px;margin-top:5px;float: left;background:url("image/tab/control.png") 0px -300px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_next{height: 23px;width: 17px;margin-top:2px;float: left;background:url("image/tab/control.png") 0px -250px;cursor: pointer;}
+.zwork-tab .tab_top .tab_navi .tab_list{height: 23px;width: 17px;margin-top:2px;float: left;background:url("image/tab/control.png") 0px -300px;cursor: pointer;}
 
 .zwork-tab .tab_center {width: 500px;height: 267px;}
 .zwork-tab .tab_center .tab_left{width: 1px;height:267px;background: #B4D1D3;float:left;overflow: hidden;}

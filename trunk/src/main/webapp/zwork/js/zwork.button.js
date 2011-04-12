@@ -144,10 +144,10 @@
 		 * */
 		var setWidth = function(_width){
 			if(config.fitWidth){
-				jqobj.obj.width(10000);
-				var center_width = jqobj.center.width();
-				var width = center_width + jqobj.left.width() + jqobj.right.width();
-				jqobj.obj.width(width);
+				jqobj.center.width(10);
+				var center_width = jqobj.center.get(0).scrollWidth;
+				jqobj.center.width(center_width);
+				jqobj.obj.width(center_width + jqobj.left.width() + jqobj.right.width());
 			}else{
 				jqobj.obj.width(_width);
 				jqobj.center.width(_width - jqobj.left.width() - jqobj.right.width());
@@ -240,6 +240,11 @@
 			}
 		};
 		this.active = active;
+		
+		var resizEvent = function(){
+			this.width(config.width);
+		};
+		this.resizEvent = resizEvent;
 		
 	};
 	

@@ -73,7 +73,7 @@
 					current.children().each(function(){
 						$(this).resizEvent();
 					});
-				},10);
+				},50);
 				current.data("resizEvent_timeoutID",timeoutID);
 			}else{
 				//添加事件
@@ -94,7 +94,7 @@
 		 * firstLevelChildren简称olc，第一级子元素。
 		 * */
 		flc : function(_value , _tag){
-			var container = ["window","layout","button","dialog"];
+			var container = ["window","layout","button","dialog","accordion","tab","grid"];
 			
 			if(_tag == undefined){
 				_tag = "type";
@@ -153,7 +153,10 @@
 				marginY:0,
 				
 				height:0,
-				width:0
+				width:0,
+				
+				x:0,
+				y:0
 			};
 			
 			var getWidth = function(_target){
@@ -164,6 +167,7 @@
 			box.marginTop = getWidth("margin-top");
 			box.marginLeft = getWidth("margin-left");
 			box.marginRight = getWidth("margin-right");
+			if($.browser.safari)box.marginRight = getWidth("margin-left");	//safari浏览器margin-right有bug
 			box.marginBottom = getWidth("margin-bottom");
 			
 			box.paddingTop = getWidth("padding-top");
@@ -187,6 +191,9 @@
 			
 			box.height = box.marginY + box.paddingY + box.borderY + current.height();
 			box.width = box.marginX + box.paddingX + box.borderX + current.width();
+			
+			box.y = box.marginY + box.paddingY + box.borderY;
+			box.x = box.marginX + box.paddingX + box.borderX;
 			
 			return box;
 		}

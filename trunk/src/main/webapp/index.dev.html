@@ -38,6 +38,8 @@
 	<script type="text/javascript" src="zwork/js/zwork.progressbar.js"></script>
 	<script type="text/javascript" src="zwork/js/zwork.tab.js"></script>
 	<script type="text/javascript" src="zwork/js/zwork.contextmenu.js"></script>
+	<script type="text/javascript" src="zwork/js/zwork.grid.js"></script>
+	<script type="text/javascript" src="zwork/js/zwork.link.js"></script>
 	
 	<link href="zwork/skin/dwz/zwork.core.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.window.css" rel="stylesheet" type="text/css">
@@ -48,6 +50,8 @@
 	<link href="zwork/skin/dwz/zwork.accordion.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.progressbar.css" rel="stylesheet" type="text/css">
 	<link href="zwork/skin/dwz/zwork.contextmenu.css" rel="stylesheet" type="text/css">
+	<link href="zwork/skin/dwz/zwork.grid.css" rel="stylesheet" type="text/css">
+	<link href="zwork/skin/dwz/zwork.link.css" rel="stylesheet" type="text/css">
 	<!-- zwork 框架文件 -->
 	
 	<!-- 对zwork的自定义 -->
@@ -56,6 +60,7 @@
 	
 	<!-- theme files -->
 	<link href="zwork/theme/classical/zwork.css" rel="stylesheet" type="text/css">
+	<link href="zwork/theme/classical/page.css" rel="stylesheet" type="text/css">
 	<!-- theme files -->
 	
 	<script type="text/javascript">
@@ -75,7 +80,7 @@
 
 <div type="layout" class="container">
 	
-	<div position="north" height="56" border="false" class="header">
+	<div position="north" height="56" class="header">
 		<div class="logo">
 			<a href=""><img alt="zwork" src="image/logo.gif" height="46px;"/></a>
 		</div>
@@ -83,7 +88,7 @@
 		</div>
 	</div>
 	
-	<div position="west" width="220" class="left" src="demo/left.html"></div>
+	<div position="west" width="220" class="left" src="demo/left.html" border="true"></div>
 	
 	<div position="center" id="main">
 		<div type="tab" width="100%" height="100%" id="systab" containerStyle="overflow:hidden;">
@@ -91,7 +96,7 @@
 		</div>
 	</div>
 	
-	<div position="south" height="30" border="false" class="footer">
+	<div position="south" height="30" class="footer">
 		<a href="http://zwork.org">zwork.org</a> - zwork.Copyright © 2011
 	</div>
 	

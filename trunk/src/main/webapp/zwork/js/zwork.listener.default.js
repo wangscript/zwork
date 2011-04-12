@@ -10,7 +10,6 @@
 			var config = {};
 			config.container = window.parent();
 			config.original = window;
-			config.containerStyle = window.attr("containerStyle");
 			config.height = window.attr("height") || 400;
 			config.id = window.attr("id") || undefined;
 			config.width = window.attr("width") || 500;
@@ -46,7 +45,6 @@
 			var config = {};
 			config.container = dialog.parent();
 			config.original = dialog;
-			config.containerStyle = dialog.attr("containerStyle");
 			config.id = dialog.attr("id") || undefined;
 			config.height = dialog.attr("height") || 400;
 			config.width = dialog.attr("width") || 500;
@@ -83,7 +81,6 @@
 			config.original = button;
 			config.id = button.attr("id") || undefined;
 			config.width = button.attr("width") || 100;
-			config.containerStyle = button.attr("containerStyle");
 			if(button.html()!=""){config.label = button.html();}
 			config.label = (button.attr("label") || config.label) || "按钮";
 			config.fitWidth = eval(button.attr("fitWidth") || true);
@@ -130,7 +127,6 @@
 			config.id = layout.attr("id") || undefined;
 			config.width = layout.attr("width") || "100%";
 			config.height = layout.attr("height") || "100%";
-			config.containerStyle = layout.attr("containerStyle");
 			
 			var north = layout.children("*[position='north']");
 			if(north.get(0) != undefined){
@@ -142,7 +138,7 @@
 				config.north.iframe = eval(north.attr("iframe")) || false;
 				config.north.src = north.attr("src") || undefined;
 				config.north.height = north.attr("height") || 0;
-				config.north.border = eval(north.attr("border") || true);
+				config.north.border = eval(north.attr("border") || false);
 				config.north.content = north.attr("content") || undefined;
 				if(north.html() != ""){config.north.content = north.html();}
 			}
@@ -157,7 +153,7 @@
 				config.south.iframe = eval(south.attr("iframe")) || false;
 				config.south.src = south.attr("src") || undefined;
 				config.south.height = south.attr("height") || 0;
-				config.south.border = eval(south.attr("border") || true);
+				config.south.border = eval(south.attr("border") || false);
 				config.south.content = south.attr("content") || undefined;
 				if(south.html() != ""){config.south.content = south.html();}
 			}
@@ -172,7 +168,7 @@
 				config.west.iframe = eval(west.attr("iframe")) || false;
 				config.west.src = west.attr("src") || undefined;
 				config.west.width = west.attr("width") || 0;
-				config.west.border = eval(west.attr("border") || true);
+				config.west.border = eval(west.attr("border") || false);
 				config.west.content = west.attr("content") || undefined;
 				if(west.html() != ""){config.west.content = west.html();}
 			}
@@ -187,7 +183,7 @@
 				config.east.iframe = eval(east.attr("iframe")) || false;
 				config.east.src = east.attr("src") || undefined;
 				config.east.width = east.attr("width") || 0;
-				config.east.border = eval(east.attr("border") || true);
+				config.east.border = eval(east.attr("border") || false);
 				config.east.content = east.attr("content") || undefined;
 				if(east.html() != ""){config.east.content = east.html();}
 			}
@@ -219,7 +215,6 @@
 			var config = {};
 			config.container = accordion.parent();
 			config.original = accordion;
-			config.containerStyle = accordion.attr("containerStyle");
 			config.id = accordion.attr("id") || undefined;
 			config.width = accordion.attr("width") || "100%";
 			config.height = accordion.attr("height") || "100%";
@@ -253,7 +248,6 @@
 			var config = {};
 			config.container = tab.parent();
 			config.original = tab;
-			config.containerStyle = tab.attr("containerStyle");
 			config.id = tab.attr("id") || undefined;
 			config.width = tab.attr("width") || "100%";
 			config.height = tab.attr("height") || "100%";
@@ -277,6 +271,47 @@
 				zobj.show();
 			}
 			tab.removeAttr("type");
+		}
+	});
+	
+	$ui.listener.add("div_type_grid",function(_c,_p){
+		var list = _c.flc("grid");
+		for(i in list){
+			var grid = list[i];
+			var config = {};
+			config.container = grid.parent();
+			config.original = grid;
+			config.id = grid.attr("id") || undefined;
+			config.width = grid.attr("width") || "100%";
+			config.height = grid.attr("height") || "100%";
+			config.toolbar = grid.children(".toolbar").html();
+			grid.children(".toolbar").remove();
+			config.content = grid.html();
+			
+			var zobj = $ui.grid(config,_p);
+			if(grid.attr("show") == undefined || grid.attr("show") == "true"){
+				zobj.show();
+			}
+			grid.removeAttr("type");
+		}
+	});
+	
+	$ui.listener.add("div_type_link",function(_c,_p){
+		var list = _c.flc("link");
+		for(i in list){
+			var link = list[i];
+			var config = {};
+			config.container = link.parent();
+			config.original = link;
+			config.id = link.attr("id") || undefined;
+			config.label = link.attr("label") || "快捷方式";
+			config.ico = link.attr("ico") || undefined;
+			
+			var zobj = $ui.link(config,_p);
+			if(link.attr("show") == undefined || link.attr("show") == "true"){
+				zobj.show();
+			}
+			link.removeAttr("type");
 		}
 	});
 	

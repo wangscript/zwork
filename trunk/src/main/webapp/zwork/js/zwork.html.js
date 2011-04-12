@@ -127,7 +127,40 @@
 					"		<div class='contextmenu_center'></div>"+
 					"		<div class='contextmenu_right'></div>"+
 					"	</div>"+
-					"</div>"
+					"</div>",
+					
+		grid:"<div class='zwork-grid'>"+
+			"	<div class='grid_toolbar'>"+
+			"	</div>"+
+			"	<div class='grid_content'>"+
+			"	</div>"+
+			"	<div class='grid_footbar'>"+
+			"		<ul>"+
+			"			<li class='step'>"+
+			"				<select>"+
+			"				<option value='10'>10</option>"+
+			"					<option value='20'>20</option>"+
+			"					<option value='50'>50</option>"+
+			"					<option value='100'>100</option>"+
+			"					<option value='200'>200</option>"+
+			"				</select>"+
+			"			</li>"+
+			"			<li class='first'></li>"+
+			"			<li class='prev'></li>"+
+			"			<li class='cur'>1</li>"+
+			"			<li class='next'></li>"+
+			"			<li class='last'></li>"+
+			"			<li class='refresh'></li>"+
+			"		</ul>"+
+			"	</div>"+
+			"</div>",
+			
+		link:"<div class='zwork-link'>"+
+			"	<div class='link_ico'>"+
+			"		<img src='image/link/ico.png'/>"+
+			"	</div>"+
+			"	<div class='link_label'></div>"+
+			"</div>"
 		
 	};
 	
