@@ -4,3 +4,5 @@
 .container .header .navi{width:300px;height: 25px;line-height: 25px;float: right;margin-right: 10px;text-align: right;}
 .container .header .navi a{color: #eeeeee;}
 .container .footer{background:#EEF4F4; line-height: 30px;text-align: center;}
+
+#main .layout_content{overflow: hidden;}

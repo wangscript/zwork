@@ -1,5 +1,5 @@
-.zwork-accordion{overflow: hidden;border: 1px solid #B4D1D3;}
-.zwork-accordion .accordion_title{font-weight: bold;color: #3a3a3a;text-indent: 10px;height: 25px;line-height: 25px;background: url("image/accordion/accordion.png");cursor: pointer;}
+.zwork-accordion{overflow: hidden;}
+.zwork-accordion .accordion_title{font-weight: bold;color: #3a3a3a;text-indent: 10px;height: 25px;line-height: 25px;background: url("image/accordion/accordion.png");cursor: pointer;overflow: hidden;}
 .zwork-accordion .accordion_title_hover{background: url("image/accordion/accordion.png") 0px -25px;}
 .zwork-accordion .accordion_top{border-top: 1px solid #B4D1D3;}
 .zwork-accordion .accordion_bottom{border-bottom: 1px solid #B4D1D3;}

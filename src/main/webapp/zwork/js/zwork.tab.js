@@ -328,6 +328,8 @@
 					}
 				}
 				
+				content.resizEvent();
+				
 			}
 			
 		};

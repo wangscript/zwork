@@ -1,0 +1,15 @@
+.zwork-grid{width: 400px;height: 300px;margin-right: 0px;}
+.zwork-grid .grid_toolbar{height: 28px;line-height: 28px;background: url("image/grid/bg.gif");overflow: hidden;}
+.zwork-grid .grid_content{height: 250px;overflow: auto;}
+.zwork-grid .grid_content table thead tr{height: 22px;background: url("image/grid/content/bg.png");}
+.zwork-grid .grid_content table tbody tr{height: 22px;}
+.zwork-grid .grid_footbar{height: 22px;line-height: 22px;background: url("image/grid/bg.gif");overflow: hidden;text-align: right;}
+.zwork-grid .grid_footbar ul{list-style: none;margin: 0;padding: 0;}
+.zwork-grid .grid_footbar ul li{float: right;height: 16px;line-height: 16px;width: 16px;text-align: center;margin: 3px;}
+.zwork-grid .grid_footbar .step{width: 50px;height: 22px;margin: 0;}
+.zwork-grid .grid_footbar .first{background: url("image/grid/footbar/first.gif") 0 0 no-repeat;}
+.zwork-grid .grid_footbar .prev{background: url("image/grid/footbar/prev.gif") 0 0 no-repeat;}
+.zwork-grid .grid_footbar .cur{width: 22px;}
+.zwork-grid .grid_footbar .next{background: url("image/grid/footbar/next.gif") 0 0 no-repeat;}
+.zwork-grid .grid_footbar .last{background: url("image/grid/footbar/last.gif") 0 0 no-repeat;}
+.zwork-grid .grid_footbar .refresh{background: url("image/grid/footbar/refresh.gif") 0 0 no-repeat;}

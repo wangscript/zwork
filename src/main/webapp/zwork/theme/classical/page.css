@@ -1,0 +1,12 @@
+/**典型页面css*/
+.page_list{}
+.page_list .page_search{background: #EEF4F5;border-bottom:1px solid #B4D1D3;}
+
+.page_add{}
+.page_add .page_button{border-top:1px solid #B4D1D3; background: #EEF4F5;}
+
+.page_view{}
+.page_view .page_button{border-top:1px solid #B4D1D3; background: #EEF4F5;}
+
+.page_edit{}
+.page_edit .page_button{border-top:1px solid #B4D1D3; background: #EEF4F5;}

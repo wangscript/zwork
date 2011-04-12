@@ -259,15 +259,15 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var hide = function(){
-			if(this.jqobj.obj != undefined){
-				this.jqobj.obj.remove();
-				this.clearjqobj();
-			}
 			var children = $ui.find(this.uid).children;	//关闭子对象
 			if(children != undefined){
 				children.call(function(obj){
 					obj.hide();
 				});
+			}
+			if(this.jqobj.obj != undefined){
+				this.jqobj.obj.remove();
+				this.clearjqobj();
 			}
 			return this;
 		};

@@ -1192,13 +1192,13 @@
 		        	case "west" : 
 		        		config.west.width = _width;
 		        		if(jqobj.obj!=undefined){
-		        			jqobj.west.obj.width(_width);
+		        			jqobj.west.obj.width(_width - jqobj.west.obj.box().x);
 		        		}
 		        		break;
 		        	case "east" : 
 		        		config.east.width = _width;
 		        		if(jqobj.obj!=undefined){
-		        			jqobj.east.obj.width(_width);
+		        			jqobj.east.obj.width(_width - jqobj.east.obj.box().x);
 		        		}
 		        		break;
 		        	default:
@@ -1229,13 +1229,13 @@
 		        	case "north" : 
 		        		config.north.height = _height;
 		        		if(jqobj.obj != undefined){
-		        			jqobj.north.obj.height(_height);
+		        			jqobj.north.obj.height(_height - jqobj.north.obj.box().y);
 		        		}
 		        		break;
 		        	case "south" : 
 		        		config.south.height = _height;
 		        		if(jqobj.obj != undefined){
-		        			jqobj.south.obj.height(_height);
+		        			jqobj.south.obj.height(_height - jqobj.south.obj.box().y);
 		        		}
 		        		break;
 		        	default:
@@ -1250,13 +1250,17 @@
 		var setWidth = function(_width){
 			jqobj.obj.width(_width);	//对象宽度
 			
-			jqobj.center.obj.width(_width - jqobj.west.obj.width() - jqobj.east.obj.width());	//中间部分的宽度
+			jqobj.center.obj.width(_width - jqobj.west.obj.box().width - jqobj.east.obj.box().width);	//中间部分的宽度
 			
 			jqobj.center.content.width(jqobj.center.obj.width());	//中间内容区域的宽度
 			jqobj.north.content.width(_width);	//北部内容区域的宽度
 			jqobj.south.content.width(_width);	//南部内容区域的宽度
-			jqobj.east.content.width(jqobj.east.obj.width() - jqobj.east.border.width());	//东部内容区域的宽度
-			jqobj.west.content.width(jqobj.west.obj.width() - jqobj.west.border.width());	//西部内容区域的宽度
+			var borderWidth = 0;
+			if(config.east.border){borderWidth = jqobj.east.border.width();}
+			jqobj.east.content.width(jqobj.east.obj.width() - borderWidth);	//东部内容区域的宽度
+			borderWidth = 0;
+			if(config.west.border){borderWidth = jqobj.west.border.width();}
+			jqobj.west.content.width(jqobj.west.obj.width() - borderWidth);	//西部内容区域的宽度
 			
 			jqobj.west.border.css("top",jqobj.north.obj.height())	//西部边框的top
 			.css("left",jqobj.west.obj.width() - jqobj.west.border.width());	//西部边框的left
@@ -1277,21 +1281,29 @@
 		var setHeight = function(_height){
 			jqobj.obj.height(_height);
 
-			jqobj.center.obj.height(_height - jqobj.north.obj.height() - jqobj.south.obj.height());
+			jqobj.center.obj.height(_height - jqobj.north.obj.box().height - jqobj.south.obj.box().height);
 			var centerHeight = jqobj.center.obj.height();
 			
 			var titleHeight = 0;
+			var borderWidth = 0;
 			if(config.center.title){titleHeight = jqobj.center.title.height();}
 			jqobj.center.content.height(centerHeight - titleHeight);	//中间内容区域的高度
 			titleHeight = 0;
+			
 			if(config.north.title){titleHeight = jqobj.north.title.height();}
-			jqobj.north.content.height(jqobj.north.obj.height() - titleHeight - jqobj.north.border.height());	//北部内容区域的高度
+			if(config.north.border){borderWidth = jqobj.north.border.height();}
+			jqobj.north.content.height(jqobj.north.obj.height() - titleHeight - borderWidth);	//北部内容区域的高度
+			
 			titleHeight = 0;
+			borderWidth = 0;
 			if(config.south.title){titleHeight = jqobj.south.title.height();}
-			jqobj.south.content.height(jqobj.south.obj.height() - titleHeight - jqobj.south.border.height());	//南部内容区域的高度
+			if(config.south.border){borderWidth = jqobj.south.border.height();}
+			jqobj.south.content.height(jqobj.south.obj.height() - titleHeight - borderWidth);	//南部内容区域的高度
+			
 			titleHeight = 0;
 			if(config.east.title){titleHeight = jqobj.east.title.height();}
 			jqobj.east.content.height(centerHeight - titleHeight);	//东部内容区域的高度
+			
 			titleHeight = 0;
 			if(config.west.title){titleHeight = jqobj.west.title.height();}
 			jqobj.west.content.height(centerHeight - titleHeight);	//西部内容区域的高度
