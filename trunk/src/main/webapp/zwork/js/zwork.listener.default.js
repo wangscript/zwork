@@ -315,4 +315,14 @@
 		}
 	});
 	
+	$ui.listener.add("ul_type_tree",function(_c,_p){
+		var list = _c.flc("tree");
+		for(i in list){
+			var tree = list[i];
+			tree.treeview({
+				animated: "fast"
+			});
+		}
+	});
+	
 })(zwork,jQuery);
