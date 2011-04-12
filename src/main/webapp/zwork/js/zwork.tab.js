@@ -323,6 +323,7 @@
 							title.data("loaded",true);	//没有加载过
 							content.load(title.attr("src"),function(){
 								$ui(content,_this);
+								content.resizEvent();
 							});
 						},200);
 					}
