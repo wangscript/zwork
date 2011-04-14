@@ -19,6 +19,7 @@
 		 */
 		var zwork = function(_container,_parent){
 			zwork.listener(_container,_parent);
+			_container.resizEvent();
 		};
 		
 		//注册给window，提供俩个调用变量。

@@ -18,7 +18,7 @@
 .zwork-window .window_top .window_titlebar .window_buttons .window_disabled{background: url("image/window/button.png") 0 -600px;}
 .zwork-window .window_top .window_titlebar .window_buttons .window_disabled_hover{background: url("image/window/button.png") 0 -600px;}
 
-.zwork-window .window_center{height: 250px;background: white;}
+.zwork-window .window_center{height: 250px;background: white;position: relative;}
 .zwork-window .window_center .window_loading{position: absolute;z-index: 100000;background: url("image/window/mask.png");display: none;}
 .zwork-window .window_center .window_leftborder{height: 250px;width: 1px;float: left;background:#B4D1D3; }
 .zwork-window .window_center .window_content{height: 250px;width: 398px;float: left;overflow: auto;background: #EEF4F4;}

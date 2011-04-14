@@ -1,28 +1,28 @@
 .zwork-contextmenu{position: absolute;z-index: 100000;height: 300px;width: 200px;top:100px;left: 100px;}
 
-.zwork-contextmenu .contextmenu_top{height: 1px;background: #B8D0D6;}
+.zwork-contextmenu .contextmenu_top{height: 1px;background: #B8D0D6;overflow: hidden;}
 .zwork-contextmenu .contextmenu_top .contextmenu_left{height: 1px;width:1px;float: left;}
 .zwork-contextmenu .contextmenu_top .contextmenu_center{height: 1px;width: 198px;float: left;}
 .zwork-contextmenu .contextmenu_top .contextmenu_right{height: 1px;width:1px;float: left;}
 
-.zwork-contextmenu .contextmenu_center{height: 298px;}
+.zwork-contextmenu .contextmenu_center{height: 298px;overflow: hidden;}
 .zwork-contextmenu .contextmenu_center .contextmenu_left{height: 298px;width:1px;background: #B8D0D6;float: left;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center{height: 298px;width: 198px;background: white;float: left;}
 
-.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item{height: 20px;cursor: pointer;}
+.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item{height: 20px;cursor: pointer;overflow: hidden;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item .contextmenu_ico{height: 20px;width: 20px;float: left;border-right:1px solid #EEF4F4;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item .contextmenu_label{height: 20px;line-height: 20px;width: 10px;float: left;text-indent: 5px;overflow: hidden;white-space:nowrap;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item .contextmenu_more{height: 20px;width: 20px;float: left;background: url("image/contextmenu/more.gif") center center no-repeat;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_item_hover{background: url("image/contextmenu/bg_item.png") 0px -20px;}
 
-.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark{height: 1px;}
+.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark{height: 1px;overflow: hidden;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark .contextmenu_ico{height: 1px;width: 20px;float: left;}
-.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark .contextmenu_label{height: 1px;width: 157px;background: #EEF4F4;float: left;}
+.zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark .contextmenu_label{height: 1px;width: 157px;background: #EEF4F4;float: left;overflow: hidden;}
 .zwork-contextmenu .contextmenu_center .contextmenu_center .contextmenu_mark .contextmenu_more{height: 1px;width: 20px;background: #EEF4F4;float: left;}
 
 .zwork-contextmenu .contextmenu_center .contextmenu_right{height: 298px;width:1px;background: #B8D0D6;float: left;}
 
-.zwork-contextmenu .contextmenu_bottom{height: 1px;background: #B8D0D6;}
+.zwork-contextmenu .contextmenu_bottom{height: 1px;background: #B8D0D6;overflow: hidden;}
 .zwork-contextmenu .contextmenu_bottom .contextmenu_left{height: 1px;width:1px;float: left;}
 .zwork-contextmenu .contextmenu_bottom .contextmenu_center{height: 1px;width: 198px;float: left;}
 .zwork-contextmenu .contextmenu_bottom .contextmenu_right{height: 1px;width:1px;float: left;}
