@@ -120,6 +120,7 @@
 				if(jqobj.obj!=undefined){
 					jqobj.toolbar.html(_toolbar);
 					$ui(jqobj.toolbar,_this);
+					_this.resizEvent();
 				}
 				return this;
 			}

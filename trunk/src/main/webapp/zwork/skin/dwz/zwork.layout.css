@@ -7,29 +7,29 @@
 
 .zwork-layout .layout_title{height: 25px;width: 100%;line-height: 25px;font-weight: bold;color: #3c3c3c;text-indent: 10px;background: url("image/layout/bg.gif");display: none;}
 
-.zwork-layout .layout_content{overflow: auto;width: 100%;clear: both;}
+.zwork-layout .layout_content{overflow: auto;width: 100%;clear: both;position: relative;}
 
 .zwork-layout .layout_border_west{width: 6px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;z-index: 2;}
-.zwork-layout .layout_border_west .layout_button{width: 5px;height: 40px;background: url("image/layout/y.gif") 0px 0px;cursor: pointer;}
+.zwork-layout .layout_border_west .layout_button{position:absolute;width: 5px;height: 40px;background: url("image/layout/y.gif") 0px 0px;cursor: pointer;}
 .zwork-layout .layout_border_west .layout_button_mo{background: url("image/layout/y.gif") -6px 0px;}
 .zwork-layout .layout_border_west .layout_button_hidden{background: url("image/layout/y.gif") -12px 0px;}
 .zwork-layout .layout_border_west .layout_button_hidden_mo{background: url("image/layout/y.gif") -18px 0px;}
 
 .zwork-layout .layout_border_east{width: 6px;background: url("image/layout/y.gif") -25px 0px repeat-y;position: absolute;cursor: col-resize;overflow: hidden;z-index: 2;}
-.zwork-layout .layout_border_east .layout_button{width: 6px;height: 40px;background: url("image/layout/y.gif") -12px 0px;cursor: pointer;}
+.zwork-layout .layout_border_east .layout_button{position:absolute;width: 6px;height: 40px;background: url("image/layout/y.gif") -12px 0px;cursor: pointer;}
 .zwork-layout .layout_border_east .layout_button_mo{background: url("image/layout/y.gif") -18px 0px;}
 .zwork-layout .layout_border_east .layout_button_hidden{background: url("image/layout/y.gif") 0px 0px;}
 .zwork-layout .layout_border_east .layout_button_hidden_mo{background: url("image/layout/y.gif") -6px 0px;}
 
 .zwork-layout .layout_border_north{height: 6px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;z-index: 2;}
-.zwork-layout .layout_border_north .layout_button{height: 6px;width: 40px;background: url("image/layout/x.gif") 0px 0px;cursor: pointer;}
+.zwork-layout .layout_border_north .layout_button{position:absolute;height: 6px;width: 40px;background: url("image/layout/x.gif") 0px 0px;cursor: pointer;}
 .zwork-layout .layout_border_north .layout_button_mo{background: url("image/layout/x.gif") 0px -6px;}
 .zwork-layout .layout_border_north .layout_button_hidden{background: url("image/layout/x.gif") 0px -12px;}
 .zwork-layout .layout_border_north .layout_button_hidden_mo{background: url("image/layout/x.gif") 0px -18px;}
 
 
 .zwork-layout .layout_border_south{height: 6px;background: url("image/layout/x.gif") 0px -25px repeat-x;position: absolute;cursor: row-resize;overflow: hidden;z-index: 2;}
-.zwork-layout .layout_border_south .layout_button{height: 6px;width: 40px;background: url("image/layout/x.gif") 0px -12px;cursor: pointer;}
+.zwork-layout .layout_border_south .layout_button{position:absolute;height: 6px;width: 40px;background: url("image/layout/x.gif") 0px -12px;cursor: pointer;}
 .zwork-layout .layout_border_south .layout_button_mo{background: url("image/layout/x.gif") 0px -18px;}
 .zwork-layout .layout_border_south .layout_button_hidden{background: url("image/layout/x.gif") 0px 0px;}
 .zwork-layout .layout_border_south .layout_button_hidden_mo{background: url("image/layout/x.gif") 0px -6px;}

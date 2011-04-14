@@ -315,14 +315,17 @@
 		}
 	});
 	
-	$ui.listener.add("ul_type_tree",function(_c,_p){
-		var list = _c.flc("tree");
-		for(i in list){
-			var tree = list[i];
-			tree.treeview({
-				animated: "fast"
-			});
-		}
+	$ui.listener.add("ul_class_tree",function(_c,_p){
+		$(".tree",_c).each(function(){
+			var inited = $(this).data("inited");
+			if(!inited){
+				$(this).parent().css("position");
+				$(this).treeview({
+					animated: "fast"
+				});
+				$(this).data("inited",true);
+			}
+		});
 	});
 	
 })(zwork,jQuery);

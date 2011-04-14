@@ -40,6 +40,7 @@
 			height:"100%",
 			items : undefined,	//子元素
 			
+			inited:false,
 			original : undefined,
 			type : "accordion"
 		};
@@ -138,6 +139,13 @@
 						$(this).addClass("accordion_top");
 					}
 				});
+				
+				if(!config.inited){
+					setTimeout(function(){
+						_this.resizEvent();
+					},350);
+					config.inited = true;
+				}
 			}
 			
 		};
@@ -180,9 +188,12 @@
 					
 					//注册事件
 					var title = $(".accordion_title",jqobj.obj);
+					var content = $(".accordion_content",jqobj.obj);
+					content.hide();
 					title.click(function(){
 						_this.display($(this).attr("id"));
 					}).mouseoverout("accordion_title_hover");
+					
 					_this.display(title.eq(0).attr("id"));
 				}
 				return this;
@@ -210,7 +221,7 @@
 			
 			var content = jqobj.obj.find(".accordion_content");
 			content.each(function(){
-				if($(this).height() != 0){
+				if(!$(this).is(":hidden")){
 					$(this).stop().height(_height - box.y - all_height);
 				}else{
 					$(this).height(0).hide();

@@ -175,6 +175,7 @@
 					if((this.config.height+"").indexOf("%") > 0){
 						var h = Number((this.config.height+"").replace("%",""));
 						temp = this.container().height()*(h/100);
+						this.container().css("overflow","hidden");
 					}
 					
 					this.setHeight(temp);
@@ -200,6 +201,7 @@
 					if((this.config.width+"").indexOf("%") > 0){
 						var w = Number((this.config.width+"").replace("%",""));
 						temp = this.container().width()*(w/100);
+						this.container().css("overflow","hidden");
 					}
 					
 					this.setWidth(temp);

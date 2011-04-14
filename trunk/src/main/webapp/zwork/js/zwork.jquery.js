@@ -55,26 +55,19 @@
 			
 			if(_event == undefined){
 				//执行操作
-				var timeoutID = current.data("resizEvent_timeoutID");
-				clearTimeout(timeoutID);
-				timeoutID = setTimeout(function(){
-					var width = current.data("resizEvent_oldWidth");
-					var height = current.data("resizEvent_oldHeight");
-					if(width != current.width() || height != current.height()){	//如果有一项改变了，那么代码大小被改变了。
-						current.data("resizEvent_oldWidth",current.width());
-						current.data("resizEvent_oldHeight",current.height());
-							var eventList = current.data("resizEvent_list");
-							if(eventList != undefined){
-								for(var i = 0;i<eventList.length;i++){
-									eventList[i]();	//执行
-								}
-							}
+				var eventList = current.data("resizEvent_list");
+				var width = current.data("resizEvent_oldWidth");
+				var height = current.data("resizEvent_oldHeight");
+				if(eventList != undefined && (width != current.width() || height != current.height())){
+					current.data("resizEvent_oldWidth",current.width());
+					current.data("resizEvent_oldHeight",current.height());
+					for(var i = 0;i<eventList.length;i++){
+						eventList[i]();	//执行
 					}
-					current.children().each(function(){
-						$(this).resizEvent();
-					});
-				},50);
-				current.data("resizEvent_timeoutID",timeoutID);
+				}
+				current.children().each(function(){
+					$(this).resizEvent();
+				});
 			}else{
 				//添加事件
 				var eventList = current.data("resizEvent_list");

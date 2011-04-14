@@ -236,7 +236,7 @@
 					title = $(titleHtml);
 					title.appendTo(jqobj.top_navi_titles);
 					
-					var contentHtml = "<div style='overflow:auto;'></div>";
+					var contentHtml = "<div style='overflow:auto;' class='tab_page'></div>";
 					
 					content = $(contentHtml);
 					content.appendTo(jqobj.center_content);
@@ -323,7 +323,6 @@
 							title.data("loaded",true);	//没有加载过
 							content.load(title.attr("src"),function(){
 								$ui(content,_this);
-								content.resizEvent();
 							});
 						},200);
 					}
@@ -384,10 +383,12 @@
 			jqobj.top_navi_titles.width(_width - jqobj.top_navi_list.width() - jqobj.top_navi_next.width() - jqobj.top_navi_prev.width());
 			
 			jqobj.center.width(_width);
+			$(".tab_page",jqobj.center_content).width(_width - jqobj.center_left.width() - jqobj.center_right.width());
 			jqobj.center_content.width(_width - jqobj.center_left.width() - jqobj.center_right.width());
 			
 			jqobj.bottom.width(_width);
 			jqobj.bottom_center.width(_width - jqobj.bottom_left.width() - jqobj.bottom_right.width());
+			
 		};
 		this.setWidth = setWidth;
 		
@@ -399,9 +400,13 @@
 			
 			var centerHeight = _height - jqobj.top.height() - jqobj.bottom.height();
 			jqobj.center.height(centerHeight);
-			jqobj.center_content.height(centerHeight);
+			
+			$(".tab_page",jqobj.center_content).height(centerHeight);
+			
 			jqobj.center_left.height(centerHeight);
 			jqobj.center_right.height(centerHeight);
+			jqobj.center_content.height(centerHeight);
+
 		};
 		this.setHeight = setHeight;
 		
