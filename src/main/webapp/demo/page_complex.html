@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>稍微复杂的页面</title>
+</head>
+<body>
+<div type="layout">
+	<div position="west" border="true" width="200">
+		<ul class="tree filetree">
+			<li><span class="file"><a href="demo/view_window.html" target="tab" tabid="demo_tab" rel="window">窗口</a></span></li>
+			<li><span class="file"><a href="demo/view_dialog.html" target="tab" tabid="demo_tab" rel="dialog">对话框</a></span></li>
+			<li><span class="file"><a href="demo/view_layout.html" target="tab" tabid="demo_tab" rel="layout">布局框架</a></span></li>
+			<li><span class="file"><a href="demo/view_accordion.html" target="tab" tabid="demo_tab" rel="accordion">滑动菜单</a></span></li>
+			<li><span class="file"><a href="demo/view_tab.html" target="tab" tabid="demo_tab" rel="tab">标签页</a></span></li>
+			<li><span class="file"><a href="demo/view_grid.html" target="tab" tabid="demo_tab" rel="grid">数据表格</a></span></li>
+		</ul>
+	</div>
+	<div position="center">
+		<div type="layout">
+			<div position="center">
+				<div type="tab" id="demo_tab">
+					
+				</div>
+			</div>
+			<div position="south" height="30">
+				您当前打开了 0 个标签页，页面处理完毕。
+				<div type="button" position="right">查询测试</div>
+				<div type="button" position="right" onclick="closeCurrentPage(this);">关闭当前页面</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
