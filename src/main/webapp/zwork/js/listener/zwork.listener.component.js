@@ -1,9 +1,9 @@
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * 添加默认监听
 	 * */
-	$ui.listener.add("div_type_window",function(_c,_p){
+	$z.listener.add("div_type_window",function(_c,_p){
 		var list = _c.flc("window");
 		for(i in list){
 			var window = list[i];
@@ -31,14 +31,14 @@
 			if(config.src == undefined && window.html() != "")
 				config.content = window.html();
 			
-			var zobj = $ui.window(config,_p);
+			var zobj = $z.window(config,_p);
 			if(window.attr("show") || window.attr("show") == "true"){
 				zobj.show();
 			}
 			window.removeAttr("type");
 		}
 	});
-	$ui.listener.add("div_type_dialog",function(_c,_p){
+	$z.listener.add("div_type_dialog",function(_c,_p){
 		var list = _c.flc("dialog");
 		for(i in list){
 			var dialog = list[i];
@@ -65,14 +65,14 @@
 			if(config.src == undefined && dialog.html() != "")
 				config.content = dialog.html();
 			
-			var zobj = $ui.dialog(config,_p);
+			var zobj = $z.dialog(config,_p);
 			if(dialog.attr("show") || dialog.attr("show") == "true"){
 				zobj.show();
 			}
 			dialog.removeAttr("type");
 		}
 	});
-	$ui.listener.add("div_type_button",function(_c,_p){
+	$z.listener.add("div_type_button",function(_c,_p){
 		var list = _c.flc("button");
 		for(i in list){
 			var button = list[i];
@@ -89,14 +89,14 @@
 			config.action = button.attr("action") || "button";
 			config.position = button.attr("position") || undefined;
 			
-			var zobj = $ui.button(config,_p);
+			var zobj = $z.button(config,_p);
 			if(button.attr("show") == undefined || button.attr("show") == "true"){
 				zobj.show();
 			}
 			button.removeAttr("type");
 		}
 	});
-	$ui.listener.add("div_type_progressbar",function(_c,_p){
+	$z.listener.add("div_type_progressbar",function(_c,_p){
 		var list = _c.flc("progressbar");
 		for(i in list){
 			var progressbar = list[i];
@@ -109,7 +109,7 @@
 			config.value = Number(progressbar.attr("value") || 0);
 			config.maxValue = Number(progressbar.attr("maxValue") || 100);
 			
-			var zobj = $ui.progressbar(config,_p);
+			var zobj = $z.progressbar(config,_p);
 			if(progressbar.attr("show") == undefined || progressbar.attr("show") == "true"){
 				zobj.show();
 			}
@@ -117,7 +117,7 @@
 			progressbar.removeAttr("type"); 
 		}
 	});
-	$ui.listener.add("div_type_layout",function(_c,_p){
+	$z.listener.add("div_type_layout",function(_c,_p){
 		var list = _c.flc("layout");
 		for(i in list){
 			var layout = list[i];
@@ -201,14 +201,14 @@
 				if(center.html() != ""){config.center.content = center.html();}
 			}
 			
-			var zobj = $ui.layout(config,_p);
+			var zobj = $z.layout(config,_p);
 			if(layout.attr("show") == undefined || layout.attr("show") == "true"){
 				zobj.show();
 			}
 			layout.removeAttr("type");
 		}
 	});
-	$ui.listener.add("div_type_accordion",function(_c,_p){
+	$z.listener.add("div_type_accordion",function(_c,_p){
 		var list = _c.flc("accordion");
 		for(i in list){
 			var accordion = list[i];
@@ -233,7 +233,7 @@
 			
 			config.items = items;
 			
-			var zobj = $ui.accordion(config,_p);
+			var zobj = $z.accordion(config,_p);
 			
 			if(accordion.attr("show") == undefined || accordion.attr("show") == "true"){
 				zobj.show();
@@ -241,7 +241,7 @@
 			accordion.removeAttr("type");
 		}
 	});
-	$ui.listener.add("div_type_tab",function(_c,_p){
+	$z.listener.add("div_type_tab",function(_c,_p){
 		var list = _c.flc("tab");
 		for(i in list){
 			var tab = list[i];
@@ -252,7 +252,7 @@
 			config.width = tab.attr("width") || "100%";
 			config.height = tab.attr("height") || "100%";
 			
-			config.items = new $ui.hashmap();
+			config.items = new $z.hashmap();
 			var items = tab.children("div");
 			items.each(function(){
 				var cur = $(this);
@@ -266,7 +266,7 @@
 				config.items.put(item.id,item);
 			});
 			
-			var zobj = $ui.tab(config,_p);
+			var zobj = $z.tab(config,_p);
 			if(tab.attr("show") == undefined || tab.attr("show") == "true"){
 				zobj.show();
 			}
@@ -274,7 +274,7 @@
 		}
 	});
 	
-	$ui.listener.add("div_type_grid",function(_c,_p){
+	$z.listener.add("div_type_grid",function(_c,_p){
 		var list = _c.flc("grid");
 		for(i in list){
 			var grid = list[i];
@@ -288,7 +288,7 @@
 			grid.children(".toolbar").remove();
 			config.content = grid.html();
 			
-			var zobj = $ui.grid(config,_p);
+			var zobj = $z.grid(config,_p);
 			if(grid.attr("show") == undefined || grid.attr("show") == "true"){
 				zobj.show();
 			}
@@ -296,7 +296,7 @@
 		}
 	});
 	
-	$ui.listener.add("div_type_link",function(_c,_p){
+	$z.listener.add("div_type_link",function(_c,_p){
 		var list = _c.flc("link");
 		for(i in list){
 			var link = list[i];
@@ -307,7 +307,7 @@
 			config.label = link.attr("label") || "快捷方式";
 			config.ico = link.attr("ico") || undefined;
 			
-			var zobj = $ui.link(config,_p);
+			var zobj = $z.link(config,_p);
 			if(link.attr("show") == undefined || link.attr("show") == "true"){
 				zobj.show();
 			}
@@ -315,7 +315,7 @@
 		}
 	});
 	
-	$ui.listener.add("ul_class_tree",function(_c,_p){
+	$z.listener.add("ul_class_tree",function(_c,_p){
 		$(".tree",_c).each(function(){
 			var inited = $(this).data("inited");
 			if(!inited){
@@ -325,6 +325,38 @@
 				});
 				$(this).data("inited",true);
 			}
+		});
+	});
+	
+	$z.listener.add("button,input",function(_c,_p){
+		$("button,input[type='button'],input[type='submit'],input[type='reset']",_c).each(function(){
+			var button = $(this);
+			var listened = button.data("listened");
+			if(!listened){
+				var config = {};
+				config.container = button.parent();
+				config.id = button.attr("id") || undefined;
+				config.width = button.attr("width") || 100;
+				if(button.html()!=""){config.label = button.html();}
+				config.fitWidth = eval(button.attr("fitWidth") || true);
+				config.active = eval(button.attr("active") || false);
+				config.click = button.attr("fn") || undefined;
+				config.action = button.attr("action") || "button";
+				config.position = button.attr("position") || undefined;
+				
+				var zobj = $z.button(config,_p);
+				zobj.show();
+				zobj.jqobj.obj.insertBefore(button);
+				zobj.jqobj.center.html(button);
+				
+				button.data("listened",true);
+			}
+		});
+	});
+	
+	$z.listener.add("div_class_javascript",function(_c,_p){
+		$(".javascript",_c).each(function(){
+			eval($(this).html());
 		});
 	});
 	

@@ -87,7 +87,7 @@
 		 * firstLevelChildren简称olc，第一级子元素。
 		 * */
 		flc : function(_value , _tag){
-			var container = ["window","layout","button","dialog","accordion","tab","grid"];
+			var container = ["window","layout","dialog","accordion","tab","grid"];
 			
 			if(_tag == undefined){
 				_tag = "type";
@@ -98,7 +98,7 @@
 				obj.children("*").each(function(){
 					var cur = $(this);
 					var value = cur.attr(_tag);
-					if(value && value == _value){
+					if(value && value == _value && cur.is("div")){
 						childrenList.push(cur);
 					}else {
 						var has = false;
@@ -189,6 +189,30 @@
 			box.x = box.marginX + box.paddingX + box.borderX;
 			
 			return box;
+		},
+		
+		/**
+		 * 查找父级别容器，tab页或window
+		 * @param _type
+		 * @returns
+		 */
+		findParentContainer : function(){
+			var current = $(this);
+			var container = undefined;
+			var find = function(_obj){
+				if(_obj.get(0) != undefined){
+					var parent = _obj.parent();
+					if(parent.hasClass("zwork-window") 
+					|| parent.hasClass("tab_page") 
+					|| parent.hasClass("zwork-tab")){
+						container = parent;
+					}else if(parent.get(0) != undefined){
+						find(parent);
+					}
+				}
+			};
+			find(current);
+			return container;
 		}
 		
 	});

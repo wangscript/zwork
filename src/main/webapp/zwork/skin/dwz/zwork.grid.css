@@ -1,8 +1,22 @@
 .zwork-grid{width: 400px;height: 300px;margin-right: 0px;}
 .zwork-grid .grid_toolbar{height: 28px;line-height: 28px;background: url("image/grid/bg.gif");overflow: hidden;}
-.zwork-grid .grid_content{height: 250px;overflow: auto;}
-.zwork-grid .grid_content table thead tr{height: 22px;background: url("image/grid/content/bg.png");}
+.zwork-grid .grid_content{height: 250px;overflow: auto;position: relative;}
+.zwork-grid .grid_content .grid_menu_ico{background: url("image/grid/content/ico.png");display: none;}
+.zwork-grid .grid_content .grid_headbg{position: absolute;z-index: -1;height: 22px;background: url("image/grid/content/bg.png");width: 100%;top:0px;left:0px;}
+.zwork-grid .grid_content table thead tr{height: 22px;background: url("image/grid/content/bg.png");cursor: pointer;}
+.zwork-grid .grid_content table thead tr th{border-bottom: 1px solid #B4D1D3;border-right: 1px solid #B4D1D3;border-left: 1px solid #ffffff;border-top: 1px solid #ffffff;}
+.zwork-grid .grid_content table thead tr .checkbox{background: url("image/grid/content/cb.gif") center center no-repeat;cursor: pointer;}
+.zwork-grid .grid_content table thead .selected .checkbox{background: url("image/grid/content/cb_ck.gif") center center no-repeat;}
+.zwork-grid .grid_content table thead tr .toggle{background: url("image/grid/content/sh.gif") center center no-repeat;}
+.zwork-grid .grid_content table thead .noallselected .checkbox{background: url("image/grid/content/cb_na.gif") center center no-repeat;}
 .zwork-grid .grid_content table tbody tr{height: 22px;}
+.zwork-grid .grid_content table tbody tr td{border-bottom: 1px solid #B4D1D3;border-right: 1px solid #B4D1D3;border-left: 1px solid #ffffff;border-top: 1px solid #ffffff;}
+.zwork-grid .grid_content table tbody tr .checkbox{background: url("image/grid/content/cb.gif") center center no-repeat;cursor: pointer;}
+.zwork-grid .grid_content table tbody .selected .checkbox{background: url("image/grid/content/cb_ck.gif") center center no-repeat;}
+.zwork-grid .grid_content table tbody .odd{background:#FFFFFF;}
+.zwork-grid .grid_content table tbody .even{background:#f9fcfd;}
+.zwork-grid .grid_content table tbody .hover{background:#EEF4F4;}
+.zwork-grid .grid_content table tbody .selected{background:#EEF4F4;}
 .zwork-grid .grid_footbar{height: 22px;line-height: 22px;background: url("image/grid/bg.gif");overflow: hidden;text-align: right;}
 .zwork-grid .grid_footbar ul{list-style: none;margin: 0;padding: 0;}
 .zwork-grid .grid_footbar ul li{float: right;height: 16px;line-height: 16px;width: 16px;text-align: center;margin: 3px;}

@@ -5,7 +5,7 @@
  * 	对话框对象，继承自window。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * messager实例化入口
@@ -22,7 +22,7 @@
 	 * messager对象
 	 * */
 	messager.messager = function(_config,_parent){
-		$ui.extend(this,$ui.window(_config,_parent));	//继承zwork.window
+		$z.extend(this,$z.window(_config,_parent));	//继承zwork.window
 		
 		//配置对象
 		var config = {
@@ -50,7 +50,7 @@
 		//被父类回调
 		this.initQueue.push(function(_this){
 			
-			_this.content($ui.html.messager);
+			_this.content($z.html.messager);
 
 			_this.title(config.title);
 			_this.top((_this.container().height() - _this.config.height)/2);
@@ -97,7 +97,7 @@
 		if(_title != undefined)
 			config.title = _title;
 		$.extend(config, _config);
-		$ui.messager(config).show();
+		$z.messager(config).show();
 	};
 	
 	/**
@@ -117,10 +117,10 @@
 			config.title = _title;
 		config.callback = _callback;
 		$.extend(config, _config);
-		$ui.messager(config).show();
+		$z.messager(config).show();
 	};
 	
 	//注册到zwork
-	$ui.messager = messager;
+	$z.messager = messager;
 	
 })(zwork,jQuery);

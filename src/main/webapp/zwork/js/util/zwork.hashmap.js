@@ -4,7 +4,7 @@
  * 	基于对象的简单map
  */
 
-(function($ui, $) {
+(function($z, $) {
 
 	/**
 	 * hashmap对象，用function构建
@@ -29,7 +29,7 @@
 				this.length++;
 			}
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -43,7 +43,7 @@
 			if (this.container[objName])
 				return this.container[objName];
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -60,7 +60,7 @@
 			}
 			return false;
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -76,7 +76,7 @@
 				this.length--;
 			}
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -95,7 +95,7 @@
 			}
 			return null;
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -108,7 +108,7 @@
 		try {
 			this.clear();
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -123,7 +123,7 @@
 			this.container = {};
 			this.length = 0;
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
@@ -147,17 +147,17 @@
 	hashmap.prototype.call = function(fun) {
 		try {
 			if (!fun)
-				$ui.debug("未定义处理函数");
+				$z.debug("未定义处理函数");
 			for ( var p in this.container) {
 				var ov = this.container[p];
 				fun(ov,p);
 			}
 		} catch (e) {
-			$ui.debug( e );
+			$z.debug( e );
 		}
 	};
 
 	//注册给zwork
-	$ui.hashmap = hashmap;
+	$z.hashmap = hashmap;
 
 })(zwork, jQuery);

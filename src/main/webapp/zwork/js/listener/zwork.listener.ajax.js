@@ -1,6 +1,6 @@
-(function($ui){
+(function($z){
 	
-	$ui.listener.add("a_target_ajax",function(_c,_p){
+	$z.listener.add("a_target_ajax",function(_c,_p){
 		$("a[target='ajax']",_c).each(function(){
 			var current = $(this);
 			current.unbind("click");
@@ -16,15 +16,15 @@
 					container = $(document);
 				
 				$("#"+rel,container).load(href,function(){
-					$ui($(this),_p);
+					$z($(this),_p);
 				});
 				return false;
 			});
 		});
 	});
 	
-	$ui.listener.add("a_target_tab",function(_c,_p){
-		var systab = $ui.find($($ui.config.systab));
+	$z.listener.add("a_target_tab",function(_c,_p){
+		var systab = $z.find($($z.config.systab));
 		if(systab!=undefined){
 			
 			$("a[target='tab']",_c).each(function(){
@@ -46,8 +46,46 @@
 			});
 			
 		}else{
-			$ui.debug("默认的tab没有找到！");
+			$z.debug("默认的tab没有找到！");
 		}
+	});
+	
+	$z.listener.add("a_target_window",function(_c,_p){
+		$("a[target='window']",_c).each(function(){
+			var current = $(this);
+			current.unbind("click");
+			current.bind("click",function(){
+				$z.window().show();
+				return false;
+			});
+			
+		});
+	});
+	
+	$z.listener.add("form_submit",function(_c,_p){
+		$("form" , _c).each(function(){
+			var current = $(this);
+			var listened = current.data("listened");
+			if(!listened){
+				current.get(0).submit = function(){
+					if(current.hasClass("validate")){
+						if (!current.valid()) {
+							return false;
+						}
+					}
+					$.ajax({
+						type: current.get(0).method || 'POST',
+						url:current.attr("action"),
+						data:current.serializeArray(),
+						cache: false,
+						success: undefined,
+						error: undefined
+					});
+					return false;
+				};
+				current.data("listened",true);
+			}
+		});
 	});
 	
 })(zwork);
