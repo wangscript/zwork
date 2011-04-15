@@ -5,7 +5,7 @@
  * 	窗口容器
  */
 
-(function($,$ui){
+(function($,$z){
 	
 	/**
 	 * window实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * window对象
 	 * */
 	window.window = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
@@ -118,10 +118,10 @@
 		 * */
 		var initjqobj = function(){
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.window);
+				jqobj.obj = $($z.html.window);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.window).html());
+				jqobj.obj.html($($z.html.window).html());
 			}
 			jqobj.obj.addClass("zwork-window");
 			
@@ -279,6 +279,9 @@
 			_this.resizable(_this.config.resizable);
 			_this.scroll(_this.config.scroll);
 			
+			_this.top((_this.container().height() - jqobj.obj.height())/2);
+			_this.left((_this.container().width() - jqobj.obj.width())/2);
+			
 		});
 		
 		/**
@@ -293,7 +296,7 @@
 				this.config.content = _content;
 				if(jqobj.obj != undefined){
 					jqobj.center_content.html(_content);
-					$ui(jqobj.center_content,this);
+					$z(jqobj.center_content,this);
 				}
 				return this;
 			}
@@ -313,7 +316,7 @@
 				if(config.mask && jqobj.obj != undefined){
 					this.container($("body"));
 					
-					var maskObj = $($ui.html.mask);
+					var maskObj = $($z.html.mask);
 					maskObj.attr("uid",this.uid).appendTo($("body"));
 					
 					var ctn = this.container();
@@ -371,7 +374,7 @@
 						jqobj.center_content.children("iframe").attr("src",config.src);
 					}else{
 						jqobj.center_content.load(config.src,function(){
-							$ui(jqobj.center_content,obj);
+							$z(jqobj.center_content,obj);
 						});
 					}
 				}
@@ -508,7 +511,7 @@
 				
 				var windows = obj.container().children(".zwork-window");
 				windows.each(function(){
-					if(!$ui.find($(this)).mask()){
+					if(!$z.find($(this)).mask()){
 						$(this).find(".loading").show();
 					}
 				});
@@ -570,7 +573,7 @@
 					topWindow = $(this);
 				}
 			});
-			return $ui.find(topWindow);
+			return $z.find(topWindow);
 		};
 		this.findtop = findtop;
 		
@@ -790,6 +793,6 @@
 		
 	};
 	
-	$ui.window = window;
+	$z.window = window;
 	
 })(jQuery,zwork);

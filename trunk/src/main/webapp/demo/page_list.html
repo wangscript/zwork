@@ -7,28 +7,45 @@
 <body>
 <div type="layout" class="page_list">
 
-	<div position="north" height="100" border="false" class="page_search">
-		<div style="height: 70px;" class="page_filed">
-			
+	<div position="north" height="62" border="false" class="page_search">
+		<form action="">
+		<div style="height: 32px;" class="page_field">
+			<div class="field row4">
+				<div class="label">姓名关键词</div>
+				<input type="text">
+			</div>
+			<div class="field row4">
+				<div class="label">性别</div>
+				<input type="radio" name="sex" value="1"/>男
+				<input type="radio" name="sex" value="2"/>女
+				<input type="radio" name="sex" value="0"/>不限制
+			</div>
+			<div class="field row2">
+				<div class="label">身份证</div>
+				<input type="text" style="width: 300px;">
+			</div>
 		</div>
 		<div style="height: 30px;line-height: 30px;" class="page_button">
-			<div type="button" position="right">高级搜索</div>
-			<div type="button" position="right">搜索</div>
+			<div type="button" position="right">
+				<a target="window" href="demo/page_add.html">高级搜索</a>
+			</div>
+			<div type="button" action="submit" position="right">搜索</div>
+			<div type="button" action="reset" position="right">清空查询条件</div>
 		</div>
+		</form>
 	</div>
 	
 	<div position="center" class="page_content">
 	
 		<div type="grid" style="border: 0;">
 			<div class="toolbar">
-				<div type='button' position='left'><img src='image/grid/add.gif' align='absmiddle'/>增加</div>
-				<div type='button' position='left'><img src='image/grid/delete.gif' align='absmiddle'/>删除</div>
-				<div type='button' position='left'><img src='image/grid/edit.gif' align='absmiddle'/>修改</div>
+				<div type='button' position='left'>增加</div>
+				<div type='button' position='left'>删除</div>
+				<div type='button' position='left'>修改</div>
 			</div>
-			<table cellpadding="0" cellspacing="0" border="0" width="872">
+			<table cellpadding="0" cellspacing="0" border="0" width="850">
 				<thead>
 					<tr>
-						<th width="22"></th>
 						<th width="100">编号</th>
 						<th width="200">名称</th>
 						<th width="50">代码</th>
@@ -39,7 +56,6 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -48,7 +64,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -57,7 +72,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -66,7 +80,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -75,7 +88,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -84,7 +96,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -93,7 +104,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -102,7 +112,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -111,7 +120,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>
@@ -120,7 +128,6 @@
 						<td>2011.02.25</td>
 					</tr>
 					<tr>
-						<td></td>
 						<td>10000</td>
 						<td>盛世花城</td>
 						<td>SS</td>

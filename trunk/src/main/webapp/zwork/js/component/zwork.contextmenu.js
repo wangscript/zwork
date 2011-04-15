@@ -5,7 +5,7 @@
  * 	按钮对象，继承自view。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * contextmenu实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,14 +28,14 @@
 	 * contextmenu对象
 	 * */
 	contextmenu.contextmenu = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
 			id : undefined,
 			container : $("body"),	//所在的容器
 			containerStyle:undefined,	//容器的样式
-			items:new $ui.hashmap(),
+			items:new $z.hashmap(),
 			/**
 			 * item结构
 			 * {
@@ -85,7 +85,7 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var initjqobj = function(){
-			jqobj.obj = $($ui.html.contextmenu);
+			jqobj.obj = $($z.html.contextmenu);
 			jqobj.top = jqobj.obj.children(".contextmenu_top");
 			jqobj.top_left = jqobj.top.children(".contextmenu_left");
 			jqobj.top_center = jqobj.top.children(".contextmenu_center");
@@ -185,28 +185,37 @@
 						var ico = item.children(".contextmenu_ico");
 						var more = item.children(".contextmenu_more");
 						
+						//设置ico
+						if(_item.ico!=undefined)
+							ico.css("background-image",_item.ico);
+						else{
+							ico.css("background-image","");
+						}
+						
+						//设置label
 						if(_item.children == undefined)more.hide();
 						label.html(_item.label);
 						var rw = label[0].scrollWidth;
 						label.width(rw);
 						item.width(ico.box().width + label.width() + more.width());
 						
+						//子菜单
 						var childrenMenu = undefined;
-						
 						if(_item.children != undefined){
-							childrenMenu = $ui.contextmenu({
+							childrenMenu = $z.contextmenu({
 								items:_item.children
 							},_this);
 						}
 
-						item.mouseoverout("contextmenu_item_hover").click(function(e){
+						//鼠标进过的事件
+						item.mouseoverout("contextmenu_item_hover").bind("click",function(e){
 							if(_item.fn!=undefined && _item.children == undefined){
 								_item.fn(config.trigger);
 								_this.hide();
 							}
 							return false;
 						}).mouseover(function(e){
-							var child = $ui.find(_this.uid).children;
+							var child = $z.find(_this.uid).children;
 							if(child != undefined){
 								child.call(function(obj){
 									obj.hide();
@@ -227,10 +236,6 @@
 								childrenMenu.top(top + _this.top()).left(_this.left()+_this.width() - 6).show();
 							}
 							
-						}).mouseout(function(){
-							if(childrenMenu){
-								//childrenMenu.hide();
-							}
 						});
 						
 						
@@ -274,7 +279,14 @@
 		this.fitWidth = fitWidth;
 		
 		var update = function(_item){
-			
+			var _this = this;
+			if(_item!=undefined){
+				var id = _item.id;
+				var item = config.items.get(id);
+				if(item!=undefined){
+					$.extend(item,_item);
+				};
+			}
 		};
 		this.update = update;
 		
@@ -386,6 +398,6 @@
 	};
 	
 	//注册到zwork
-	$ui.contextmenu = contextmenu;
+	$z.contextmenu = contextmenu;
 	
 })(zwork,jQuery);

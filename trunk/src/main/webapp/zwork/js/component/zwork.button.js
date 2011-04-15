@@ -5,7 +5,7 @@
  * 	按钮对象，继承自view。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * button实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * button对象
 	 * */
 	button.button = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
@@ -77,10 +77,10 @@
 		 * */
 		var initjqobj = function(){
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.button);
+				jqobj.obj = $($z.html.button);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.button).html());
+				jqobj.obj.html($($z.html.button).html());
 			}
 			jqobj.obj.addClass("zwork-button");
 			
@@ -129,7 +129,7 @@
 				config.label = _label;
 				if(jqobj.obj != undefined){
 					jqobj.center.html(_label);
-					$ui(jqobj.center,this);
+					$z(jqobj.center,this);
 					this.width(config.width);
 				}
 				return this;
@@ -249,6 +249,6 @@
 	};
 	
 	//注册到zwork
-	$ui.button = button;
+	$z.button = button;
 	
 })(zwork,jQuery);

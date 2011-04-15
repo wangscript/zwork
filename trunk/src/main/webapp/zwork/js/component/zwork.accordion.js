@@ -5,7 +5,7 @@
  * 	滑动菜单，类似手风琴性质，只能有一个显示。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * accordion实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * accordion对象
 	 * */
 	accordion.accordion = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
@@ -65,10 +65,10 @@
 		 * */
 		var initjqobj = function(){
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.accordion);
+				jqobj.obj = $($z.html.accordion);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.accordion).html());
+				jqobj.obj.html($($z.html.accordion).html());
 			}
 			jqobj.obj.addClass("zwork-accordion");
 		};
@@ -163,7 +163,7 @@
 					for(i in _items){	//构建html
 						var item = _items[i];
 						var itemobj = {
-							id : $ui.util.guid(),
+							id : $z.util.guid(),
 							src : undefined,
 							content:undefined,
 							title:undefined,
@@ -240,6 +240,6 @@
 	};
 	
 	//注册到zwork
-	$ui.accordion = accordion;
+	$z.accordion = accordion;
 	
 })(zwork,jQuery);

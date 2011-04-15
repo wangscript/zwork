@@ -9,12 +9,12 @@
  * 对象。它将内存中的对象用树形的结构组织起来。
  */
 
-(function($, $ui) {
+(function($, $z) {
 
 	/**
 	 * 内存管理器
 	 */
-	$ui.memory = {
+	$z.memory = {
 
 		/**
 		 * 树形内存结构
@@ -26,7 +26,7 @@
 				obj : {
 					uid : "root",
 					pid : "root",
-					children : new $ui.hashmap()
+					children : new $z.hashmap()
 				}
 			},
 
@@ -41,7 +41,7 @@
 				var parentObj = this.find(_pid);
 				var children = parentObj.children;
 				if (children == undefined) {
-					children = new $ui.hashmap();
+					children = new $z.hashmap();
 				}
 				children.put(_obj.uid, _obj);
 				parentObj.children = children;
@@ -71,10 +71,10 @@
 					
 				};
 
-				if ($ui.memory.tree.root.obj.uid == _uid) {
-					result = $ui.memory.tree.root.obj;
+				if ($z.memory.tree.root.obj.uid == _uid) {
+					result = $z.memory.tree.root.obj;
 				} else {
-					children($ui.memory.tree.root.obj.children);
+					children($z.memory.tree.root.obj.children);
 				}
 				
 				return result;
@@ -114,7 +114,7 @@
 			 * */
 			add:function(_pid,_sid){
 				if(_pid == _sid){
-					$ui.debug("不能自己与自己建立关系");
+					$z.debug("不能自己与自己建立关系");
 				}else{
 					var obj = {};
 					obj.pid = _pid;

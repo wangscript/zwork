@@ -8,9 +8,15 @@
 <form action="">
 <div>
 <input type="text"/><br/>
+<button onclick="closeCurrentPage(this);" type="button">关闭当前标签页</button>
+
+<input type="button" value="按钮"/>
+<input type="submit"/>
+<input type="reset"/>
+
 <div type="button" action="submit">提交</div>
 <div type="button" action="reset">重写</div>
-<div type="button" fn="$ui.messager.alert('被点击')">普通按钮</div>
+<div type="button" fn="$z.messager.alert('被点击');">普通按钮</div>
 </div>
 </form>
 </body>

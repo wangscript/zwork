@@ -4,12 +4,12 @@
  * 	工具箱，提供一些工具函数。
  */
 
-(function($ui, $) {
+(function($z, $) {
 
 	/**
 	 * util对象
 	 * */
-	$ui.util = {
+	$z.util = {
 			
 		/**
 		 * 获取全球唯一码
@@ -64,9 +64,19 @@
 		system_click_event:function(){
 			$(document).bind("click",function(){
 				$(".zwork-contextmenu").each(function(){
-					$ui.find($(this)).hide();
+					$z.find($(this)).hide();
 				});
 			});
+		},
+		
+		/**
+		 * 获取当前区域
+		 * 参数	当前对象
+		 * 返回	当前对象所在的容器
+		 */
+		findCurrent:function(_this){
+			var current = $(_this);
+			
 		}
 	
 	};

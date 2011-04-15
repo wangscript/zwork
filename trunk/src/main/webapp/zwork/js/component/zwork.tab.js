@@ -5,7 +5,7 @@
  * 	按钮对象，继承自view。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * button实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * button对象
 	 * */
 	tab.tab = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		this.loadTimeId = undefined;
 		//配置对象
 		var config = {
@@ -37,7 +37,7 @@
 			containerStyle:undefined,	//容器的样式
 			width:"100%",	//宽度
 			height:"100%",	//高度
-			items : new $ui.hashmap(),	//项目
+			items : new $z.hashmap(),	//项目
 			/**
 			 * 一个map对象存储当前tab中的所有标签页信息，key是当前标签页的id，id不能为空，为空默认以_blank命名。
 			 * value的结构
@@ -63,7 +63,7 @@
 			_this.items(config.items);
 			
 			if(config.contextmenu_title == undefined){
-				config.contextmenu_title = $ui.contextmenu();
+				config.contextmenu_title = $z.contextmenu();
 				config.contextmenu_title.add({
 					id:"closeCurrent",
 					label:"关闭当前",
@@ -132,10 +132,10 @@
 		 * */
 		var initjqobj = function(){
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.tab);
+				jqobj.obj = $($z.html.tab);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.tab).html());
+				jqobj.obj.html($($z.html.tab).html());
 			}
 			jqobj.obj.addClass("zwork-tab");
 			
@@ -266,7 +266,7 @@
 				content.attr("id",_item.id);
 				if(_item.content!=undefined){
 					content.html(_item.content);
-					$ui(content,_this);
+					$z(content,_this);
 				}
 				
 				title.click(function(){
@@ -279,7 +279,7 @@
 				_this.open(_item.id);
 				
 				if(config.contextmenu_changtab == undefined){
-					config.contextmenu_changtab = $ui.contextmenu();
+					config.contextmenu_changtab = $z.contextmenu();
 				}
 				config.contextmenu_changtab.add({
 					id:_item.id,
@@ -322,7 +322,7 @@
 						_this.loadTimeId = setTimeout(function(){
 							title.data("loaded",true);	//没有加载过
 							content.load(title.attr("src"),function(){
-								$ui(content,_this);
+								$z(content,_this);
 							});
 						},200);
 					}
@@ -367,7 +367,7 @@
 			
 			if(title.get(0)!=undefined){
 				content.load(title.attr("src"),function(){
-					$ui(content,_this);
+					$z(content,_this);
 				});
 			}
 		};
@@ -421,6 +421,6 @@
 	};
 	
 	//注册到zwork
-	$ui.tab = tab;
+	$z.tab = tab;
 	
 })(zwork,jQuery);

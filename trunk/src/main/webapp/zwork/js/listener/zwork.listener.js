@@ -4,7 +4,7 @@
  * 	监听器，对html的监听，从而实现了html扩展。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * 监听器
@@ -18,7 +18,7 @@
 		var listener = function(_container,_parent){
 			
 			if(_parent == undefined){
-				_parent = $ui.memory.tree.root.obj;
+				_parent = $z.memory.tree.root.obj;
 			}
 
 			for(i in listener.map.container){
@@ -80,10 +80,10 @@
 		//禁用的监听器列表
 		listener.disabled = new Array();
 		//监听器列表
-		listener.map = new $ui.hashmap();
+		listener.map = new $z.hashmap();
 		
 		//注册给zwork
-		$ui.listener = listener;
+		$z.listener = listener;
 		
 	})();
 	

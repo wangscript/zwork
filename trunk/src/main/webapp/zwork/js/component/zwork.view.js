@@ -4,15 +4,15 @@
  * 	基类对象，所有的对象都集成自这个类，它包含了zwork组件的一些公共的基础属性和方法。
  */
 
-(function($,$ui){
+(function($,$z){
 	
 	/**
 	 * view对象
 	 * */
-	$ui.view = function(){
+	$z.view = function(){
 		
 		//当前对象的uid
-		var uid = $ui.util.guid();
+		var uid = $z.util.guid();
 		this.uid = uid;
 		
 		this.initQueue = new Array();
@@ -261,7 +261,7 @@
 		 * 返回	当前对象（对象）
 		 * */
 		var hide = function(){
-			var children = $ui.find(this.uid).children;	//关闭子对象
+			var children = $z.find(this.uid).children;	//关闭子对象
 			if(children != undefined){
 				children.call(function(obj){
 					obj.hide();

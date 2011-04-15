@@ -4,7 +4,7 @@
  * 	各个组件的html结构。
  */
 
-(function($ui) {
+(function($z) {
 
 	/**
 	 * html对象
@@ -165,6 +165,6 @@
 	};
 	
 	//注册给zwork
-	$ui.html = html;
+	$z.html = html;
 
 })(zwork);

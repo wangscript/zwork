@@ -5,7 +5,7 @@
  * 	按钮对象，继承自view。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * button实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * button对象
 	 * */
 	progressbar.progressbar = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
@@ -65,10 +65,10 @@
 		 * */
 		var initjqobj = function(){
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.progressbar);
+				jqobj.obj = $($z.html.progressbar);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.progressbar).html());
+				jqobj.obj.html($($z.html.progressbar).html());
 			}
 			jqobj.obj.addClass("zwork-progressbar");
 			
@@ -130,6 +130,6 @@
 	};
 	
 	//注册到zwork
-	$ui.progressbar = progressbar;
+	$z.progressbar = progressbar;
 	
 })(zwork,jQuery);

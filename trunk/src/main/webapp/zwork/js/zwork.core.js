@@ -23,7 +23,7 @@
 		};
 		
 		//注册给window，提供俩个调用变量。
-		window.$ui = window.zwork = zwork;
+		window.$z = window.zwork = zwork;
 		
 		/**
 		 * 初始化方法
@@ -41,20 +41,20 @@
 			//设置用户自定义config
 			$.extend(config,_config);
 			//处理config
-			$ui.config.init(config);
+			$z.config.init(config);
 			
 			if(config.ajax_animate)
-				$ui.ajaxanimate.init();
+				$z.ajaxanimate.init();
 			
-			$ui.util.fitbody();
-			$ui.util.close_default_contextmenu();	//关闭默认的右键菜单
-			$ui.util.document_keypress();	//监听按键
-			$ui.util.system_click_event();
+			$z.util.fitbody();
+			$z.util.close_default_contextmenu();	//关闭默认的右键菜单
+			$z.util.document_keypress();	//监听按键
+			$z.util.system_click_event();
 			
 			if(config.listen != undefined)
-				$ui(config.listen);
+				$z(config.listen);
 			
-			$ui.debug("当前版本 " + $ui.version);
+			$z.debug("当前版本 " + $z.version);
 			
 		};
 		
@@ -66,10 +66,10 @@
 		zwork.find = function(_obj){
 			if(_obj!=undefined){
 				if(typeof _obj == "string"){
-					return $ui.memory.tree.find(_obj);
+					return $z.memory.tree.find(_obj);
 				}else{
 					var uid = _obj.data("uid");
-					return $ui.memory.tree.find(uid);
+					return $z.memory.tree.find(uid);
 				}
 			}else{
 				return undefined;

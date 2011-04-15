@@ -4,7 +4,7 @@
  * 	调试模式管理器。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * debug对象
@@ -18,12 +18,12 @@
 		 * 返回	无
 		 * */
 		var debug = function(_msg,_type){
-			if($ui.config.debug)
+			if($z.config.debug)
 				alert(_msg);
 		};
 		
 		//注册到zwork
-		$ui.debug = debug;
+		$z.debug = debug;
 		
 		/**
 		 * 调试：提示信息
@@ -31,7 +31,7 @@
 		 * 返回	无
 		 * */
 		debug.info = function(_msg){
-			if($ui.config.debug)
+			if($z.config.debug)
 				alert(_msg);
 		};
 		
@@ -41,7 +41,7 @@
 		 * 返回	无
 		 * */
 		debug.warn = function(_msg){
-			if($ui.config.debug)
+			if($z.config.debug)
 				alert(_msg);
 		};
 		
@@ -51,7 +51,7 @@
 		 * 返回	无
 		 * */
 		debug.error = function(_msg){
-			if($ui.config.debug)
+			if($z.config.debug)
 				alert(_msg);
 		};
 		
@@ -61,7 +61,7 @@
 		 * 返回	无
 		 * */
 		debug.exception = function(_msg){
-			if($ui.config.debug)
+			if($z.config.debug)
 				alert(_msg);
 		};
 		

@@ -5,7 +5,7 @@
  * 	布局对象，布局对象吧一个容器或区域分为五个不同的区域，分别是，东西南北和中，继承自view。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * button实例化入口
@@ -20,7 +20,7 @@
 		}else{
 			pid = _parent.uid;
 		}
-		$ui.memory.tree.add(pid,obj);
+		$z.memory.tree.add(pid,obj);
 		return obj;
 	};
 	
@@ -28,7 +28,7 @@
 	 * button对象
 	 * */
 	layout.layout = function(_config){
-		$ui.extend(this,new $ui.view());	//继承zwork.view
+		$z.extend(this,new $z.view());	//继承zwork.view
 		
 		//配置对象
 		var config = {
@@ -147,10 +147,10 @@
 			_this.blockOriginal("east",config.east.original,_this);
 			
 			if(config.original == undefined){
-				jqobj.obj = $($ui.html.layout);
+				jqobj.obj = $($z.html.layout);
 			}else{
 				jqobj.obj = config.original;
-				jqobj.obj.html($($ui.html.layout).html());
+				jqobj.obj.html($($z.html.layout).html());
 			}
 			jqobj.obj.addClass("zwork-layout");
 			
@@ -231,6 +231,7 @@
 			var eastButton = $(".layout_button",jqobj.east.border);
 			
 			var repaintMiddle = function(){
+				jqobj.center.obj.show();
 				_this.width(config.width);
 				_this.height(config.height);
 				_this.container().resizEvent();
@@ -762,7 +763,7 @@
 		        			iframe.attr("src",_src);
 		        		}else{
 		        			jqobj.north.content.load(_src,function(){
-		        				$ui(jqobj.north.content,obj);
+		        				$z(jqobj.north.content,obj);
 		        			});
 		        		}
 		        		break;
@@ -774,7 +775,7 @@
 		        			iframe.attr("src",_src);
 		        		}else{
 		        			jqobj.south.content.load(_src,function(){
-		        				$ui(jqobj.south.content,obj);
+		        				$z(jqobj.south.content,obj);
 		        			});
 		        		}
 		        		break;
@@ -786,7 +787,7 @@
 		        			iframe.attr("src",_src);
 		        		}else{
 		        			jqobj.center.content.load(_src,function(){
-		        				$ui(jqobj.center.content,obj);
+		        				$z(jqobj.center.content,obj);
 		        			});
 		        		}
 		        		break;
@@ -798,7 +799,7 @@
 		        			iframe.attr("src",_src);
 		        		}else{
 		        			jqobj.west.content.load(_src,function(){
-		        				$ui(jqobj.west.content,obj);
+		        				$z(jqobj.west.content,obj);
 		        			});
 		        		}
 		        		break;
@@ -810,7 +811,7 @@
 		        			iframe.attr("src",_src);
 		        		}else{
 		        			jqobj.east.content.load(_src,function(){
-		        				$ui(jqobj.east.content,obj);
+		        				$z(jqobj.east.content,obj);
 		        			});
 		        		}
 		        		break;
@@ -852,35 +853,35 @@
 		        		config.north.content = _content;
 		        		if(jqobj.obj!=undefined){
 		        			jqobj.north.content.html(_content);
-		        			$ui(jqobj.north.content,obj);
+		        			$z(jqobj.north.content,obj);
 		        		}
 		        		break;
 		        	case "south" : 
 		        		config.south.content = _content;
 		        		if(jqobj.obj!=undefined){
 		        			jqobj.south.content.html(_content);
-		        			$ui(jqobj.south.content,obj);
+		        			$z(jqobj.south.content,obj);
 		        		}
 		        		break;
 		        	case "center" : 
 		        		config.center.content = _content;
 		        		if(jqobj.obj != undefined){
 		        			jqobj.center.content.html(_content);
-		        			$ui(jqobj.center.content,obj);
+		        			$z(jqobj.center.content,obj);
 		        		}
 		        		break;
 		        	case "west" : 
 		        		config.west.content = _content;
 		        		if(jqobj.obj!=undefined){
 		        			jqobj.west.content.html(_content);
-		        			$ui(jqobj.west.content,obj);
+		        			$z(jqobj.west.content,obj);
 		        		}
 		        		break;
 		        	case "east" : 
 		        		config.east.content = _content;
 		        		if(jqobj.obj!=undefined){
 		        			jqobj.east.content.html(_content);
-		        			$ui(jqobj.east.content,obj);
+		        			$z(jqobj.east.content,obj);
 		        		}
 		        		break;
 		        	default:
@@ -1288,8 +1289,8 @@
 			var borderWidth = 0;
 			if(config.center.title){titleHeight = jqobj.center.title.height();}
 			jqobj.center.content.height(centerHeight - titleHeight);	//中间内容区域的高度
-			titleHeight = 0;
 			
+			titleHeight = 0;
 			if(config.north.title){titleHeight = jqobj.north.title.height();}
 			if(config.north.border){borderWidth = jqobj.north.border.height();}
 			jqobj.north.content.height(jqobj.north.obj.height() - titleHeight - borderWidth);	//北部内容区域的高度
@@ -1334,6 +1335,6 @@
 	};
 	
 	//注册到zwork
-	$ui.layout = layout;
+	$z.layout = layout;
 	
 })(zwork,jQuery);

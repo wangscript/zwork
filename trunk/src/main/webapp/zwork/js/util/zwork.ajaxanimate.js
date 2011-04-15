@@ -1,6 +1,6 @@
-(function($,$ui){
+(function($,$z){
 	
-	$ui.ajaxanimate = {
+	$z.ajaxanimate = {
 		obj : undefined,
 		animate : false,
 		timeId : undefined,
@@ -12,7 +12,7 @@
 				_this.animate = false;
 				_this.obj.fadeOut();
 				
-				var zobj = $ui.find($("#ajaxanimate_progressbar"));
+				var zobj = $z.find($("#ajaxanimate_progressbar"));
 				zobj.value(100).maxValue(100);
 				
 			},200);
@@ -26,7 +26,7 @@
 				_this.animate = true;
 				_this.obj.fadeIn();
 				
-				var zobj = $ui.find($("#ajaxanimate_progressbar"));
+				var zobj = $z.find($("#ajaxanimate_progressbar"));
 				zobj.value(0).maxValue(100);
 				
 				_this.progressUpdate();
@@ -36,9 +36,9 @@
 		init : function(){
 			var _this = this;
 			
-			_this.obj = $($ui.html.ajaxanimate);
+			_this.obj = $($z.html.ajaxanimate);
 			_this.obj.appendTo($("body"));
-			$ui($("body"));
+			$z($("body"));
 			_this.obj.hide();
 			
 			_this.obj.bind("ajaxStart",function(e){
@@ -52,7 +52,7 @@
 			
 			var _this = this;
 			
-			var zobj = $ui.find($("#ajaxanimate_progressbar"));
+			var zobj = $z.find($("#ajaxanimate_progressbar"));
 			
 			var update = function(){
 				zobj.value(zobj.value() + 2);

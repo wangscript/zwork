@@ -5,14 +5,43 @@
 <title>添加页面</title>
 </head>
 <body>
-<form action="" style="height: 100%;width: 100%;">
+
+<form action="" class="validate">
 <div type="layout" class="page_add">
 	<div position="center" class="page_content">
-		
+		<div class="field row2">
+			<div class="label">姓名</div>
+			<input type="text" name="name"  validate="{required:true}"/>
+		</div>
+		<div class="field row2">
+			<div class="label">性别</div>
+			<input type="radio" name="sex" value="1"/>男
+			<input type="radio" name="sex" value="2"/>女
+		</div>
+		<div class="field row1">
+			<div class="label">身份证号码</div>
+			<input type="text" name="id"/> 或 <input type="text" name="id"/>
+		</div>
+		<div class="field row3">
+			<div class="label">爱好</div>
+			<input type="text" name="ah"/>
+		</div>
+		<div class="field row3">
+			<div class="label">兴趣</div>
+			<input type="text" name="xq"/>
+		</div>
+		<div class="field row3">
+			<div class="label">职业</div>
+			<input type="text" name="zy"/>
+		</div>
+		<div class="field row1 last">
+			<div class="label">备注</div>
+			<textarea style="width:800px;height: 300px;"></textarea>
+		</div>
 	</div>
 	<div position="south" height="30" border="false" class="page_button">
 		<div type="button" position="right" action="submit">提交</div>
-		<div type="button" position="right">取消</div>
+		<div type="button" position="right" onclick="closeCurrentPage(this);">取消</div>
 	</div>
 </div>
 </form>

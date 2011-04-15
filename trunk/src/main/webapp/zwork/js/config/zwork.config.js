@@ -4,12 +4,12 @@
  * 	配置对象，定义zwork框架中一些默认配置，用户可以根据自己的需要对config进行修改。
  */
 
-(function($ui,$){
+(function($z,$){
 	 
 	/**
 	 * zwork配置对象
 	 * */
-	$ui.config = {
+	$z.config = {
 		/**
 		 * 初始化config对象
 		 * 参数	配置内容（json对象）
@@ -17,7 +17,7 @@
 		 * */
 		init : function(_config){
 			$.extend(this,_config);
-			$ui.debug("zwork.config.init() config处理完毕");
+			$z.debug("zwork.config.init() config处理完毕");
 		},
 		
 		//是否启用debug模式	布尔值	可选值：true|false

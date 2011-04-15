@@ -5,7 +5,7 @@
  * 	对话框对象，继承自window。
  */
 
-(function($ui,$){
+(function($z,$){
 	
 	/**
 	 * dialog实例化入口
@@ -23,7 +23,7 @@
 	 * */
 	dialog.dialog = function(_config,_parent){
 		
-		$ui.extend(this,$ui.window(_config,_parent));	//继承zwork.window
+		$z.extend(this,$z.window(_config,_parent));	//继承zwork.window
 		
 		var config = {
 			id : undefined,
@@ -39,6 +39,6 @@
 	};
 	
 	//注册到zwork
-	$ui.dialog = dialog;
+	$z.dialog = dialog;
 	
 })(zwork,jQuery);
