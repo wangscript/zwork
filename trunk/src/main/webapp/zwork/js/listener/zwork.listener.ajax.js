@@ -39,6 +39,10 @@
 						item.title = current.html();
 					item.title = (current.attr("title")||item.title) || "无标题标签页";
 					item.iframe = eval(current.attr("iframe") || false);
+					var tabid = current.attr("tabid");
+					if(tabid!=undefined){
+						systab = $z.find($("#"+tabid,_c));
+					}
 					systab.add(item);
 					return false;
 				});
